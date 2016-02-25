@@ -6,10 +6,13 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    include Pundit
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+    
     before_filter :authenticate_admin
 
     def authenticate_admin
-      # TODO Add authentication logic here.
+      authorize :admin, :show?
     end
 
     # Override this value to specify the number of elements to display at a time
@@ -17,5 +20,13 @@ module Admin
     # def records_per_page
     #   params[:per_page] || 20
     # end
+    
+    private
+
+    def user_not_authorized
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    end
+
   end
 end
