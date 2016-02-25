@@ -1,0 +1,14 @@
+%li.dropdown
+  %a.dropdown-toggle{data: {toggle: 'dropdown'}, role: 'button', aria: {expanded: false}}
+    - if user_signed_in?
+      = current_user.email
+    - else
+      Not signed in
+    %b.caret
+  %ul.dropdown-menu
+    - if user_signed_in?
+      %li= link_to 'Account', edit_user_registration_path
+      %li= link_to 'Logout', destroy_user_session_path, :method => :delete
+    - else
+      %li= link_to 'Login', new_user_session_path
+      %li= link_to 'Sign up', new_user_registration_path
