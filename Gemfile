@@ -33,9 +33,26 @@ gem 'puma', '~> 2.16'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Frameworky stuff
+gem 'administrate'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
+gem 'devise'
+gem 'haml-rails'
+gem 'high_voltage'
+gem 'pundit'
+gem 'simple_form'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'rspec-rails'
+  gem 'rubocop'
 end
 
 group :development do
@@ -44,6 +61,19 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  gem 'better_errors'
+  gem 'html2haml'
+  gem 'quiet_assets'
+  gem 'rails_layout'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'cucumber-rails', require: false
 end
 
 group :production do
