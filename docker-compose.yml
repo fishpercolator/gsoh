@@ -1,0 +1,46 @@
+db:
+  image: postgres
+  ports:
+    - "5432"
+web:
+  build: .
+  entrypoint:
+    - env
+    - --unset=RAILS_ENV
+  command: bundle exec puma -C config/puma.rb
+  volumes:
+    - .:/usr/src/gsoh
+  volumes_from:
+    - bundle
+  ports:
+    - "3000:3000"
+  links:
+    - db
+bundle:
+  image: gsoh_web
+  command: echo Done
+  volumes:
+    - /bundle
+db:
+  image: postgres
+  ports:
+    - "5432"
+web:
+  build: .
+  entrypoint:
+    - env
+    - --unset=RAILS_ENV
+  command: bundle exec puma -C config/puma.rb
+  volumes:
+    - .:/usr/src/gsoh
+  volumes_from:
+    - bundle
+  ports:
+    - "3000:3000"
+  links:
+    - db
+bundle:
+  image: gsoh_web
+  command: echo Done
+  volumes:
+    - /bundle
