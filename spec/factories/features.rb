@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :feature do
-    name "MyString"
-    type ""
-    subtype "MyString"
-    lat 1.5
-    lng 1.5
+    name { Faker::Company.name }
+    ftype { Faker::Company.profession }
+    subtype nil
+    lat { Faker::Address.latitude }
+    lng { Faker::Address.longitude }
   end
 end
