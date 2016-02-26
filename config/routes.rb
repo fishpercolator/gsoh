@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :areas, :features, :users
+    resources :areas, :features, :questions, :users
 
     root to: "areas#index"
   end
