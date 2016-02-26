@@ -18,9 +18,13 @@ class OSMLeeds
   # Generates an XML query for the union of the given key-value pairs
   def query_xml(hash)
     Nokogiri::XML::Builder.new do |x|
-      x.query(type: 'node') do
-        hash.each do |k,v|
-          x.send(:'has-kv', k: k, v: v)
+      x.union do
+        %w{node way}.each do |t|
+          x.query(type: t) do
+            hash.each do |k,v|
+              x.send(:'has-kv', k: k, v: v)
+            end
+          end
         end
       end
     end.doc.root.to_s
