@@ -10,7 +10,15 @@ class OSMLeeds
   
   # Runs the given query on Overpass
   def query(hash)
-    @overpass.query(query_xml hash)
+    # Array -> Hash so we can look up
+    result = @overpass.query(query_xml hash).inject({}) {|h,v| h.update(v[:id] => v)}
+    # Pull out all the child nodes into this hash
+    result.each do |id, v|
+      if v[:type] == 'way'
+        v[:nodes] = v[:nodes].map {|id| result.delete(id)}.flatten
+      end
+    end
+    result.values
   end
   
   private
@@ -26,6 +34,7 @@ class OSMLeeds
             end
           end
         end
+        x.recurse(type: 'way-node')
       end
     end.doc.root.to_s
   end

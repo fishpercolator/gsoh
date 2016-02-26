@@ -8,12 +8,17 @@ namespace :gsoh do
     Feature.destroy_all
     
     leeds = OSMLeeds.new
-    leeds.query('amenity' => 'pharmacy').each do |ph|
-      Feature.create(name: (ph[:tags] && ph[:tags][:name]), ftype: 'pharmacy', lat: ph[:lat], lng: ph[:lon])
+    %w{pharmacy place_of_worship}.each do |am|
+      leeds.query('amenity' => am).each {|osm| Feature.from_osm(osm).save }
     end
-    leeds.query('amenity' => 'place_of_worship').each do |r|
-      Feature.create(name: (r[:tags] && r[:tags][:name]), ftype: 'place_of_worship', subtype: (r[:tags] && r[:tags][:religion]), lat: r[:lat], lng: r[:lon])
-    end
+    
+    
+    #leeds.query('amenity' => 'pharmacy').each do |ph|
+    #  Feature.create(name: (ph[:tags] && ph[:tags][:name]), ftype: 'pharmacy', lat: ph[:lat], lng: ph[:lon])
+    #end
+    #leeds.query('amenity' => 'place_of_worship').each do |r|
+  #    Feature.create(name: (r[:tags] && r[:tags][:name]), ftype: 'place_of_worship', subtype: (r[:tags] && r[:tags][:religion]), lat: r[:lat], lng: r[:lon])
+  #  end
   end
   
 end
