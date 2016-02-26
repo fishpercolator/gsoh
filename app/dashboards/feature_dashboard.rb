@@ -10,7 +10,7 @@ class FeatureDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
-    type: Field::String,
+    ftype: Field::String,
     subtype: Field::String,
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
@@ -26,7 +26,7 @@ class FeatureDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :type,
+    :ftype,
     :subtype,
   ]
 
@@ -35,7 +35,7 @@ class FeatureDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
-    :type,
+    :ftype,
     :subtype,
     :lat,
     :lng,
@@ -48,7 +48,7 @@ class FeatureDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :type,
+    :ftype,
     :subtype,
     :lat,
     :lng,
