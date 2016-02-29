@@ -1,9 +1,9 @@
 class Feature < ActiveRecord::Base
   
-  # Construct a new feature from an OSM object hash
+  # Construct a new feature from an OSM object hash as returned by OSMLeeds
   def self.from_osm(osm)
     new do |f|
-      f.from_osm_tags osm[:tags]
+      f.send(:from_osm_tags, osm[:tags])
       
       # Pick a node for lat/lng - for ways, just pick one of the corners
       node = osm[:type] == 'way' ? osm[:nodes].first : osm
@@ -11,6 +11,8 @@ class Feature < ActiveRecord::Base
       f.lng = node[:lon]
     end
   end
+  
+  private
   
   def from_osm_tags(tags)
     self.ftype = tags[:amenity] # Only works for amenities right now

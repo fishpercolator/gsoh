@@ -34,7 +34,7 @@ class OSMLeeds
             end
           end
         end
-        x.recurse(type: 'way-node')
+        x.recurse(type: 'way-node') # include all nodes in a given way
       end
     end.doc.root.to_s
   end
