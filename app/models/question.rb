@@ -3,7 +3,14 @@ class Question < ActiveRecord::Base
 end
 
 class ImportanceQuestion < Question
+  # Disable subclass routing
+  def self.model_name
+    Question.model_name
+  end
 end
 
 class BooleanQuestion < Question
+  def self.model_name
+    Question.model_name
+  end
 end
