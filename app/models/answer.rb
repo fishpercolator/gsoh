@@ -2,6 +2,8 @@ class Answer < ActiveRecord::Base
   belongs_to :user
   belongs_to :question
   validates_presence_of :type, :user, :question, :answer
+  validates_presence_of :subtype, if:     -> { question.ask_subtype }
+  validates_absence_of  :subtype, unless: -> { question.ask_subtype }
   validate :question_matches
   
   def matching_question_class

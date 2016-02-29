@@ -12,7 +12,10 @@ class User < ActiveRecord::Base
   end
   
   def answer_question(question, answer, subtype: nil)
-    question.answer(user: self, answer: answer, subtype: subtype).save!
+    question.answer(user: self, answer: answer, subtype: subtype).save!.tap do
+      # Reload the questions before returning the answer
+      questions.reload
+    end
   end
   
 end
