@@ -28,8 +28,10 @@ module Admin
       redirect_to(request.referrer || root_path)
     end
     
+    # Temporary to get around collision between method name in administrate
+    # 0.1.4 and pundit
     def resource_params
-      params.require(:user).permit(dashboard.permitted_attributes)
+      params.require(resource_name).permit(dashboard.permitted_attributes)
     end
 
   end
