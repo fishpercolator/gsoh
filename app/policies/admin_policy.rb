@@ -1,5 +1,5 @@
 class AdminPolicy < Struct.new(:user, :admin)
   def show?
-    user.admin?
+    user&.admin?
   end
 end

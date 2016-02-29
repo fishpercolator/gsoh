@@ -38,5 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  config.consider_all_requests_local = true
 end
 BetterErrors::Middleware.allow_ip! '172.17.0.0/24' # allow docker host
