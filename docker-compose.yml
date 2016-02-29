@@ -17,6 +17,8 @@ web:
   links:
     - db
   user: '1001'
+  environment:
+    WEB_CONCURRENCY: 1
 bundle:
   image: gsoh_web
   command: echo Done
