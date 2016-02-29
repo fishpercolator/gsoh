@@ -2,6 +2,8 @@ FROM ruby:2.3
 MAINTAINER Rich Daley <rich@fishpercolator.co.uk>
 ENV REFRESHED_AT 2016-02-24
 
+RUN adduser --uid 1001 --disabled-password --gecos "" rails
+
 RUN gem install bundler
 
 ENV APP_HOME /usr/src/gsoh
