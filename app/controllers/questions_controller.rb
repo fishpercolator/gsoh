@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
     render inline: 'Nothing to see here... yet', layout: true
   end
   def answer
-    @question = current_user&.unanswered_questions.first
+    @question = current_user&.unanswered_questions&.first
     if @question
       authorize @question
       @remaining = current_user.unanswered_questions.count
