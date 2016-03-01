@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.all
+    @unanswered = current_user&.unanswered_questions
     authorize Question
   end
 
