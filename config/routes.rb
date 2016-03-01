@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   namespace :admin do
-    resources :areas, :features, :questions, :users
+    resources :questions, :answers, :areas, :features, :users
 
-    root to: "areas#index"
+    root to: "questions#index"
   end
 
   devise_for :users
