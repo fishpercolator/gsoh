@@ -6,4 +6,8 @@ class QuestionPolicy < ApplicationPolicy
   def show?
     user
   end
+  def answer?
+    # Any user can answer any question
+    user
+  end
 end

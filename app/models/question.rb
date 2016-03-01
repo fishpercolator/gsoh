@@ -13,9 +13,12 @@ class Question < ActiveRecord::Base
     fail "Abstract!"
   end
   
-  # Returns a user's answer to this question or nil if unanswered
+  # Returns a user's answer to this question or a blank answer object if unanswered
   def answer_from(user)
-    user.answers.where(question_id: self).first
+    user.answers.where(question_id: self).first || 
+      matching_answer_class.new do |answer|
+        answer.question = self
+      end
   end
   
   def available_answers

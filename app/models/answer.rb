@@ -6,8 +6,17 @@ class Answer < ActiveRecord::Base
   validates_absence_of  :subtype, unless: -> { question.ask_subtype }
   validate :question_matches
   
+  def self.new_with_type(params)
+    klass = Question.find(params[:question_id])&.matching_answer_class || self
+    klass.new(params)
+  end
+  
   def matching_question_class
     fail "Abstract!"
+  end
+  
+  def available_subtypes
+    Feature.subtypes_for(question.ftype)
   end
   
   private
@@ -22,6 +31,10 @@ end
 class ImportanceAnswer < Answer
   enum answer: [:essential, :important, :irrelevant, :bad]
   
+  def self.model_name
+    Answer.model_name
+  end
+  
   def matching_question_class
     ImportanceQuestion
   end
@@ -29,6 +42,10 @@ end
 
 class BooleanAnswer < Answer
   enum answer: [:yes, :no]
+  
+  def self.model_name
+    Answer.model_name
+  end
   
   def matching_question_class
     BooleanQuestion 

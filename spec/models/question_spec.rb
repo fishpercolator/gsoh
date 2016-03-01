@@ -12,11 +12,14 @@ RSpec.describe Question, type: :model do
         a = subject.answer_from(user)
         expect(a).to be_an(ImportanceAnswer)
         expect(a.answer).to eq('essential')
+        expect(a.new_record?).to be false
       end
     end
     context 'user has not answered' do
-      it 'returns nil' do
-        expect(subject.answer_from(user)).to be nil
+      it 'returns an unsaved answer' do
+        a = subject.answer_from(user)
+        expect(a).to be_an(ImportanceAnswer)
+        expect(a.new_record?).to be true
       end
     end
   end

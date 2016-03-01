@@ -1,0 +1,19 @@
+.row
+  .col-md-6.col-md-offset-3
+    %h1 Answering questions
+    %h2 #{@remaining} of #{@total} remaining
+.row
+  .question-box.col-md-6.col-md-offset-3
+    %h3= @question.text
+    = form_for @answer do |f|
+      = f.hidden_field :question_id
+      .main-answer
+        .btn-group
+          - @question.available_answers.each do |a|
+            %label.btn.btn-primary
+              = f.radio_button :answer, a[0]
+              = a[0]
+        - if @question.ask_subtype?
+          = f.select :subtype, @answer.available_subtypes
+      .buttons
+        %button.btn.btn-default{type: 'submit'} Next &raquo;
