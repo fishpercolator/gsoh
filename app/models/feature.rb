@@ -12,6 +12,10 @@ class Feature < ActiveRecord::Base
     end
   end
   
+  def self.subtypes_for(ftype)
+    where(ftype: ftype).select(:subtype).distinct.map(&:subtype).compact.sort
+  end
+  
   private
   
   def from_osm_tags(tags)

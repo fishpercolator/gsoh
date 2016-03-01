@@ -1,0 +1,9 @@
+.row
+  .col-md-6.col-md-offset-3
+    .question
+      %h3= question.text
+      .answer-select.btn-group{role: 'group'}
+        - question.available_answers.each do |a|
+          %button.btn.btn-default{type: 'button'}= a[0]
+      - if question.ask_subtype?
+        = select question, 'subtype', Feature.subtypes_for(question.ftype), prompt: 'select:'

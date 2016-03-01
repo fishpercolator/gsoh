@@ -17,6 +17,10 @@ class Question < ActiveRecord::Base
   def answer_from(user)
     user.answers.where(question_id: self).first
   end
+  
+  def available_answers
+    matching_answer_class.answers
+  end
 end
 
 class ImportanceQuestion < Question
