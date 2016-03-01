@@ -7,8 +7,7 @@ class Answer < ActiveRecord::Base
   validate :question_matches
   
   def self.new_with_type(params)
-    klass = Question.find(params[:question_id])&.matching_answer_class || self
-    klass.new(params)
+    Question.find(params[:question_id])&.answer(params)
   end
   
   def matching_question_class
