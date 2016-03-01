@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.1'
+gem 'rails', '~> 4.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -16,9 +16,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -34,17 +34,17 @@ gem 'puma', '~> 2.16'
 # gem 'capistrano-rails', group: :development
 
 # Frameworky stuff
-gem 'administrate'
-gem 'bootstrap-sass'
-gem 'bootswatch-rails'
-gem 'devise'
-gem 'haml-rails'
-gem 'high_voltage'
-gem 'pundit'
-gem 'simple_form'
+gem 'administrate', '~> 0.1'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'bootswatch-rails', '~> 3.3'
+gem 'devise', '~> 3.5'
+gem 'haml-rails', '~> 0.9'
+gem 'high_voltage', '~> 2.4'
+gem 'pundit', '~> 1.1'
+gem 'simple_form', '~> 3.2'
 
 # Needed for the seeding of data from OpenStreetMap
-gem 'overpass-api-ruby'
+gem 'overpass-api-ruby', '~> 0.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -81,5 +81,5 @@ group :test do
 end
 
 group :production do
-  gem 'rails_12factor'
+  gem 'rails_12factor', '~> 0.0'
 end
