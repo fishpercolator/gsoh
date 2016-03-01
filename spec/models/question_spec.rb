@@ -24,4 +24,10 @@ RSpec.describe Question, type: :model do
     end
   end
   
+  describe '#available_answers' do
+    it 'matches the list of answers on the appropriate class' do
+      expect(subject.available_answers).to eq(ImportanceAnswer.answers)
+    end
+  end
+  
 end
