@@ -12,6 +12,11 @@ class Question < ActiveRecord::Base
   def matching_answer_class
     fail "Abstract!"
   end
+  
+  # Returns a user's answer to this question or nil if unanswered
+  def answer_from(user)
+    user.answers.where(question_id: self).first
+  end
 end
 
 class ImportanceQuestion < Question

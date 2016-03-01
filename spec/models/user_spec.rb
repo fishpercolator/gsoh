@@ -46,6 +46,9 @@ RSpec.describe User, type: :model do
         it 'refuses a bad enum answer' do
           expect{subject.answer_question(question, :yes)}.to raise_error(/'yes' is not a valid answer/)
         end
+        it 'returns the answer' do
+          expect(subject.answer_question(question, :essential)).to be_an(ImportanceAnswer)
+        end
         context 'with subtype question' do
           let!(:question) { create :boolean_question, ask_subtype: true }
           it 'requires subtype answer' do
