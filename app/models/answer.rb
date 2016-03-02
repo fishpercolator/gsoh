@@ -115,7 +115,7 @@ class BooleanAnswer < Answer
     if yes?
       contains ? 100 : 0
     else
-      contains ? 50 : 100
+      50 # if it's not important, it's 50 either way
     end
   end
 end

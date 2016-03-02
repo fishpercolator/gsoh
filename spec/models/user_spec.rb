@@ -40,8 +40,9 @@ RSpec.describe User, type: :model do
           expect(a.bad?).to be false
           expect(a.question).to eq question
         end
-        it 'fails to allow subtype answer' do
-          expect{subject.answer_question(question, :essential, subtype: 'christian')}.to raise_error(/Subtype must be blank/)
+        it 'allows subtype answer but deletes it' do
+          expect{subject.answer_question(question, :essential, subtype: 'christian')}.not_to raise_error
+          expect(subject.answers.first.subtype).to be nil
         end
         it 'refuses a bad enum answer' do
           expect{subject.answer_question(question, :yes)}.to raise_error(/'yes' is not a valid answer/)
@@ -51,9 +52,6 @@ RSpec.describe User, type: :model do
         end
         context 'with subtype question' do
           let!(:question) { create :boolean_question, ask_subtype: true }
-          it 'requires subtype answer' do
-            expect{subject.answer_question(question, :yes)}.to raise_error(/Subtype can't be blank/)
-          end
           it 'stores the answer' do
             subject.answer_question(question, :yes, subtype: 'christian')
             expect(subject.answers.first.subtype).to eq('christian')

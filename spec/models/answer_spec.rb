@@ -58,6 +58,75 @@ RSpec.describe Answer, type: :model do
           expect(a.subtype).to eq('foo')
         end
       end
+    end    
+  end
+  
+  # A score of 50 is "OK", lower than 50 is "bad"
+  # This also implicitly tests the #area_contains_feature? method by stubbing the already-specced
+  # Area#contains? instead of that method.
+  describe '#score_area' do
+    let(:area)   { create :area }
+    let(:answer) { self.class.description } # let the answer be the context name
+    let(:type)   { :importance_answer }
+    subject { create(type, question: question, user: user, answer: answer).score_area(area) }
+    context 'area contains feature' do
+      before(:each) do
+        allow(area).to receive(:contains?).with(question.ftype, subtype: nil).and_return(true)
+      end
+      context ImportanceAnswer do
+        context :essential do
+          it { is_expected.to eq(100) }
+        end
+        context :important do
+          it { is_expected.to eq(75) }
+        end
+        context :irrelevant do
+          it { is_expected.to eq(50) }
+        end
+        context :bad do
+          it { is_expected.to eq(25) }
+        end
+      end
+      context BooleanAnswer do
+        let(:question) { create :boolean_question }
+        let(:type)     { :boolean_answer }
+        context :yes do
+          it { is_expected.to eq(100) }
+        end
+        context :no do
+          it { is_expected.to eq(50) }
+        end
+      end
+    end
+    context 'area does not contain feature' do
+      before(:each) do
+        allow(area).to receive(:contains?).with(question.ftype, subtype: nil).and_return(false)
+      end
+      context ImportanceAnswer do
+        context :essential do
+          it { is_expected.to eq(0) }
+        end
+        context :important do
+          it { is_expected.to eq(25) }
+        end
+        context :irrelevant do
+          it { is_expected.to eq(50) }
+        end
+        context :bad do
+          it { is_expected.to eq(75) }
+        end
+      end
+      context BooleanAnswer do
+        let(:question) { create :boolean_question }
+        let(:type)     { :boolean_answer }
+        context :yes do
+          it { is_expected.to eq(0) }
+        end
+        context :no do
+          it { is_expected.to eq(50) }
+        end
+      end
     end
   end
+  
 end
