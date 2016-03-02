@@ -18,4 +18,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  # Get the average score for an area across all the provided answers
+  def score_area(area)
+    50 if answers.count == 0 # avoid divzero
+    answers.map {|ans| ans.score_area(area) }.sum.to_f / answers.count
+  end
+  
 end

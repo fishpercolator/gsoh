@@ -61,4 +61,23 @@ RSpec.describe User, type: :model do
     end
   end
   
+  context 'area scores', focus: true do
+    let(:area) { create :area }
+    before(:each) do
+      # Create some questions and answers from this user and make up scores for them
+      answers = 25.times.map { create :importance_answer, question: create(:importance_question), user: subject }
+      @scores = answers.map do |answer|
+        [0, 25, 50, 75, 100].sample.tap do |score|
+          allow(answer).to receive(:score_area).with(area).and_return(score)
+        end
+      end
+      allow(subject).to receive(:answers).and_return(answers)
+    end
+    describe '#score_area' do
+      it 'scores the average of all the answer scores' do
+        expect(subject.score_area(area)).to eq(@scores.sum.to_f / 25)
+      end
+    end  
+  end
+  
 end
