@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
     end
   end
   
-  describe '#area_matches' do
+  describe '#matches' do
     before(:each) do
       [12.0, 45.0, 78.0, 16.0].each do |score|
         area = create :area
@@ -88,15 +88,13 @@ RSpec.describe User, type: :model do
       end
     end
     it 'returns the right number of results' do
-      expect(subject.area_matches).to have(4).items
+      expect(subject.matches).to have(4).items
     end
-    it 'returns tuples containing an area and a score' do
-      item = subject.area_matches.first
-      expect(item[0]).to be_an(Area)
-      expect(item[1]).to be_a(Float)
+    it 'returns an array of Match objects' do
+      expect(subject.matches.first).to be_a(Match)
     end
     it 'returns the scores in the right order' do
-      expect(subject.area_matches.map {|_,s| s}).to eq([78.0, 45.0, 16.0, 12.0])
+      expect(subject.matches.map(&:score)).to eq([78.0, 45.0, 16.0, 12.0])
     end
   end
   

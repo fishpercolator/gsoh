@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   end
   
   # Get all the areas in descending order of score, with their scores
-  def area_matches
-    Area.all.map {|a| [a, score_area(a)] }.sort_by {|_,score| score }.reverse!
+  def matches
+    Area.all.map {|a| Match.new(area: a, score: score_area(a)) }.sort_by(&:score).reverse!
   end
   
 end
