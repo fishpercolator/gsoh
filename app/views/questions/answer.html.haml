@@ -14,6 +14,6 @@
               = f.radio_button :answer, a[0]
               = a[0]
         - if @question.ask_subtype?
-          = f.select :subtype, @answer.available_subtypes
+          = f.select :subtype, @answer.available_subtypes, include_blank: 'any'
       .buttons
         %button.btn.btn-default{type: 'submit'} Next &raquo;

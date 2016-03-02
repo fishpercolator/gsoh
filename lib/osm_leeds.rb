@@ -15,10 +15,11 @@ class OSMLeeds
     # Pull out all the child nodes into this hash
     result.each do |id, v|
       if v[:type] == 'way'
-        v[:nodes] = v[:nodes].map {|id| result.delete(id)}.flatten
+        v[:nodes] = v[:nodes].map {|id| result[id]}
       end
     end
-    result.values
+    # Items without a name are probably just constituent nodes and we don't need them
+    result.values.select {|v| v[:tags] && v[:tags][:name] }
   end
   
   private
@@ -30,7 +31,11 @@ class OSMLeeds
         %w{node way}.each do |t|
           x.query(type: t) do
             hash.each do |k,v|
-              x.send(:'has-kv', k: k, v: v)
+              options = {k: k}
+              if v.is_a? String
+                options[:v] = v
+              end
+              x.send(:'has-kv', options)
             end
           end
         end
