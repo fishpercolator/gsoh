@@ -46,6 +46,9 @@ gem 'simple_form', '~> 3.2'
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1'
 
+# Sandbox for codey things in the dashbaord
+gem 'shikashi', '~> 0.6'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

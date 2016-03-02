@@ -117,6 +117,9 @@ GEM
     diff-lcs (1.2.5)
     diskcached (1.1.2)
     erubis (2.7.0)
+    evalhook (0.6.0)
+      partialruby (~> 0.3)
+      sexp_processor (~> 4.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -127,6 +130,7 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.10)
     formatador (0.2.5)
+    getsource (0.2.2)
     gherkin (3.2.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -207,6 +211,9 @@ GEM
       diskcached
       httpi (~> 2.4.0)
       nokogiri
+    partialruby (0.3.0)
+      ruby2ruby (~> 2)
+      ruby_parser (~> 3)
     pg (0.18.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -287,6 +294,9 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby2ruby (2.3.0)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.0)
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     rubyzip (1.2.0)
@@ -308,6 +318,9 @@ GEM
       websocket (~> 1.0)
     sexp_processor (4.7.0)
     shellany (0.0.1)
+    shikashi (0.6.0)
+      evalhook (>= 0.6.0)
+      getsource (>= 0.1.0)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -384,6 +397,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  shikashi (~> 0.6)
   simple_form (~> 3.2)
   spring
   spring-commands-rspec
