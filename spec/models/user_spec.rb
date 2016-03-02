@@ -61,7 +61,7 @@ RSpec.describe User, type: :model do
     end
   end
   
-  context 'area scores', focus: true do
+  context 'area scores' do
     let(:area) { create :area }
     before(:each) do
       # Create some questions and answers from this user and make up scores for them
@@ -77,7 +77,27 @@ RSpec.describe User, type: :model do
       it 'scores the average of all the answer scores' do
         expect(subject.score_area(area)).to eq(@scores.sum.to_f / 25)
       end
-    end  
+    end
+  end
+  
+  describe '#area_matches' do
+    before(:each) do
+      [12.0, 45.0, 78.0, 16.0].each do |score|
+        area = create :area
+        allow(subject).to receive(:score_area).with(area).and_return(score)
+      end
+    end
+    it 'returns the right number of results' do
+      expect(subject.area_matches).to have(4).items
+    end
+    it 'returns tuples containing an area and a score' do
+      item = subject.area_matches.first
+      expect(item[0]).to be_an(Area)
+      expect(item[1]).to be_a(Float)
+    end
+    it 'returns the scores in the right order' do
+      expect(subject.area_matches.map {|_,s| s}).to eq([78.0, 45.0, 16.0, 12.0])
+    end
   end
   
 end

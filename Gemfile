@@ -56,7 +56,8 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
-  gem 'rubocop'
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec'
 end
 
 group :development do
