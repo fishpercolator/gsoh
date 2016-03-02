@@ -24,4 +24,9 @@ class User < ActiveRecord::Base
     answers.map {|ans| ans.score_area(area) }.sum.to_f / answers.count
   end
   
+  # Get all the areas in descending order of score, with their scores
+  def area_matches
+    Area.all.map {|a| [a, score_area(a)] }.sort_by {|_,score| score }.reverse!
+  end
+  
 end
