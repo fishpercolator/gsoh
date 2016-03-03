@@ -13,7 +13,6 @@ class MatchesController < ApplicationController
   private
   
   def set_match
-    console
     @match = current_user.matches.find {|m| m.area.name == params[:area]} || not_found
     authorize @match
   end
