@@ -1,17 +1,28 @@
 .row
-  .col-md-6.col-md-offset-3
-    %h3 #{match.area.name} (#{match.score.to_i}% match)
-    %h4 Good for
-    %ul
-      - match.good_answers.each do |a|
-        %li
-          = a.question.text
-          %br
-          (your answer: #{a.answer}, #{a.area_matching_features(match.area).count} matches)
-    %h4 Bad for
-    %ul
-      - match.bad_answers.each do |a|
-        %li
-          = a.question.text
-          %br
-          (your answer: #{a.answer}, #{a.area_matching_features(match.area).count} matches)
+  .col-md-10.col-md-offset-1
+    %h1
+      #{match.area.name}:
+      %span{class: match.goodness} #{match.score.to_i}%
+      match
+    %hr
+    - if match.good_answers.any?
+      %h2
+        %span.glyphicon.glyphicon-thumbs-up.good
+        - case match.goodness
+        - when :good
+          Why #{match.area.name} is a good match for you
+        - else
+          Where #{match.area.name} matches
+      %table.table.table-striped.match-details
+        = render partial: 'match_row', collection: match.good_answers, locals: {area: match.area}
+    - if match.bad_answers.any?
+      %h2
+        %span.glyphicon.glyphicon-thumbs-down.bad
+        - case match.goodness
+        - when :bad
+          Why #{match.area.name} is not such a good match for you
+        - else
+          Where #{match.area.name} doesn't match
+      %table.table.table-striped.match-details
+        = render partial: 'match_row', collection: match.bad_answers, locals: {area: match.area}
+  
