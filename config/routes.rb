@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get :answer, on: :collection
   end
   resources :answers, only: [:create, :update, :delete]
-  resources :matches, only: [:index]
+  resources :matches, only: [:index, :show], param: :area
   
   root to: 'pages#show', id: 'index'
 end
