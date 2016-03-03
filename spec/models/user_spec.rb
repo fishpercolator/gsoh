@@ -80,6 +80,15 @@ RSpec.describe User, type: :model do
     end
   end
   
+  context 'no answers at all' do
+    let(:area) { create :area }
+    describe '#score_area' do
+      it 'returns 50' do
+        expect(subject.score_area(area)).to eq(50)
+      end
+    end
+  end
+  
   describe '#matches' do
     before(:each) do
       [12.0, 45.0, 78.0, 16.0].each do |score|
