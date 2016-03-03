@@ -1,19 +1,17 @@
-.row
-  .col-md-6.col-md-offset-3
-    %h1 Answering questions
-    %h2 #{@remaining} of #{@total} remaining
-.row
-  .question-box.col-md-6.col-md-offset-3
-    %h3= @question.text
-    = form_for @answer do |f|
-      = f.hidden_field :question_id
-      .main-answer
-        .btn-group
-          - @question.available_answers.each do |a|
-            %label.btn.btn-primary
-              = f.radio_button :answer, a[0]
-              = a[0]
-        - if @question.ask_subtype?
-          = f.select :subtype, @answer.available_subtypes, include_blank: 'any'
-      .buttons
-        %button.btn.btn-default{type: 'submit'} Next &raquo;
+.col-md-8.col-md-offset-2
+  %h2 What do you look for in a neighbourhood?
+  %h3 #{@remaining} questions remaining
+  = form_for @answer do |f|
+    = f.hidden_field :question_id
+    .well
+      %p= @question.text
+      .btn-group{role: 'group'}
+        - @question.available_answers.each do |a|
+          %label.btn.btn-default
+            = f.radio_button :answer, a[0]
+            = a[0]
+      - if @question.ask_subtype?
+        .pull-right
+          = f.select :subtype, @answer.available_subtypes, {include_blank: 'any'}, class: 'selectpicker'
+    .btn-group.pull-right{role: 'group'}
+      %button.btn.btn-primary{type: 'submit'} Next &raquo;
