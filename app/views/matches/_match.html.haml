@@ -1,3 +1,17 @@
 .row
   .col-md-6.col-md-offset-3
     %h3 #{match.area.name} (#{match.score.to_i}% match)
+    %h4 Good for
+    %ul
+      - match.good_answers.each do |a|
+        %li
+          = a.question.text
+          %br
+          (your answer: #{a.answer}, #{a.area_matching_features(match.area).count} matches)
+    %h4 Bad for
+    %ul
+      - match.bad_answers.each do |a|
+        %li
+          = a.question.text
+          %br
+          (your answer: #{a.answer}, #{a.area_matching_features(match.area).count} matches)

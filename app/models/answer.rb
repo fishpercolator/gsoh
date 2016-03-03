@@ -36,11 +36,16 @@ class Answer < ActiveRecord::Base
     area.contains?(question.ftype, subtype: subtype)
   end
   
+  # The specific features that match this answer for a given area (good or bad)
+  def area_matching_features(area)
+    area.specific_feature(question.ftype, subtype: subtype)
+  end
+  
   def to_s
     subtype_str = subtype? ? " (#{subtype})" : ""
     "<Q: #{question.text} A: #{answer}#{subtype_str}>"
   end
-  
+    
   private
   
   def question_matches

@@ -41,4 +41,22 @@ RSpec.describe Area, type: :model do
     end
   end
   
+  describe '#specific_feature' do
+    let!(:pharmacy_inside1) { create :feature, ftype: 'pharmacy', lat: 53.8090, lng: -1.5103 }
+    let!(:pharmacy_inside2) { create :feature, ftype: 'pharmacy', lat: 53.8066, lng: -1.5092 }
+    let!(:pharmacy_outside) { create :feature, ftype: 'pharmacy', lat: 53.8090, lng: -1.5010 }
+    let!(:school_inside)    { create :feature, ftype: 'school',   lat: 53.8123, lng: -1.5123 }
+    
+    it 'returns both pharmacies inside' do
+      expect(subject.specific_feature('pharmacy')).to include(pharmacy_inside1)
+      expect(subject.specific_feature('pharmacy')).to include(pharmacy_inside2)
+    end
+    it 'does not return the pharmacy outside' do
+      expect(subject.specific_feature('pharmacy')).not_to include(pharmacy_outside)
+    end
+    it 'does not return the school' do
+      expect(subject.specific_feature('pharmacy')).not_to include(school_inside)
+    end
+  end
+  
 end
