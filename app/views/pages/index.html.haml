@@ -1,3 +1,14 @@
-.centered
-  %h1 GSOH
-  %h2 Great Sense of Home
+.homepage
+  .row
+    .col-md-3.col-md-offset-2.col-xs-4
+      = image_tag 'blue-house.svg'
+    .col-md-6.col-xs-8
+      %h1 GSOH:
+      %h2 Great Sense of Home
+  .row
+    .col-md-7.col-md-offset-2
+      %h3 Helping you find the perfect place to live in Leeds
+      - if user_signed_in?
+        %p= link_to 'Answer questions &raquo;'.html_safe, answer_questions_path, class: 'btn btn-primary'
+      - else
+        %p= link_to 'Sign up to get started &raquo;'.html_safe, new_user_registration_path, class: 'btn btn-primary'
