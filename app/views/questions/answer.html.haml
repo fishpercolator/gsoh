@@ -5,7 +5,7 @@
     = f.hidden_field :question_id
     .well
       %p= @question.text
-      .btn-group{role: 'group'}
+      .btn-group{role: 'group', data: {toggle: 'buttons'}}
         - @question.available_answers.each do |a|
           %label.btn.btn-default
             = f.radio_button :answer, a[0]
