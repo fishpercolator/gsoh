@@ -330,9 +330,6 @@ GEM
     shikashi (0.6.0)
       evalhook (>= 0.6.0)
       getsource (>= 0.1.0)
-    simple_form (3.2.1)
-      actionpack (> 4, < 5.1)
-      activemodel (> 4, < 5.1)
     slop (3.6.0)
     spring (1.6.4)
     spring-commands-rspec (1.0.4)
@@ -411,7 +408,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selenium-webdriver
   shikashi (~> 0.6)
-  simple_form (~> 3.2)
   spring
   spring-commands-rspec
   therubyracer

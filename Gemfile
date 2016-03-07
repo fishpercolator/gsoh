@@ -43,7 +43,6 @@ gem 'devise-bootstrap-views', '~> 0.0'
 gem 'haml-rails', '~> 0.9'
 gem 'high_voltage', '~> 2.4'
 gem 'pundit', '~> 1.1'
-gem 'simple_form', '~> 3.2'
 
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1'
