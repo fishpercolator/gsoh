@@ -12,13 +12,13 @@ When(/^I list my matches$/) do
 end
 
 When(/^I click on a match$/) do
-  link = page.first('#matchlist li a')
+  link = page.first('#matchlist td a')
   @area = link.text
   link.click
 end
 
 Then(/^I should see (\d+) areas with match percentage$/) do |arg1|
-  expect(page).to have_css('#matchlist li', count: 4, text: /\d+%/)
+  expect(page).to have_css('#matchlist tr', count: 4, text: /\d+%/)
 end
 
 Then(/^match percentages should be in descending order$/) do

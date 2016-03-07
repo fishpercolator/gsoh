@@ -1,8 +1,15 @@
 .row
   .col-md-6.col-md-offset-3
     %h1 Your matches
-    %ul#matchlist
-      - @matches.each do |match|
-        %li
-          = link_to match.area.name, match_path(match.area.name)
-          (#{match.score.to_i}% match)
+    %table.table.table-striped.table-bordered#matchlist
+      %thead
+        %tr
+          %th Neighbourhood
+          %th Match
+      %tbody
+        - @matches.each do |match|
+          %tr
+            %td
+              = link_to match.area.name, match_path(match.area.name)
+            %td
+              #{match.score.to_i}% match
