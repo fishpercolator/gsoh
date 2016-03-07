@@ -3,7 +3,7 @@
   %li.active Answer questions
 .col-md-8.col-md-offset-2
   %h2 What do you look for in a neighbourhood?
-  %h3 #{remaining_questions} questions remaining
+  %h3 #{pluralize remaining_questions, 'question'} remaining
   = form_for @answer do |f|
     = f.hidden_field :question_id
     .well
@@ -16,6 +16,6 @@
             = t a[0]
       - if @answer.question.ask_subtype?
         .pull-right
-          = f.select :subtype, @answer.available_subtypes.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
+          = f.select :subtype, @answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
     .btn-group.pull-right{role: 'group'}
       = f.button('Next &raquo;'.html_safe, class: 'btn btn-primary')

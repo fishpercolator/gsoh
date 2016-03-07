@@ -1,9 +1,9 @@
 @import "bootstrap-sprockets";
-@import "bootswatch/darkly/variables";
+@import "bootswatch/flatly/variables";
 @import "bootstrap";
 // Bootstrap body padding for fixed navbar
 body { padding-top: 80px; }
-@import "bootswatch/darkly/bootswatch";
+@import "bootswatch/flatly/bootswatch";
 @import "bootstrap-select";
 @import "devise_bootstrap_views";
 
