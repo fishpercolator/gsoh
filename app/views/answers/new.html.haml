@@ -10,9 +10,9 @@
         - @answer.question.available_answers.each do |a|
           %label.btn.btn-default
             = f.radio_button :answer, a[0]
-            = a[0]
+            = t a[0]
       - if @answer.question.ask_subtype?
         .pull-right
-          = f.select :subtype, @answer.available_subtypes, {include_blank: 'any'}, class: 'selectpicker'
+          = f.select :subtype, @answer.available_subtypes.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
     .btn-group.pull-right{role: 'group'}
       = f.button('Next &raquo;'.html_safe, class: 'btn btn-primary')

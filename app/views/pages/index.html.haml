@@ -1,14 +1,26 @@
 .homepage
   .row
-    .col-md-3.col-md-offset-2.col-xs-4
-      = image_tag 'blue-house.svg'
-    .col-md-6.col-xs-8
-      %h1 GSOH:
+    .col-md-8
+      = image_tag 'armley.jpg', class: 'img-responsive img-rounded'
+    .col-md-4.text-center
+      %h1.huge GSOH
       %h2 Great Sense of Home
   .row
-    .col-md-7.col-md-offset-2
-      %h3 Helping you find the perfect place to live in Leeds
-      - if user_signed_in?
-        %p= link_to 'Answer questions &raquo;'.html_safe, new_answer_path, class: 'btn btn-primary'
-      - else
-        %p= link_to 'Sign up to get started &raquo;'.html_safe, new_user_registration_path, class: 'btn btn-primary'
+    .col-md-12
+      .cta.well.text-center
+        %h3 Helping you find the perfect place to live in Leeds
+        - if user_signed_in?
+          %p= link_to 'Answer questions &raquo;'.html_safe, new_answer_path, class: 'btn btn-primary btn-lg'
+        - else
+          %p= link_to 'Sign up to get started &raquo;'.html_safe, new_user_registration_path, class: 'btn btn-primary btn-lg'
+  .row
+    .col-md-4
+      %h2 Step 1
+      %p Answer questions about your perfect neighbourhood
+    .col-md-4
+      %h2 Step 2
+      %p See the areas of Leeds that best fit your profile
+    .col-md-4
+      %h2 Step 3
+      %p Get the lowdown on your matches and find your dream location
+

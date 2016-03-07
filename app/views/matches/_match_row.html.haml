@@ -1,8 +1,8 @@
 %tr
   %th
-    = match_row.question.ftype
+    = t match_row.question.ftype
     - if match_row.subtype?
-      (#{match_row.subtype})
+      (#{t match_row.subtype})
   %td
     - features = match_row.area_matching_features(area).sort_by {|f| f.name.downcase}
     - if features.any?
