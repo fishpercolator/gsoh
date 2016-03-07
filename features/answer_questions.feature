@@ -58,7 +58,7 @@ Scenario: Answering boolean question
   And there is 1 boolean question to answer
   And I have answered 0 questions
   When I go to answer questions
-  And I answer the displayed question with 'no'
+  And I answer the displayed question with 'No'
   Then I should be redirected to my matches
   And I should be told there are no more questions
   

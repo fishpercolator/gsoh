@@ -25,13 +25,13 @@ When(/^I go to answer questions$/) do
 end
 
 When(/^I answer the displayed question(?: with '(\w+)')?$/) do |answer|
-  choose answer || 'essential'
+  choose answer || 'Essential'
   step 'I click to go to the next question'
 end
 
 When(/^I answer the displayed question selecting a subtype$/) do
-  choose 'essential'
-  select 'harry'
+  choose 'Essential'
+  select 'Harry'
   step 'I click to go to the next question'
 end
 
@@ -62,7 +62,7 @@ Then(/^I should see an error telling me I haven't answered$/) do
 end
 
 Then(/^I should be asked for a subtype$/) do
-  expect(page).to have_select('answer_subtype', options: %w{any tom dick harry sally})
+  expect(page).to have_select('answer_subtype', options: %w{Any Tom Dick Harry Sally})
 end
 
 Then(/^an answer should be recording containing the chosen subtype$/) do
