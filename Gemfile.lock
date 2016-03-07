@@ -118,6 +118,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-bootstrap-views (0.0.8)
     diff-lcs (1.2.5)
     diskcached (1.1.2)
     erubis (2.7.0)
@@ -383,6 +384,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise (~> 3.5)
+  devise-bootstrap-views (~> 0.0)
   factory_girl_rails
   faker
   guard-cucumber

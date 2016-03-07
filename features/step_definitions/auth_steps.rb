@@ -7,7 +7,7 @@ Given(/^I am signed in$/) do
   visit new_user_session_path
   fill_in 'user_email', with: user.email
   fill_in 'user_password', with: user.password
-  click_button 'Log in'
+  click_button 'Sign in'
 end
 
 Then(/^I should be told to sign in$/) do
