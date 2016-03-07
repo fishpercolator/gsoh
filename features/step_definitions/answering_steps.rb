@@ -11,7 +11,7 @@ Given(/^I have answered (\d+) questions$/) do |arg1|
 end
 
 When(/^I go to answer questions$/) do
-  visit answer_questions_path
+  visit new_answer_path
 end
 
 When(/^I answer the displayed question$/) do
@@ -41,5 +41,5 @@ Then(/^I should be told there are no more questions$/) do
 end
 
 Then(/^I should see an error telling me I haven't answered$/) do
-  expect(page).to have_content('Answer must be set')
+  expect(page).to have_content("Answer can't be blank")
 end

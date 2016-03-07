@@ -1,0 +1,5 @@
+.alert.alert-danger{role: 'alert'}
+  - errors_for.errors.full_messages.each do |msg|
+    %span.glyphicon.glyphicon-exclamation-sign
+    Error: #{msg}
+    %br

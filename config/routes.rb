@@ -8,10 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :questions, only: [:index] do
-    get :answer, on: :collection
-  end
-  resources :answers, only: [:create, :update, :delete]
+  resources :answers
   resources :matches, only: [:index, :show], param: :area
   
   root to: 'pages#show', id: 'index'

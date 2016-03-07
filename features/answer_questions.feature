@@ -45,7 +45,6 @@ Scenario: Trying to answer questions when none remain
   Then I should be redirected to my matches
   And I should be told there are no more questions
 
-@wip
 Scenario: Proceeding without answering
   Given I am signed in
   And there are 4 questions to answer
