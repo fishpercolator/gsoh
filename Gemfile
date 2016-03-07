@@ -62,6 +62,7 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
+  gem 'guard-cucumber'
 end
 
 group :development do

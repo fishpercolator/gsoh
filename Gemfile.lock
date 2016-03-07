@@ -145,6 +145,10 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
+    guard-cucumber (2.0.0)
+      cucumber (~> 2.0)
+      guard-compat (~> 1.0)
+      nenv (~> 0.1)
     guard-rspec (4.6.4)
       guard (~> 2.1)
       guard-compat (~> 1.1)
@@ -377,6 +381,7 @@ DEPENDENCIES
   devise (~> 3.5)
   factory_girl_rails
   faker
+  guard-cucumber
   guard-rspec
   haml-rails (~> 0.9)
   high_voltage (~> 2.4)
