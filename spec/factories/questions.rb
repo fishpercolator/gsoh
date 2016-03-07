@@ -2,7 +2,7 @@ require 'question'
 
 FactoryGirl.define do
   factory :question do
-    ftype { Faker::Company.profession }
+    ftype { %w{church school doctors pub}.sample }
     ask_subtype false
     factory :importance_question, class: 'ImportanceQuestion' do
       text { "How important is it to you to be near a #{ftype}?" }

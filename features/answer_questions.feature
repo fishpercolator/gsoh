@@ -52,3 +52,8 @@ Scenario: Proceeding without answering
   When I go to answer questions
   And I click to go to the next question
   Then I should see an error telling me I haven't answered
+
+Scenario: Answering boolean question
+  
+Scenario: Answering question with subtype
+
