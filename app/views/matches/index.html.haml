@@ -2,8 +2,14 @@
   %li= link_to 'Home', root_path
   %li.active Matches
 .row
-  .col-md-6.col-md-offset-3
+  .col-md-12.text-center
     %h1 Your matches
+.row
+  .col-md-6.col-xs-12
+    #matchmap
+    :javascript
+      initialize_matchmap()
+  .col-md-6.col-xs-12
     %table.table.table-striped.table-bordered#matchlist
       %thead
         %tr

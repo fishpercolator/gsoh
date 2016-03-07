@@ -50,6 +50,9 @@ gem 'overpass-api-ruby', '~> 0.1'
 # Sandbox for codey things in the dashbaord
 gem 'shikashi', '~> 0.6'
 
+# For drawing maps in the UI
+gem 'leaflet-rails', '~> 0.7'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
