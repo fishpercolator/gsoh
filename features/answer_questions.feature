@@ -54,6 +54,28 @@ Scenario: Proceeding without answering
   Then I should see an error telling me I haven't answered
 
 Scenario: Answering boolean question
+  Given I am signed in
+  And there is 1 boolean question to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  And I answer the displayed question with 'no'
+  Then I should be redirected to my matches
+  And I should be told there are no more questions
   
-Scenario: Answering question with subtype
+Scenario: Subtype question asks about subtype
+  Given I am signed in
+  And there is 1 subtype question to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  Then I should be asked for a subtype
+  
+Scenario: Answering subtype question
+  Given I am signed in
+  And there is 1 subtype question to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  And I answer the displayed question selecting a subtype
+  Then I should be redirected to my matches
+  And I should be told there are no more questions
+  And an answer should be recording containing the chosen subtype
 
