@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
   def index
     authorize Match
     @matches = current_user.matches
+    @polygons = @matches[0..2].map {|m| m.area.polygon }
   end
   
   def show

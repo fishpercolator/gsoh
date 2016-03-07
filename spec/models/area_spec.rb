@@ -59,4 +59,10 @@ RSpec.describe Area, type: :model do
     end
   end
   
+  describe '#polygon' do
+    it 'returns the four corners NW, NE, SE, SW' do
+      expect(subject.polygon).to eq([[53.8177, -1.5252], [53.8177, -1.5051], [53.8057, -1.5051], [53.8057, -1.5252]])
+    end
+  end
+  
 end

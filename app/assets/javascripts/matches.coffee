@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-@initialize_matchmap = ->
+@initialize_matchmap = (polygons) ->
   matchmap = L.map('matchmap')
   osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 10,
@@ -11,3 +11,4 @@
   })
   matchmap.setView([53.794,-1.551], 12)
   matchmap.addLayer(osm)
+  L.polygon(p).addTo(matchmap) for p in polygons

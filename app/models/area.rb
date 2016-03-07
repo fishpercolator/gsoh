@@ -23,4 +23,10 @@ class Area < ActiveRecord::Base
     specific_feature(ftype, subtype: subtype).any?
   end
   
+  # Returns the points of the polygon (currently always a rectangle)
+  def polygon
+    g = geography
+    [[g[:n],g[:w]], [g[:n], g[:e]], [g[:s], g[:e]], [g[:s], g[:w]]]
+  end
+  
 end
