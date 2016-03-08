@@ -4,7 +4,7 @@ namespace :gsoh do
   
   desc 'Regenerate all the features in the DB'
   task :seed_features => :environment do
-    # Obliterate all the existing features
+    # Obliterate all the existing features (FIXME)
     Feature.destroy_all
     
     leeds = OSMLeeds.new

@@ -7,7 +7,10 @@
     - features = match_row.area_matching_features(area).sort_by {|f| f.name.downcase}
     - if features.any?
       - features[0..2].each do |feature|
-        = feature.name
+        - if match_row.subtype.present?
+          = feature.name
+        - else
+          = feature_name_and_subtype(feature)
         %br
       - if features.length > 3
         %a{role: 'button', data: {toggle: 'collapse'}, href: "#features-#{match_row.question.ftype}"}
@@ -16,7 +19,10 @@
           %b.caret
         %div.collapse{id: "features-#{match_row.question.ftype}"}
           - features[3..-1].each do |feature|
-            = feature.name
+            - if match_row.subtype.present?
+              = feature.name
+            - else
+              = feature_name_and_subtype(feature)
             %br
     - else
       None found

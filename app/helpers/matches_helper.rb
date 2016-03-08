@@ -2,7 +2,7 @@ module MatchesHelper
   
   # Given an array of features, generate some JSON for rendering them on a map
   def features_map_json(features)
-    features.map {|f| {latlng: [f.lat, f.lng], name: f.name} }.to_json
+    features.map {|f| {latlng: [f.lat, f.lng], name: feature_name_and_subtype(f)} }.to_json
   end
   
   # Gets all the JSON needed to render a match as a polygon on the map

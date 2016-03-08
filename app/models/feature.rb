@@ -36,7 +36,7 @@ class Feature < ActiveRecord::Base
     when 'place_of_worship'
       self.subtype = tags[:religion]
     when 'shop'
-      self.subtype = tags[:shop]
+      self.subtype = tags[:shop] unless tags[:shop] == 'yes'
     end
   end
   
