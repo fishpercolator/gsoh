@@ -1,10 +1,15 @@
 .row
-  .col-md-10.col-md-offset-1
+  .col-md-12
     %h1
       #{match.area.name}:
       %span{class: match.goodness} #{match.score.to_i}%
       match
-    %hr
+.row
+  .col-md-6.col-xs-12
+    #matchmap
+    :javascript
+      initialize_matchmap(#{@map_data.to_json}, true)
+  .col-md-6.col-xs-12
     - if match.good_answers.any?
       .good-answers
         %h2
