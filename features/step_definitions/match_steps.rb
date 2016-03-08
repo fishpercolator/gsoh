@@ -54,20 +54,31 @@ def get_popular_ftype
   user = User.find_by_email('test@example.com')
   area = Area.find_by_name('Wibbleton')
   match = Match.new(user: user, area: area, score: 50)
-  match.good_answers.find {|a| a.area_matching_features(area).length > 3}.question.ftype
+  answer = match.good_answers.find {|a| a.area_matching_features(area).length > 3}
+  # memoize the response for speed
+  @response ||= [answer.question.ftype, answer.area_matching_features(area).map(&:name)]
 end
 
 Then(/^features with more than 3 matches should be collapsed$/) do
-  ftype = get_popular_ftype
-  row = page.find('tr', text: ftype.capitalize)
-  list = row.find('td:nth-child(2)')
-  expect(list.text).to include('more')
+  ftype, features = get_popular_ftype
+  within(page.find('tr', text: ftype.capitalize)) do
+    assert_text 'more'
+    assert_text features[0]
+    assert_no_text features[3]
+  end
 end
 
 When(/^I click the more link on a feature$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  ftype, features = get_popular_ftype
+  within(page.find('tr', text: ftype.capitalize)) do
+    click_link('more')
+  end
 end
 
 Then(/^I should see the rest of the matches$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  ftype, features = get_popular_ftype
+  within(page.find('tr', text: ftype.capitalize)) do
+    assert_text features[0]
+    assert_text features[3]
+  end
 end
