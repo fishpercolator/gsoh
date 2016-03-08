@@ -8,7 +8,7 @@
   .col-md-6.col-xs-12
     #matchmap
     :javascript
-      initialize_matchmap(#{@map_data.to_json}, true)
+      initialize_matchmap(#{matches_map_json [@match]}, true)
   .col-md-6.col-xs-12
     - if match.good_answers.any?
       .good-answers

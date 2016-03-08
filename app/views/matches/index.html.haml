@@ -8,7 +8,7 @@
   .col-md-6.col-xs-12
     #matchmap
     :javascript
-      initialize_matchmap(#{@map_data.to_json})
+      initialize_matchmap(#{matches_map_json @matches[0..4]})
   .col-md-6.col-xs-12
     %table.table.table-striped.table-bordered#matchlist
       %thead
