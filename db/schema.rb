@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308135721) do
+ActiveRecord::Schema.define(version: 20160307153338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,12 +48,6 @@ ActiveRecord::Schema.define(version: 20160308135721) do
 
   add_index "features", ["ftype", "subtype"], name: "index_features_on_ftype_and_subtype", using: :btree
   add_index "features", ["ftype"], name: "index_features_on_ftype", using: :btree
-
-  create_table "letsencrypt_plugin_challenges", force: :cascade do |t|
-    t.text     "response"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "questions", force: :cascade do |t|
     t.string   "type"
