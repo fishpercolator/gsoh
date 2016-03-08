@@ -10,9 +10,9 @@
       .cta.well.text-center
         %h3 Helping you find the perfect place to live in Leeds
         - if user_signed_in?
-          %p= link_to 'Answer questions &raquo;'.html_safe, new_answer_path, class: 'btn btn-primary btn-lg'
+          %p= link_to 'Answer questions <span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, new_answer_path, class: 'btn btn-primary btn-lg'
         - else
-          %p= link_to 'Sign up to get started &raquo;'.html_safe, new_user_registration_path, class: 'btn btn-primary btn-lg'
+          %p= link_to 'Sign up to get started <span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, new_user_registration_path, class: 'btn btn-primary btn-lg'
   .row
     .col-md-4
       %h2 Step 1

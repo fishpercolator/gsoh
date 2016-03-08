@@ -17,6 +17,7 @@ Scenario: Presented with a question
   When I go to answer questions
   Then I should see a question with options
   And I should see a button for the next question
+  And I should see a button to skip this question
   And I should see there are 4 questions remaining
 
 Scenario: Answering a question
@@ -79,3 +80,10 @@ Scenario: Answering subtype question
   And I should be told there are no more questions
   And an answer should be recording containing the chosen subtype
 
+Scenario: Skip question
+  Given I am signed in
+  And there are 4 questions to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  And I click to skip
+  Then I should see the second question

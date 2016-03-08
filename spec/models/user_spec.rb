@@ -18,6 +18,13 @@ RSpec.describe User, type: :model do
         it { expect(subject.unanswered_questions).to have(20).items}
       end
       
+      describe '#next_unanswered_question_after' do
+        it 'follows in sequence' do
+          q5, q6 = subject.unanswered_questions.values_at(5,6)
+          expect(subject.next_unanswered_question_after(q5.id)).to eq(q6)
+        end
+      end
+      
       describe '#answer_question' do
         # Create a new :importance_question so now there are 21
         let!(:question) { create :importance_question }

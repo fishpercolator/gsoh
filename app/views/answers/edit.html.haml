@@ -17,5 +17,6 @@
       - if @answer.question.ask_subtype?
         .pull-right
           = f.select :subtype, @answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
-    .btn-group.pull-right{role: 'group'}
-      = f.button('Next &raquo;'.html_safe, class: 'btn btn-primary')
+    .pull-right{role: 'group'}
+      = f.button('Skip <span class="glyphicon glyphicon-forward"></span>'.html_safe, class: 'btn btn-default', name: 'skip')
+      = f.button('Next <span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, class: 'btn btn-primary')

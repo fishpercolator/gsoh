@@ -26,7 +26,9 @@ class AnswersController < ApplicationController
   end
   
   def create
-    if @answer.save
+    if params[:skip]
+      skip_answer
+    elsif @answer.save
       # Next answer
       redirect_to new_answer_path
     else
@@ -48,6 +50,13 @@ class AnswersController < ApplicationController
     @answer = Answer.new_with_type(answer_params)
     @answer.user = current_user
     authorize @answer
+  end
+  
+  def skip_answer
+    # come full circle if we get to the end
+    next_question = current_user.next_unanswered_question_after(answer_params[:question_id]) ||
+      current_user.unanswered_questions.first
+    redirect_to edit_answer_path(next_question.id)
   end
   
   def answer_params

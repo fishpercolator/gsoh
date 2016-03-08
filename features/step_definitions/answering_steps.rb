@@ -39,6 +39,9 @@ When(/^I click to go to the next question$/) do
   click_on 'Next'
 end
 
+When(/^I click to skip$/) do
+  click_on 'Skip'
+end
 
 Then(/^I should see a question with options$/) do
   expect(page).to have_css('#new_answer p', text: '?')
@@ -47,6 +50,10 @@ end
 
 Then(/^I should see a button for the next question$/) do
   expect(page).to have_css('button', text: 'Next')
+end
+
+Then(/^I should see a button to skip this question$/) do
+  expect(page).to have_css('button', text: 'Skip')
 end
 
 Then(/^I should see there are (\d+) questions remaining$/) do |arg1|
@@ -68,3 +75,8 @@ end
 Then(/^an answer should be recording containing the chosen subtype$/) do
   expect(Answer.where(subtype: 'harry').any?).to be true
 end
+
+Then(/^I should see the second question$/) do
+  expect(page).to have_content(Question.all[1].text)
+end
+

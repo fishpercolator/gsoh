@@ -8,8 +8,12 @@ class User < ActiveRecord::Base
   has_many :questions, through: :answers
   
   def unanswered_questions
-    Question.where.not(id: questions)
+    Question.where.not(id: questions).order(:id)
   end
+  
+  def next_unanswered_question_after(id)
+    unanswered_questions.where("id > ?", id).first
+  end 
   
   def answer_question(question, answer, subtype: nil)
     question.answer(user: self, answer: answer, subtype: subtype).tap do |a|
