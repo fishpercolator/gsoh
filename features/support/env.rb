@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'capybara-screenshot/cucumber'
+require 'headless'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -57,4 +58,12 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 World(FactoryGirl::Syntax::Methods)
+
+Capybara.javascript_driver = :webkit
+Headless.new.start # make sure there's an X server for the browser to run in
+
+# Whitelist some external URLs
+Capybara::Webkit.configure do |config|
+  config.allow_url("fonts.googleapis.com")
+end
 

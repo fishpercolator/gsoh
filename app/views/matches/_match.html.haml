@@ -6,23 +6,24 @@
       match
     %hr
     - if match.good_answers.any?
-      %h2
-        %span.glyphicon.glyphicon-thumbs-up.good
-        - case match.goodness
-        - when :good
-          Why #{match.area.name} is a good match for you
-        - else
-          Where #{match.area.name} matches
-      %table.table.table-striped.match-details
-        = render partial: 'match_row', collection: match.good_answers, locals: {area: match.area}
+      .good-answers
+        %h2
+          %span.glyphicon.glyphicon-thumbs-up.good
+          - case match.goodness
+          - when :good
+            Why #{match.area.name} is a good match for you
+          - else
+            Where #{match.area.name} matches
+        %table.table.table-striped.match-details
+          = render partial: 'match_row', collection: match.good_answers, locals: {area: match.area}
     - if match.bad_answers.any?
-      %h2
-        %span.glyphicon.glyphicon-thumbs-down.bad
-        - case match.goodness
-        - when :bad
-          Why #{match.area.name} is not such a good match for you
-        - else
-          Where #{match.area.name} doesn't match
-      %table.table.table-striped.match-details
-        = render partial: 'match_row', collection: match.bad_answers, locals: {area: match.area}
-  
+      .bad-answers
+        %h2
+          %span.glyphicon.glyphicon-thumbs-down.bad
+          - case match.goodness
+          - when :bad
+            Why #{match.area.name} is not such a good match for you
+          - else
+            Where #{match.area.name} doesn't match
+        %table.table.table-striped.match-details
+          = render partial: 'match_row', collection: match.bad_answers, locals: {area: match.area}

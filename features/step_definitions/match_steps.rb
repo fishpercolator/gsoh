@@ -17,6 +17,10 @@ When(/^I click on a match$/) do
   link.click
 end
 
+When(/^I visit that neighbourhood's match page$/) do
+  visit match_path(area: 'Wibbleton')
+end
+
 Then(/^I should see (\d+) areas with match percentage$/) do |arg1|
   expect(page).to have_css('#matchlist tr', count: 4, text: /\d+%/)
 end
@@ -28,4 +32,42 @@ end
 
 Then(/^I should be taken to that area's match page$/) do
   expect(current_path).to eq(match_path area: @area)
+end
+
+Then(/^I should see a section of good and a section of bad$/) do
+  expect(page).to have_css('h2 span.good')
+  expect(page).to have_css('h2 span.bad')
+end
+
+Then(/^each section should contain appropriate features$/) do
+  %w{School Pub Pharmacy}.each do |ftype|
+    expect(page.find('.good-answers')).to have_text(ftype)
+    expect(page.find('.bad-answers')).not_to have_text(ftype)
+  end
+  %w{Restaurant Doctors}.each do |ftype|
+    expect(page.find('.good-answers')).not_to have_text(ftype)
+    expect(page.find('.bad-answers')).to have_text(ftype)
+  end
+end
+
+def get_popular_ftype
+  user = User.find_by_email('test@example.com')
+  area = Area.find_by_name('Wibbleton')
+  match = Match.new(user: user, area: area, score: 50)
+  match.good_answers.find {|a| a.area_matching_features(area).length > 3}.question.ftype
+end
+
+Then(/^features with more than 3 matches should be collapsed$/) do
+  ftype = get_popular_ftype
+  row = page.find('tr', text: ftype.capitalize)
+  list = row.find('td:nth-child(2)')
+  expect(list.text).to include('more')
+end
+
+When(/^I click the more link on a feature$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see the rest of the matches$/) do
+  pending # Write code here that turns the phrase above into concrete actions
 end

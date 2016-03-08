@@ -79,6 +79,9 @@ GEM
     capybara-screenshot (1.0.11)
       capybara (>= 1.0, < 3)
       launchy
+    capybara-webkit (1.8.0)
+      capybara (>= 2.3.0, < 2.7.0)
+      json
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
@@ -166,6 +169,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    headless (2.2.2)
     high_voltage (2.4.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
@@ -379,6 +383,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+  capybara-webkit
   coffee-rails (~> 4.1.0)
   color-generator (~> 0.0)
   cucumber-rails
@@ -390,6 +395,7 @@ DEPENDENCIES
   guard-cucumber
   guard-rspec
   haml-rails (~> 0.9)
+  headless
   high_voltage (~> 2.4)
   html2haml
   jbuilder (~> 2.0)

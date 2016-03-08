@@ -89,6 +89,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'cucumber-rails', require: false
   gem 'capybara-screenshot'
+  gem 'headless'
+  gem 'capybara-webkit'
 end
 
 group :production do
