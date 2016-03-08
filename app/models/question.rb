@@ -18,6 +18,7 @@ class Question < ActiveRecord::Base
     user.answers.where(question_id: self).first || 
       matching_answer_class.new do |answer|
         answer.question = self
+        answer.user = user
       end
   end
   
