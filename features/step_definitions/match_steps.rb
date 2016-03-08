@@ -56,7 +56,7 @@ def get_popular_ftype
   match = Match.new(user: user, area: area, score: 50)
   answer = match.good_answers.find {|a| a.area_matching_features(area).length > 3}
   # memoize the response for speed
-  @response ||= [answer.question.ftype, answer.area_matching_features(area).map(&:name)]
+  @response ||= [answer.question.ftype, answer.area_matching_features(area).map(&:name).sort]
 end
 
 Then(/^features with more than 3 matches should be collapsed$/) do

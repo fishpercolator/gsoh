@@ -17,8 +17,9 @@ FactoryGirl.define do
       after(:create) do |area, evaluator|
         avg_lat = (area.geography[:n] + area.geography[:s]) / 2
         avg_lng = (area.geography[:e] + area.geography[:w]) / 2
+        guaranteed = evaluator.ftypes.clone # guarantee at least one of each type
         evaluator.n_features.times do
-          create :feature, lat: avg_lat, lng: avg_lng, ftype: evaluator.ftypes.sample
+          create :feature, lat: avg_lat, lng: avg_lng, ftype: guaranteed.shift || evaluator.ftypes.sample
         end
       end
     end
