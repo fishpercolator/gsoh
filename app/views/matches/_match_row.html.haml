@@ -20,3 +20,7 @@
             %br
     - else
       None found
+  %td
+    - if features.any?
+      %button.btn.btn-default.show-on-map{id: "show-#{match_row.question.ftype}", onclick: "show_features(\"show-#{match_row.question.ftype}\", #{features_map_json features})"}
+        Show

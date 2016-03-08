@@ -24,3 +24,7 @@ div#matchmap {
   height: 600px;
   border: 1px solid #ecf0f1;
 }
+
+#matchdetails #matchmap {
+  margin-top: 21px; // to match h2
+}
