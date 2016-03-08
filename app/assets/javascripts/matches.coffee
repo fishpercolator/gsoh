@@ -8,7 +8,7 @@ render_area = (map, area) ->
 
 @initialize_matchmap = (map_data) ->
   matchmap = L.map('matchmap')
-  osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 10,
     maxZoom: 18,
     attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
