@@ -62,8 +62,8 @@ World(FactoryGirl::Syntax::Methods)
 Capybara.javascript_driver = :webkit
 Headless.new.start # make sure there's an X server for the browser to run in
 
-# White/blacklist some external URLs
+# Block all external requests that are not on the whitelist
 Capybara::Webkit.configure do |config|
-  config.block_url("fonts.googleapis.com")
+  config.block_unknown_urls
 end
 
