@@ -13,7 +13,7 @@ Scenario: View match
   And each section should contain appropriate features
   And features with more than 3 matches should be collapsed
 
-@javascript @now
+@javascript
 Scenario: Expand features
   Given I am signed in
   And there is a neighbourhood that matches part of my profile
