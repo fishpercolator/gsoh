@@ -1,7 +1,0 @@
-production:
-  endpoint: 'https://gsoh.fishpercolator.co.uk/'
-  email: 'rich@fishpercolator.co.uk'
-  domain: 'gsoh.fishpercolator.co.uk'
-
-  # in Rails.root, path to private key
-  private_key: 'tmp/keyfile.pem'
