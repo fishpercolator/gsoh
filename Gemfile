@@ -95,4 +95,5 @@ end
 
 group :production do
   gem 'rails_12factor', '~> 0.0'
+  gem 'letsencrypt_plugin', '0.0.6' # until the hardcoded 2.1 dep is removed
 end
