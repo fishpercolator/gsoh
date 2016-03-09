@@ -1,1 +1,7 @@
-%h1 Nothing to see here!
+%ol.breadcrumb
+  %li= link_to 'Home', root_path
+  %li.active Your answers
+.row
+  .col-md-8.col-md-offset-2
+    %h2 Questions you've answered
+= render partial: 'answer', collection: @answers

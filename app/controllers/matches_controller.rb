@@ -3,8 +3,7 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show]
   
   def index
-    authorize Match
-    @matches = current_user.matches
+    @matches = policy_scope(Match)
   end
   
   def show

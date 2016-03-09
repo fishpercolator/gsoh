@@ -1,9 +1,4 @@
-class AnswerPolicy < ApplicationPolicy
-  # Any user can list their answers
-  def index?
-    user # FIXME Scope
-  end
-  
+class AnswerPolicy < ApplicationPolicy  
   # Users can only create/update answers they own
   def create?
     user == record.user
@@ -14,4 +9,14 @@ class AnswerPolicy < ApplicationPolicy
   def new?
     create?
   end
+  
+  class Scope < Scope
+    def resolve
+      if user.admin?
+        scope.all
+      else
+        scope.where(user: user)
+      end
+    end
+  end  
 end

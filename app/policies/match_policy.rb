@@ -5,5 +5,12 @@ class MatchPolicy < ApplicationPolicy
   
   def show?
     user && record&.user == user
-  end  
+  end
+  
+  class Scope < Scope
+    def resolve
+      user.matches
+    end
+  end
+  
 end

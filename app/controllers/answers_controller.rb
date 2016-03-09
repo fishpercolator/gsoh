@@ -3,7 +3,11 @@ class AnswersController < ApplicationController
   before_action :find_and_update_answer, only: [:create, :update]
   
   def index
-    authorize Answer
+    @answers = policy_scope(Answer).where(user: current_user)
+    if @answers.empty?
+      flash[:error] = 'No answers found. Please answer some questions below.'
+      redirect_to new_answer_path
+    end
   end
   
   def new

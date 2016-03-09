@@ -9,7 +9,3 @@ Given(/^I am signed in$/) do
   fill_in 'user_password', with: user.password
   click_button 'Sign in'
 end
-
-Then(/^I should be told to sign in$/) do
-  expect(page).to have_content('You need to sign in or sign up before continuing.')
-end
