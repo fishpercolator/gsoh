@@ -1,15 +1,20 @@
 .row
   .col-md-8.col-md-offset-2
-    .well.answer
-      %p
-        %b
-          Q.
-          = answer.question.text
-      %p
-        A.
-        = t answer.answer
-        - if answer.question.ask_subtype?
-          - if answer.subtype.present?
-            (#{t answer.subtype})
-          - else
-            (Any)
+    .well.clearfix.answer
+      .pull-left
+        %p
+          %b
+            Q.
+            = answer.question.text
+        %p
+          A.
+          = t answer.answer
+          - if answer.question.ask_subtype?
+            - if answer.subtype.present?
+              (#{t answer.subtype})
+            - else
+              (Any)
+      .pull-right
+        = link_to edit_answer_path(answer.question), class: 'btn btn-default' do
+          %span.glyphicon.glyphicon-edit
+          Edit

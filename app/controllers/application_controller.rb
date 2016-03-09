@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index
 
   private
-
-  def user_not_authorized
+  
+  def user_not_authorized(exception)
+    logger.error("Authorization error: user #{user.id} #{exception}")
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
   end

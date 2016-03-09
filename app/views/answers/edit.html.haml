@@ -11,12 +11,21 @@
       %p= @answer.question.text
       .btn-group{role: 'group', data: {toggle: 'buttons'}}
         - @answer.question.available_answers.each do |a|
-          %label.btn.btn-default
+          %label.btn.btn-default{class: ('active' if a[0] == @answer.answer)}
             = f.radio_button :answer, a[0]
             = t a[0]
       - if @answer.question.ask_subtype?
         .pull-right
           = f.select :subtype, @answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
     .pull-right{role: 'group'}
-      = f.button('Skip <span class="glyphicon glyphicon-forward"></span>'.html_safe, class: 'btn btn-default', name: 'skip')
-      = f.button('Next <span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, class: 'btn btn-primary')
+      - if @answer.new_record?
+        = f.button class: 'btn btn-default', name: 'skip' do
+          Skip
+          %span.glyphicon.glyphicon-forward        
+        = f.button class: 'btn btn-primary' do
+          Next
+          %span.glyphicon.glyphicon-chevron-right
+      - else
+        = f.button class: 'btn btn-primary' do
+          Save
+          %span.glyphicon.glyphicon-chevron-right

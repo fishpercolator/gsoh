@@ -1,7 +1,7 @@
 class AnswerPolicy < ApplicationPolicy  
   # Users can only create/update answers they own
   def create?
-    user == record.user
+    user.id == record.user_id
   end
   def update?
     create?

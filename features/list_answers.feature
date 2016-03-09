@@ -26,3 +26,11 @@ Scenario: Signed in, no questions answered
   Then I should be redirected to the answer questions page
   And I should be told to answer questions
 
+Scenario: Answer list has edit button
+  Given I am signed in
+  And there are 4 questions to answer
+  And I have answered 3 questions
+  When I go to list answers
+  Then I should see an edit button on each answer
+  When I click on an edit button
+  Then I should be redirected to the edit answer page

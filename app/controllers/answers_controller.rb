@@ -1,6 +1,5 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_and_update_answer, only: [:create, :update]
   
   def index
     @answers = policy_scope(Answer).where(user: current_user)
@@ -30,9 +29,12 @@ class AnswersController < ApplicationController
   end
   
   def create
-    if params[:skip]
-      skip_answer
-    elsif @answer.save
+    return skip_answer if params[:skip]
+
+    @answer = Answer.new_with_type(answer_params)
+    @answer.user = current_user
+    authorize @answer
+    if @answer.save
       # Next answer
       redirect_to new_answer_path
     else
@@ -41,6 +43,9 @@ class AnswersController < ApplicationController
   end
   
   def update
+    @answer = Answer.find(params[:id])
+    authorize @answer
+    @answer.update_attributes(answer_params)
     if @answer.save
       redirect_to answers_path
     else
@@ -49,12 +54,6 @@ class AnswersController < ApplicationController
   end
   
   private
-  
-  def find_and_update_answer
-    @answer = Answer.new_with_type(answer_params)
-    @answer.user = current_user
-    authorize @answer
-  end
   
   def skip_answer
     # come full circle if we get to the end
