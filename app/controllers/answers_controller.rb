@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @answers = policy_scope(Answer).where(user: current_user)
+    @answers = policy_scope(Answer).where(user: current_user).order(:question_id)
     if @answers.empty?
       flash[:error] = 'No answers found. Please answer some questions below.'
       redirect_to new_answer_path
@@ -29,11 +29,10 @@ class AnswersController < ApplicationController
   end
   
   def create
-    return skip_answer if params[:skip]
-
     @answer = Answer.new_with_type(answer_params)
     @answer.user = current_user
     authorize @answer
+    return skip_answer if params[:skip]
     if @answer.save
       # Next answer
       redirect_to new_answer_path
@@ -47,6 +46,7 @@ class AnswersController < ApplicationController
     authorize @answer
     @answer.update_attributes(answer_params)
     if @answer.save
+      flash[:notice] = 'Answer saved'
       redirect_to answers_path
     else
       render action: 'edit'

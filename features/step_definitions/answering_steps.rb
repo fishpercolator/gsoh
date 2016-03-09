@@ -43,6 +43,16 @@ When(/^I click to skip$/) do
   click_on 'Skip'
 end
 
+When(/^I go to edit an answer$/) do
+  first_answer = User.find_by_email('test@example.com').answers.first
+  visit edit_answer_path(first_answer.question.id)
+end
+
+When(/^I change my answer and save$/) do
+  choose 'Irrelevant'
+  click_on 'Save'
+end
+
 Then(/^I should see a question with options$/) do
   expect(page).to have_css('#new_answer p', text: '?')
   expect(page).to have_css('#new_answer label.btn', count: 4)
@@ -80,3 +90,15 @@ Then(/^I should see the second question$/) do
   expect(page).to have_content(Question.all[1].text)
 end
 
+Then(/^I should see my existing answer selected$/) do
+  expect(page.find('input[type=radio][value=essential]')).to be_checked
+end
+
+Then(/^my new answer should be recorded$/) do
+  first_answer = User.find_by_email('test@example.com').answers.order(:question_id).first
+  expect(first_answer.answer).to eq('irrelevant')
+end
+
+Then(/^I should be told my new answer was saved$/) do
+  expect(page).to have_content('Answer saved')
+end
