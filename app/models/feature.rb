@@ -1,5 +1,8 @@
 class Feature < ActiveRecord::Base
   
+  scope :in_geography, -> (geography) { where(lat: geography[:s]..geography[:n], lng: geography[:w]..geography[:e]) }
+  scope :with_type,    -> (ftype, subtype=nil) { subtype.present? ? where(ftype: ftype, subtype: subtype) : where(ftype: ftype) }
+    
   # Construct a new feature from an OSM object hash as returned by OSMLeeds
   def self.from_osm(osm)
     new do |f|
@@ -16,7 +19,7 @@ class Feature < ActiveRecord::Base
   end
   
   def self.subtypes_for(ftype)
-    where(ftype: ftype).select(:subtype).distinct.map(&:subtype).compact.sort
+    where(ftype: ftype).distinct.pluck(:subtype).compact.sort
   end
   
   private

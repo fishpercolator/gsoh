@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   validates_presence_of :type, :user, :question, :answer
   validates_uniqueness_of :question, scope: :user
   validate :question_matches
-  
+    
   # Remove subtype from answer if it wasn't asked in the question
   # - we do this instead of validation because the code quickly becomes a
   #   mess otherwise

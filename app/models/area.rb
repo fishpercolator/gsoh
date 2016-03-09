@@ -9,14 +9,11 @@ class Area < ActiveRecord::Base
   end
   
   def features
-    Feature.where(lat: geography[:s]..geography[:n], lng: geography[:w]..geography[:e])
+    Feature.in_geography(geography)
   end
   
   def specific_feature(ftype, subtype: nil)
-    conditions = {ftype: ftype}.tap do |c|
-      c[:subtype] = subtype if subtype.present? # assume blank is nil
-    end
-    features.where(conditions)
+    features.with_type(ftype, subtype)
   end
   
   def contains?(ftype, subtype: nil)
