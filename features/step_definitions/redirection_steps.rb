@@ -16,7 +16,7 @@ Then(/^I should redirected to the answers page$/) do
 end
 
 Then(/^I should be redirected to the edit answer page$/) do
-  first_answer = User.find_by_email('test@example.com').answers.first
+  first_answer = User.find_by_email('test@example.com').answers.order(:question_id).first
   expect(current_path).to eq(edit_answer_path(first_answer.question.id))
 end
 
