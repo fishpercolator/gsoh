@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   private
   
   def user_not_authorized(exception)
-    logger.error("Authorization error: user #{user.id} #{exception}")
+    logger.error("Authorization error: user #{current_user&.id} #{exception}")
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
   end

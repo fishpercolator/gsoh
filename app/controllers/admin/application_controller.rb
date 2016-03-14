@@ -8,7 +8,6 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     include Pundit
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-    
     before_filter :authenticate_admin
 
     def authenticate_admin
