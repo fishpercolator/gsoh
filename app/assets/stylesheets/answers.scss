@@ -7,3 +7,11 @@
     margin: 5px 0;
   }
 }
+
+.progress {
+  height: 1.5em;
+  .progress-bar {
+    font-size: 0.8em;
+    line-height: 1.5em;
+  }
+}

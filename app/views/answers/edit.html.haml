@@ -3,7 +3,11 @@
   %li.active Answer questions
 .col-md-8.col-md-offset-2
   %h2 What do you look for in a neighbourhood?
-  %h3 #{pluralize remaining_questions, 'question'} remaining
+  - if @answer.new_record?
+    .progress
+      .progress-bar{role: 'progressbar', style: "width: #{@progress}%;"}
+        = "#{@progress}% answered"
+        
   = form_for @answer do |f|
     = f.hidden_field :question_id
     .well

@@ -25,6 +25,7 @@ class AnswersController < ApplicationController
   def edit
     question = Question.find(params[:id]) || not_found
     @answer = question.answer_from(current_user)
+    @progress = (current_user.answers.count * 100) / Question.count
     authorize @answer
   end
   
