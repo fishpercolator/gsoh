@@ -9,3 +9,22 @@
   background-repeat: no-repeat;
   background-position: left center;
 }
+
+// Footer adapted from http://ryanfait.com/sticky-footer/
+html, body {
+  height: 100%;
+}
+main {
+  min-height: 100%;
+  margin: 0 auto -3em;
+}
+footer, .push {
+  height: 3em;
+}
+
+footer {
+  @extend .container;
+  background-color: $well-bg;
+  line-height: 3em;
+  width: 100%;
+}
