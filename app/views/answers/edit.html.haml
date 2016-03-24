@@ -5,31 +5,6 @@
   %h2 What do you look for in a neighbourhood?
   - if @answer.new_record?
     .progress
-      .progress-bar{role: 'progressbar', style: "width: #{@progress}%;"}
-        = "#{@progress}% answered"
-        
-  = form_for @answer do |f|
-    = f.hidden_field :question_id
-    .well
-      = errors_for @answer
-      %p= @answer.question.text
-      .btn-group{role: 'group', data: {toggle: 'buttons'}}
-        - @answer.question.available_answers.each do |a|
-          %label.btn.btn-default{class: ('active' if a[0] == @answer.answer)}
-            = f.radio_button :answer, a[0]
-            = t a[0]
-      - if @answer.question.ask_subtype?
-        .pull-right
-          = f.select :subtype, @answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
-    .pull-right{role: 'group'}
-      - if @answer.new_record?
-        = f.button class: 'btn btn-default', name: 'skip' do
-          Skip
-          %span.glyphicon.glyphicon-forward        
-        = f.button class: 'btn btn-primary' do
-          Next
-          %span.glyphicon.glyphicon-chevron-right
-      - else
-        = f.button class: 'btn btn-primary' do
-          Save
-          %span.glyphicon.glyphicon-chevron-right
+      .progress-bar{role: 'progressbar', style: "width: #{progress}%;"}
+        = "#{progress}% answered"
+  = render partial: 'form', locals: {answer: @answer}

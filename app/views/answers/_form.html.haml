@@ -1,0 +1,25 @@
+= form_for answer do |f|
+  = f.hidden_field :question_id
+  .answer-well
+    = errors_for answer
+    %p= answer.question.text
+    .answer-group{role: 'group', data: {toggle: 'buttons'}}
+      - answer.question.available_answers.each do |a|
+        %label.btn{class: ('active' if a[0] == answer.answer)}
+          = f.radio_button :answer, a[0]
+          = t a[0]
+    - if answer.question.ask_subtype?
+      .subtype-selector
+        = f.select :subtype, answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
+  .answer-button-group{role: 'group'}
+    - if answer.new_record?
+      = f.button class: 'btn btn-default', name: 'skip' do
+        Skip
+        %span.glyphicon.glyphicon-forward        
+      = f.button class: 'btn btn-primary' do
+        Next
+        %span.glyphicon.glyphicon-chevron-right
+    - else
+      = f.button class: 'btn btn-primary' do
+        Save
+        %span.glyphicon.glyphicon-chevron-right
