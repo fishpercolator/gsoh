@@ -18,6 +18,17 @@ class Feature < ActiveRecord::Base
     end
   end
   
+  # Construct a new feature from a row of NNS data (from Leeds Data Mill)
+  def self.from_nns_data(nns)
+    latlng = Breasal::EastingNorthing.new(nns.slice(:easting, :northing)).to_wgs84
+    new do |f|
+      f.ftype = 'nns'
+      f.name  = nns[:nameofneighbourhoodnetworkscheme].strip
+      f.lat   = latlng[:latitude]
+      f.lng   = latlng[:longitude]
+    end
+  end
+  
   def self.subtypes_for(ftype)
     where(ftype: ftype).distinct.pluck(:subtype).compact.sort
   end

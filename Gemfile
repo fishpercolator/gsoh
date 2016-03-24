@@ -54,6 +54,10 @@ gem 'shikashi', '~> 0.6'
 gem 'leaflet-rails', '~> 0.7'
 gem 'color-generator', '~> 0.0'
 
+# For querying government data
+gem 'ckan', '~> 0.0', github: 'fishpercolator/CKAN'
+gem 'breasal', '~> 0.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
