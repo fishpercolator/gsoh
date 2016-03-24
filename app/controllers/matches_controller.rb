@@ -7,6 +7,7 @@ class MatchesController < ApplicationController
   end
   
   def show
+    @closest_nns = @match.area.closest('nns')
   end
   
   private

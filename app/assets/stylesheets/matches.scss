@@ -3,12 +3,27 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 span.good {
   color: green;
+  &.icon {
+    @extend .glyphicon;
+    @extend .glyphicon-thumbs-up;
+  }
 }
 span.middle {
   color: orange;
 }
 span.bad {
   color: red;
+  &.icon {
+    @extend .glyphicon;
+    @extend .glyphicon-thumbs-down;
+  }
+}
+span.info {
+  color: blue;
+  &.icon {
+    @extend .glyphicon;
+    @extend .glyphicon-info-sign;
+  }
 }
 
 table.match-details {

@@ -58,6 +58,9 @@ gem 'color-generator', '~> 0.0'
 gem 'ckan', '~> 0.0', github: 'fishpercolator/CKAN'
 gem 'breasal', '~> 0.0'
 
+# So the objects can be mappable
+gem 'geokit-rails', '~> 2.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

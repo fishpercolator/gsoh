@@ -82,3 +82,9 @@ Then(/^I should see the rest of the matches$/) do
     assert_text features[3]
   end
 end
+
+Then(/^it should show the nearest neighbourhood network$/) do
+  expect(page).to have_content('Nearest Neighbourhood Network')
+  nns = Area.find_by_name('Wibbleton').closest('nns')
+  expect(page).to have_content(nns.name)
+end

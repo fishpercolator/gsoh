@@ -12,6 +12,7 @@ Scenario: View match
   Then I should see a section of good and a section of bad
   And each section should contain appropriate features
   And features with more than 3 matches should be collapsed
+  And it should show the nearest neighbourhood network
 
 @javascript
 Scenario: Expand features

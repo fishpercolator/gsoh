@@ -65,4 +65,19 @@ RSpec.describe Area, type: :model do
     end
   end
   
+  describe '#centre' do
+    it 'returns the centre of the area' do
+      expect(subject.centre).to eq([53.8117, -1.51515])
+    end
+  end
+  
+  describe '#closest' do
+    let!(:nns) { create :feature, ftype: 'nns', lat: 53.3000, lng: -1.5092 }
+    let!(:further_nns) { create :feature, ftype: 'nns', lat: 52.8000, lng: -1.5092 }
+    
+    it 'returns the nearest nns even though it is not inside the area' do
+      expect(subject.closest('nns')).to eq(nns)
+    end
+  end
+  
 end

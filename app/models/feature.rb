@@ -1,8 +1,9 @@
 class Feature < ActiveRecord::Base
+  acts_as_mappable
   
-  scope :in_geography, -> (geography) { where(lat: geography[:s]..geography[:n], lng: geography[:w]..geography[:e]) }
   scope :with_type,    -> (ftype, subtype=nil) { subtype.present? ? where(ftype: ftype, subtype: subtype) : where(ftype: ftype) }
-    
+  scope :in_area,      -> (area) { in_bounds(area.bounds) }
+
   # Construct a new feature from an OSM object hash as returned by OSMLeeds
   def self.from_osm(osm)
     new do |f|

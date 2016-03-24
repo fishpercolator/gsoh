@@ -21,6 +21,8 @@ FactoryGirl.define do
         evaluator.n_features.times do
           create :feature, lat: avg_lat, lng: avg_lng, ftype: guaranteed.shift || evaluator.ftypes.sample
         end
+        # Create a neighbourhood network inside the neighbourhood
+        create :feature, lat: avg_lat, lng: avg_lng, ftype: 'nns'
       end
     end
   end
