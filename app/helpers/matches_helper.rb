@@ -18,6 +18,14 @@ module MatchesHelper
     end.to_json
   end
   
+  # Get JSON for a highlight
+  def map_highlight(match)
+    {
+      polygon: match.area.polygon,
+      color: '#000000'
+    }.to_json
+  end
+  
   private
   
   def colorgen

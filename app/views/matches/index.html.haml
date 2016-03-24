@@ -13,7 +13,7 @@
           %th Match
       %tbody
         - @matches.each do |match|
-          %tr
+          %tr.match{data: {map_highlight: map_highlight(match)}}
             %td
               = link_to match.area.name, match_path(match.area.name)
             %td

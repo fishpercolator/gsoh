@@ -21,6 +21,14 @@ render_area = (area, single) ->
   @matchmap.addLayer(osm)
   render_area(area, single) for area in map_data
   @matchmap.setView([53.794,-1.551], 11) unless single
+  
+  $('tr.match').hover(
+    ->
+      area = $(this).data('map-highlight')
+      @hovered = L.polygon(area['polygon'], color: area['color'], fillOpacity: 0).addTo(matchmap)
+    ->
+      matchmap.removeLayer(@hovered)
+  )
 
 show_feature = (feature) ->
   marker = L.marker(feature["latlng"]).addTo(@matchmap)
