@@ -24,6 +24,11 @@ div#matchmap {
   height: 600px;
   border: 1px solid #ecf0f1;
   margin-bottom: 1em;
+  @media (max-width: $screen-md-min) {
+    // On small devices, leave a little space at the side for scrolling
+    margin: 2em;
+    height: 300px;
+  }
 }
 
 #matchdetails #matchmap {
