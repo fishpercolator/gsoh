@@ -13,14 +13,34 @@ namespace :gsoh do
     
   task :seed_osm => :environment do
     leeds = OSMLeeds.new
-    %w{pharmacy place_of_worship restaurant pub cafe bank library}.each do |am|
-      leeds.query('amenity' => am).each {|osm| Feature.from_osm(osm).save }
+    OSM_TYPES = {
+      'pharmacy'         => 'amenity',
+      'doctors'          => 'amenity',
+      'place_of_worship' => 'amenity',
+      'restaurant'       => 'amenity',
+      'pub'              => 'amenity',
+      'cafe'             => 'amenity',
+      'bank'             => 'amenity',
+      'library'          => 'amenity',
+      'shop'             => true,
+      'sports_centre'    => 'leisure',
+      'bus_stop'         => 'highway',
+    }
+    OSM_TYPES.each do |ftype, tagname|
+      puts "Finding #{ftype}:"
+      query = case tagname
+      when String
+        {tagname => ftype}
+      else
+        # E.g. shop where the ftype is the tag itself
+        {ftype => true}
+      end
+      leeds.query(query).each {|osm| Feature.from_osm(osm).save }
     end
-    leeds.query('shop' => true).each {|osm| Feature.from_osm(osm).save }
-    # FIXME: Do the 'leisure' types
   end
   
-  task :seed_nnses => :environment do    
+  task :seed_nnses => :environment do
+    puts "Finding nns:"
     nnses = CKAN::Package.find(name: 'neighbourhood-network-schemes').first.resources.first.content_csv
     nnses.each do |nns|
       Feature.from_nns_data(nns.to_h).save

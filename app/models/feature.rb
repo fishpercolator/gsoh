@@ -1,4 +1,5 @@
 class Feature < ActiveRecord::Base
+  validates :ftype, presence: true
   acts_as_mappable
   
   scope :with_type,    -> (ftype, subtype=nil) { subtype.present? ? where(ftype: ftype, subtype: subtype) : where(ftype: ftype) }
@@ -43,7 +44,12 @@ class Feature < ActiveRecord::Base
     if tags[:shop]
       self.ftype = 'shop'
     else
-      self.ftype = tags[:amenity]
+      [:amenity, :leisure, :highway].each do |t|
+        if tags[t]
+          self.ftype = tags[t]
+          break
+        end
+      end
     end
     
     # Set subtype if appropriate
@@ -52,6 +58,10 @@ class Feature < ActiveRecord::Base
       self.subtype = tags[:religion]
     when 'shop'
       self.subtype = tags[:shop] unless tags[:shop] == 'yes'
+    when 'bus_stop'
+      if tags[:shelter] == 'yes'
+        self.subtype = 'with_shelter'
+      end
     end
   end
   
