@@ -43,6 +43,8 @@ gem 'devise-bootstrap-views', '~> 0.0'
 gem 'haml-rails', '~> 0.9'
 gem 'high_voltage', '~> 2.4'
 gem 'pundit', '~> 1.1'
+gem 'administrate-field-password', '~> 0.0'
+gem 'administrate-field-type', '~> 1.0'
 
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1'
@@ -74,6 +76,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
   gem 'guard-cucumber'
+  gem 'binding_of_caller'
 end
 
 group :development do

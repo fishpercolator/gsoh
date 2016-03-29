@@ -9,7 +9,7 @@ class QuestionDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    type: TypeField.with_options(class: Question),
+    type: Field::Type.with_options(class_name: 'Question'),
     text: Field::String,
     ftype: Field::String,
     ask_subtype: Field::Boolean,

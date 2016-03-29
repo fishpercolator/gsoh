@@ -22,8 +22,8 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     admin: Field::Boolean,
-    password: PasswordField,
-    password_confirmation: PasswordField,
+    password: Field::Password,
+    password_confirmation: Field::Password,
   }
 
   # COLLECTION_ATTRIBUTES
