@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
        
   has_many :answers
   has_many :questions, through: :answers
-  has_many :matches, -> { order(score: :desc) }
+  has_many :matches, -> { order(score: :desc) }, dependent: :delete_all
   
   def unanswered_questions
     Question.where.not(id: questions).order(:id)

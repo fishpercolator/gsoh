@@ -7,7 +7,7 @@ require 'ckan'
 namespace :gsoh do
   
   desc 'Regenerate all the features in the DB'
-  task :seed_features => [:destroy_all_features, :seed_nnses, :seed_osm]
+  task :seed_features => [:destroy_all_features, :seed_nnses, :seed_changing_places, :seed_osm, :regenerate_matches]
 
   task :destroy_all_features => :environment do
     # Obliterate all the existing features (FIXME)

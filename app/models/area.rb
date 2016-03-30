@@ -1,5 +1,6 @@
 class Area < ActiveRecord::Base
   serialize :geography
+  has_many :matches, dependent: :delete_all
   
   before_save do
     # If the geography was given as a string, run it in a sandbox
