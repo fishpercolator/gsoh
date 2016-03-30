@@ -11,6 +11,7 @@ namespace :gsoh do
 
   task :destroy_all_features => :environment do
     # Obliterate all the existing features (FIXME)
+    puts "Destroying existing features (FIXME)..."
     Feature.destroy_all
   end
     
@@ -38,7 +39,16 @@ namespace :gsoh do
         # E.g. shop where the ftype is the tag itself
         {ftype => true}
       end
-      leeds.query(query).each {|osm| Feature.from_osm(osm).save }
+      begin
+        leeds.query(query).each {|osm| Feature.from_osm(osm).save }
+      rescue JSON::ParserError => e
+        if e.message =~ /rate_limited/
+          puts "Oops! Too fast... hold on"
+          sleep 3
+          redo
+        end
+        raise
+      end
     end
   end
   
