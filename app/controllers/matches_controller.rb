@@ -13,7 +13,8 @@ class MatchesController < ApplicationController
   private
   
   def set_match
-    @match = current_user.matches.find {|m| m.area.name == params[:area]} || not_found
+    area = Area.find_by(name: params[:area]) || not_found
+    @match = current_user.matches.where(area: area).first || not_found
     authorize @match
   end
     

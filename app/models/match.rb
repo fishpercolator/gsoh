@@ -1,7 +1,8 @@
-class Match
-  include ActiveModel::Model
+class Match < ActiveRecord::Base
   
-  attr_accessor :user, :area, :score
+  belongs_to :user
+  belongs_to :area
+  validates :score, presence: true, numericality: true
   
   def goodness
     case score.to_i

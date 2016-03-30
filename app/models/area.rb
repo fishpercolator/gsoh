@@ -8,6 +8,11 @@ class Area < ActiveRecord::Base
     end
   end
   
+  # Whenever an area is saved, regenerate all user matches
+  after_save do
+    User.all.each(&:regenerate_matches!)
+  end
+  
   def features
     Feature.in_area(self)
   end

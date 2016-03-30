@@ -421,6 +421,7 @@ DEPENDENCIES
   html2haml
   jbuilder (~> 2.0)
   jquery-rails (~> 4.1)
+  kaminari (~> 0.16)
   launchy
   leaflet-rails (~> 0.7)
   overpass-api-ruby (~> 0.1)

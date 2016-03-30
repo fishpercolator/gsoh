@@ -45,6 +45,7 @@ gem 'high_voltage', '~> 2.4'
 gem 'pundit', '~> 1.1'
 gem 'administrate-field-password', '~> 0.0'
 gem 'administrate-field-type', '~> 1.0'
+gem 'kaminari', '~> 0.16'
 
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1'

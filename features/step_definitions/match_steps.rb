@@ -53,7 +53,7 @@ end
 def get_popular_ftype
   user = User.find_by_email('test@example.com')
   area = Area.find_by_name('Wibbleton')
-  match = Match.new(user: user, area: area, score: 50)
+  match = user.matches.where(area: area).first
   answer = match.good_answers.find {|a| a.area_matching_features(area).length > 3}
   # memoize the response for speed
   @response ||= [answer.question.ftype, answer.area_matching_features(area).map(&:name).sort]

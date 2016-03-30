@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
        
   has_many :answers
   has_many :questions, through: :answers
+  has_many :matches, -> { order(score: :desc) }
   
   def unanswered_questions
     Question.where.not(id: questions).order(:id)
@@ -28,9 +29,12 @@ class User < ActiveRecord::Base
     answers.map {|ans| ans.score_area(area) }.sum.to_f / answers.count
   end
   
-  # Get all the areas in descending order of score, with their scores
-  def matches
-    Area.all.map {|a| Match.new(area: a, score: score_area(a), user: self) }.sort_by(&:score).reverse!
+  # Regenerate all the user's matches based on the areas' current scores
+  def regenerate_matches!
+    Area.all.each do |area|
+      m = Match.find_or_create_by(user: self, area: area)
+      m.update!(score: score_area(area))
+    end
   end
   
 end

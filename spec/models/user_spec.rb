@@ -96,7 +96,7 @@ RSpec.describe User, type: :model do
     end
   end
   
-  describe '#matches' do
+  describe '#regenerate_matches!' do
     before(:each) do
       [12.0, 45.0, 78.0, 16.0].each do |score|
         area = create :area
@@ -104,12 +104,15 @@ RSpec.describe User, type: :model do
       end
     end
     it 'returns the right number of results' do
+      subject.regenerate_matches!
       expect(subject.matches).to have(4).items
     end
-    it 'returns an array of Match objects' do
+    it 'returns a scope of Match objects' do
+      subject.regenerate_matches!
       expect(subject.matches.first).to be_a(Match)
     end
     it 'returns the scores in the right order' do
+      subject.regenerate_matches!
       expect(subject.matches.map(&:score)).to eq([78.0, 45.0, 16.0, 12.0])
     end
   end

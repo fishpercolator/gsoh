@@ -14,6 +14,11 @@ class Answer < ActiveRecord::Base
     end
   end
   
+  # Make sure a user's matches are regenerated whenever an answer is saved
+  after_save do
+    user.regenerate_matches!
+  end
+  
   def self.new_with_type(params)
     Question.find(params[:question_id])&.answer(params)
   end
