@@ -248,6 +248,12 @@ GEM
       ruby2ruby (~> 2)
       ruby_parser (~> 3)
     pg (0.18.4)
+    postmark (1.7.1)
+      json
+      rake
+    postmark-rails (0.12.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.7.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -426,6 +432,7 @@ DEPENDENCIES
   leaflet-rails (~> 0.7)
   overpass-api-ruby (~> 0.1)
   pg (~> 0.15)
+  postmark-rails (~> 0.12)
   pry-rails
   pry-rescue
   puma (~> 3.2)
