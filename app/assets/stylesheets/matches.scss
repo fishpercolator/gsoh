@@ -69,6 +69,10 @@ div#matchmap {
     margin: 2em;
     height: 300px;
   }
+  @media print {
+    height: 600px;
+    width: 600px;
+  }
 }
 
 #matchdetails #matchmap {
