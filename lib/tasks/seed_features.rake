@@ -1,6 +1,9 @@
 require 'osm_leeds'
 require 'ckan'
 
+# This whole thing is a bit of a mess - ideally the city should be stored as
+# config (perhaps in a DSL) and this data generated that way.
+
 namespace :gsoh do
   
   desc 'Regenerate all the features in the DB'
