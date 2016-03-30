@@ -20,7 +20,7 @@
           - else
             Where #{match.area.name} matches
         %table.table.table-striped.match-details
-          = render partial: 'match_row', collection: match.good_answers, locals: {area: match.area}
+          = render partial: 'match_row', collection: match.good_answers.sort_by {|a| a.question.ftype}, locals: {area: match.area}
     - if match.bad_answers.any?
       .bad-answers
         %h2
@@ -31,7 +31,7 @@
           - else
             Where #{match.area.name} doesn't match
         %table.table.table-striped.match-details
-          = render partial: 'match_row', collection: match.bad_answers, locals: {area: match.area}
+          = render partial: 'match_row', collection: match.bad_answers.sort_by {|a| a.question.ftype}, locals: {area: match.area}
     .area_info
       %h2
         %span.info.icon
