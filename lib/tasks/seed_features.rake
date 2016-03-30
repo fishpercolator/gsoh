@@ -47,4 +47,12 @@ namespace :gsoh do
     end
   end
   
+  task :seed_changing_places => :environment do
+    puts "Finding changing_place:"
+    changing_places = CKAN::Package.find(name: 'changing-places-toilets-in-leeds').first.resources.first.content_csv
+    changing_places.each do |cp|
+      Feature.from_changing_place_data(cp.to_h).save
+    end
+  end
+  
 end

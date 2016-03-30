@@ -31,6 +31,17 @@ class Feature < ActiveRecord::Base
     end
   end
   
+  # Construct a new feature from a row of changing_places data (from Leeds Data Mill)
+  def self.from_changing_place_data(changing_place)
+    latlng = Breasal::EastingNorthing.new(changing_place.slice(:easting, :northing)).to_wgs84
+    new do |f|
+      f.ftype = 'changing_place'
+      f.name  = changing_place[:location].strip
+      f.lat   = latlng[:latitude]
+      f.lng   = latlng[:longitude]
+    end
+  end
+  
   def self.subtypes_for(ftype)
     where(ftype: ftype).distinct.pluck(:subtype).compact.sort
   end
