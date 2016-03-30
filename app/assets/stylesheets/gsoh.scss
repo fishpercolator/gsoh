@@ -36,3 +36,13 @@ h1.with-small {
     margin-left: 0.5em;
   }
 }
+
+@media print {
+  body {
+    padding: 0;
+  }
+
+  ol.breadcrumb, nav {
+    display: none;
+  }
+}

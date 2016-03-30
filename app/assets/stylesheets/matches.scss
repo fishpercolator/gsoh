@@ -1,28 +1,37 @@
 // Place all the styles related to the matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-span.good {
-  color: green;
+span.good, span.good:before {
+  color: green !important; // Marked as important black in print css, so override
   &.icon {
     @extend .glyphicon;
     @extend .glyphicon-thumbs-up;
   }
 }
-span.middle {
-  color: orange;
+span.middle, span.middle:before {
+  color: orange !important; // Marked as important black in print css, so override
 }
-span.bad {
-  color: red;
+span.bad, span.bad:before {
+  color: red !important; // Marked as important black in print css, so override
   &.icon {
     @extend .glyphicon;
     @extend .glyphicon-thumbs-down;
   }
 }
-span.info {
-  color: blue;
+span.info, span.info:before {
+  color: blue !important; // Marked as important black in print css, so override
   &.icon {
     @extend .glyphicon;
     @extend .glyphicon-info-sign;
+  }
+}
+
+.print-button {
+  @extend .btn;
+  @extend .btn-info;
+  @extend .pull-right;
+  @media print {
+    display: none;
   }
 }
 
@@ -32,6 +41,22 @@ table.match-details {
   }
   td {
     width: 75%;
+  }
+  @media print {
+    th, td {
+      width: 50%;
+      border: 1px solid #cccccc;
+      border-collapse: collapse;
+    }
+    td.map-button {
+      display: none;
+    }
+    .more {
+      display: none;
+    }
+    .collapse {
+      display: inherit;
+    }
   }
 }
 

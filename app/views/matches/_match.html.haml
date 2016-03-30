@@ -4,6 +4,9 @@
       #{match.area.name}:
       %span{class: match.goodness} #{match.score.to_i}%
       match
+      = link_to 'javascript:window.print()', class: 'print-button' do
+        %span.glyphicon.glyphicon-print
+        Print
 .row#matchdetails
   .col-md-6.col-xs-12
     #matchmap
@@ -42,5 +45,5 @@
             %th Nearest Neighbourhood Network
             %td
               = @closest_nns.name
-            %td
+            %td.map-button
               = show_features_on_map_button([@closest_nns])

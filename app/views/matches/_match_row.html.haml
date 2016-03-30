@@ -13,7 +13,7 @@
           = feature_name_and_subtype(feature)
         %br
       - if features.length > 3
-        %a{role: 'button', data: {toggle: 'collapse'}, href: "#features-#{match_row.question.ftype}"}
+        %a{role: 'button', class: 'more', data: {toggle: 'collapse'}, href: "#features-#{match_row.question.ftype}"}
           = features.length - 3
           more
           %b.caret
@@ -26,6 +26,6 @@
             %br
     - else
       None found
-  %td
+  %td.map-button
     - if features.any?
       = show_features_on_map_button(features)
