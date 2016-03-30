@@ -3,5 +3,12 @@
   %li.active Your answers
 .row
   .col-md-8.col-md-offset-2
-    %h2 Questions you've answered
+    %h1.with-small
+      Your answers
+      %small [#{link_to 'see your matches', matches_path}]
+- if current_user.unanswered_questions.any?
+  .row
+    .col-md-8.col-md-offset-2
+      = link_to new_answer_path, class: 'answer-more-btn' do
+        Answer more questions &raquo;
 = render partial: 'answer', collection: @answers

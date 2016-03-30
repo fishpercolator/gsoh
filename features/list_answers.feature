@@ -17,6 +17,7 @@ Scenario: Signed in, answered questions
   When I go to list answers
   Then I should see a list of 3 answers
   And they should be the answers I have given
+  And I should see an invitation to answer more questions
 
 Scenario: Signed in, no questions answered
   Given I am signed in
@@ -25,6 +26,13 @@ Scenario: Signed in, no questions answered
   When I go to list answers
   Then I should be redirected to the answer questions page
   And I should be told to answer questions
+  
+Scenario: Signed in, answered all questions
+  Given I am signed in
+  And there are 4 questions to answer
+  And I have answered 4 questions
+  When I go to list answers
+  Then I should not see an invitation to answer more questions
 
 Scenario: Answer list has edit button
   Given I am signed in

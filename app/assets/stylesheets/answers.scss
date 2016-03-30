@@ -48,3 +48,11 @@
 .answer-button-group {
   @extend .pull-right;
 }
+
+.answer-more-btn {
+  @extend .btn;
+  @extend .btn-success;
+  @extend .btn-lg;
+  @extend .pull-right;
+  margin-bottom: 1em;
+}

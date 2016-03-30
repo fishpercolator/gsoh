@@ -30,3 +30,9 @@ footer {
   line-height: 3em;
   width: 100%;
 }
+
+h1.with-small {
+  small {
+    margin-left: 0.5em;
+  }
+}

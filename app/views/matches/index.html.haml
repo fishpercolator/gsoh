@@ -2,8 +2,10 @@
   %li= link_to 'Home', root_path
   %li.active Matches
 .row
-  .col-md-12.text-center
-    %h1 Your matches
+  .col-md-12
+    %h1.with-small
+      Your matches
+      %small [#{link_to 'see your answers', answers_path}]
 .row
   .col-md-6.col-xs-12
     %table.table.table-striped.table-bordered#matchlist
