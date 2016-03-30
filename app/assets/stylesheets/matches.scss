@@ -78,3 +78,22 @@ div#matchmap {
 #matchdetails #matchmap {
   margin-top: 21px; // to match h2
 }
+
+.paginator {
+  @extend .text-center;
+  @media (min-width: $screen-md-min) {
+    position: absolute;
+    width: 100%;
+    width: calc(100% - 30px);
+    bottom: 0;
+    margin: 0;
+  }
+}
+
+#matchlist-container {
+  @extend .col-md-6;
+  @extend .col-xs-12;
+  @media (min-width: $screen-md-min) {
+    height: 600px;
+  }
+}

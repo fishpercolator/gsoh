@@ -22,7 +22,7 @@ When(/^I visit that neighbourhood's match page$/) do
 end
 
 Then(/^I should see (\d+) areas with match percentage$/) do |arg1|
-  expect(page).to have_css('#matchlist tr', count: 4, text: /\d+%/)
+  expect(page).to have_css('#matchlist tr', count: arg1.to_i, text: /\d+%/)
 end
 
 Then(/^match percentages should be in descending order$/) do
@@ -87,4 +87,15 @@ Then(/^it should show the nearest neighbourhood network$/) do
   expect(page).to have_content('Nearest Neighbourhood Network')
   nns = Area.find_by_name('Wibbleton').closest('nns')
   expect(page).to have_content(nns.name)
+end
+
+Then(/^I should see a paginator with (\d+) pages$/) do |arg1|
+  expect(page).to have_css('ul.pagination')
+  # +2 for the prev/next links
+  expect(page).to have_css('ul.pagination li', count: arg1.to_i + 2)
+end
+
+
+When(/^I click for page (\d+)$/) do |arg1|
+  click_link(arg1)
 end

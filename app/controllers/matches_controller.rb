@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show]
   
   def index
-    @matches = policy_scope(Match)
+    @matches = policy_scope(Match).page(params[:page]).per(10)
   end
   
   def show

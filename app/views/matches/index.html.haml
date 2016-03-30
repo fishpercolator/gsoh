@@ -7,7 +7,7 @@
       Your matches
       %small [#{link_to 'see your answers', answers_path}]
 .row
-  .col-md-6.col-xs-12
+  #matchlist-container
     %table.table.table-striped.table-bordered#matchlist
       %thead
         %tr
@@ -20,7 +20,9 @@
               = link_to match.area.name, match_path(match.area.name)
             %td
               #{match.score.to_i}% match
+    .paginator
+      = paginate @matches
   .col-md-6.col-xs-12
     #matchmap
     :javascript
-      initialize_matchmap(#{matches_map_json @matches[0..4]})
+      initialize_matchmap(#{matches_map_json @matches})

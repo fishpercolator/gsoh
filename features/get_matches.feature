@@ -18,6 +18,16 @@ Scenario: Listing matches
   Then I should see 4 areas with match percentage
   And match percentages should be in descending order
   
+Scenario: Match pagination
+  Given I am signed in
+  And there exist 15 areas
+  When I list my matches
+  Then I should see 10 areas with match percentage
+  And match percentages should be in descending order
+  And I should see a paginator with 2 pages
+  When I click for page 2
+  Then I should see 5 areas with match percentage
+
 Scenario: Proceeding to match details
   Given I am signed in
   And there exist 4 areas
