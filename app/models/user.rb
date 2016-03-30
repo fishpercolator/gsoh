@@ -23,10 +23,22 @@ class User < ActiveRecord::Base
     end
   end
   
-  # Get the average score for an area across all the provided answers
+  # Get the score for an area across all the provided answers.
   def score_area(area)
-    return 50 if answers.count == 0 # avoid divzero
-    answers.map {|ans| ans.score_area(area) }.sum.to_f / answers.count
+    scores = area_scores(area)
+    return 100 if scores.empty? # perfect match if we know nothing!
+    
+    # The "loss weight" is the fraction of loses + 2*dealbreakers
+    loss_weight = (scores.count(:lose) + 2*scores.count(:dealbreaker)).to_f / scores.count
+    
+    # The "win weight" is the fraction of non-wins (i.e. more wins lowers the weight)
+    win_weight = (scores.count - scores.count(:win)).to_f / scores.count
+    
+    # Multiplying the two weights and subtracting them from 1 should give us our percentage
+    score = (1 - loss_weight * win_weight) * 100
+    
+    # If it's less than zero (because of so many dealbreakers), return zero
+    score < 0 ? 0 : score
   end
   
   # Regenerate all the user's matches based on the areas' current scores
@@ -35,6 +47,12 @@ class User < ActiveRecord::Base
       m = Match.find_or_create_by(user: self, area: area)
       m.update!(score: score_area(area))
     end
+  end
+  
+  private
+  
+  def area_scores(area)
+    answers.map {|ans| ans.score_area(area) }
   end
   
 end

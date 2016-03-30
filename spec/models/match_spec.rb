@@ -10,7 +10,7 @@ RSpec.describe Match, type: :model do
   # We need answers!
   before(:each) do
     @answers = {}
-    [0, 25, 50, 75, 100].each do |n|
+    [:dealbreaker, :lose, :irrelevant, :win].each do |n|
       @answers[n] = create(:importance_answer, user: user, question: create(:importance_question))
       allow(@answers[n]).to receive(:score_area).with(area).and_return(n)
     end
@@ -18,26 +18,26 @@ RSpec.describe Match, type: :model do
   end
     
   describe '#good_answers' do
-    it 'includes the 75 and 100' do
-      expect(subject.good_answers).to include(@answers[75], @answers[100])
+    it 'includes the :win' do
+      expect(subject.good_answers).to include(@answers[:win])
     end
-    it 'does not include the 50' do
-      expect(subject.good_answers).not_to include(@answers[50])
+    it 'does not include the :irrelevant' do
+      expect(subject.good_answers).not_to include(@answers[:irrelevant])
     end
-    it 'does not include the 0 and 25' do
-      expect(subject.good_answers).not_to include(@answers[0], @answers[25])
+    it 'does not include the :lose and :dealbreaker' do
+      expect(subject.good_answers).not_to include(@answers[:dealbreaker], @answers[:lose])
     end
   end
   
   describe '#bad_answers' do
-    it 'includes the 0 and 25' do
-      expect(subject.bad_answers).to include(@answers[0], @answers[25])
+    it 'includes the :lose and :dealbreaker' do
+      expect(subject.bad_answers).to include(@answers[:dealbreaker], @answers[:lose])
     end
-    it 'does not include the 50' do
-      expect(subject.bad_answers).not_to include(@answers[50])
+    it 'does not include the :irrelevant' do
+      expect(subject.bad_answers).not_to include(@answers[:irrelevant])
     end
-    it 'does not include the 75 and 100' do
-      expect(subject.bad_answers).not_to include(@answers[75], @answers[100])
+    it 'does not include the :win' do
+      expect(subject.bad_answers).not_to include(@answers[:win])
     end
   end
   

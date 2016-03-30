@@ -82,13 +82,13 @@ class ImportanceAnswer < Answer
   def score_area(area)
     contains = area_contains_feature?(area)
     if essential?
-      contains ? 100 : 0
+      contains ? :win : :dealbreaker
     elsif important?
-      contains ? 75 : 25
+      contains ? :win : :lose
     elsif bad?
-      contains ? 25 : 75
+      contains ? :lose : :win
     else
-      50 # if irrelevant it doesn't matter either way
+      :irrelevant
     end
   end
   
@@ -124,9 +124,9 @@ class BooleanAnswer < Answer
   def score_area(area)
     contains = area_contains_feature?(area)
     if yes?
-      contains ? 100 : 0
+      contains ? :win : :lose
     else
-      50 # if it's not important, it's 50 either way
+      :irrelevant # if it's not important, it's 50 either way
     end
   end
 end

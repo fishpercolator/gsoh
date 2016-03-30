@@ -68,30 +68,71 @@ RSpec.describe User, type: :model do
     end
   end
   
-  context 'area scores' do
-    let(:area) { create :area }
+  describe '#score_area' do
+    let(:area1) { create :area }
+    let(:area2) { create :area }
+    let(:scores1) { [] }
+    let(:scores2) { [] }
     before(:each) do
-      # Create some questions and answers from this user and make up scores for them
-      answers = 25.times.map { create :importance_answer, question: create(:importance_question), user: subject }
-      @scores = answers.map do |answer|
-        [0, 25, 50, 75, 100].sample.tap do |score|
-          allow(answer).to receive(:score_area).with(area).and_return(score)
-        end
-      end
-      allow(subject).to receive(:answers).and_return(answers)
+      allow(subject).to receive(:area_scores).with(area1).and_return(scores1)
+      allow(subject).to receive(:area_scores).with(area2).and_return(scores2)
     end
-    describe '#score_area' do
-      it 'scores the average of all the answer scores' do
-        expect(subject.score_area(area)).to eq(@scores.sum.to_f / 25)
+    
+    context 'no answers yet' do
+      it 'scores 100' do
+        expect(subject.score_area area1).to eq(100)
       end
     end
-  end
-  
-  context 'no answers at all' do
-    let(:area) { create :area }
-    describe '#score_area' do
-      it 'returns 50' do
-        expect(subject.score_area(area)).to eq(50)
+
+    context 'all wins or irrelevant' do
+      let(:scores1) { [:win, :irrelevant, :win, :irrelevant, :irrelevant] }
+      it 'scores 100' do
+        expect(subject.score_area area1).to eq(100)
+      end
+    end
+    
+    context 'both 1 lose, area1 has more wins' do
+      let(:scores1) { [:win, :irrelevant, :irrelevant, :lose] }
+      let(:scores2) { [:irrelevant, :lose, :irrelevant, :irrelevant] }
+      it 'both scores are between 0 and 100' do
+        expect(subject.score_area area1).to be_between(0,100)
+        expect(subject.score_area area2).to be_between(0,100)
+      end
+      it 'area1 scores higher than area2' do
+        expect(subject.score_area area1).to be > subject.score_area(area2)
+      end
+    end
+    
+    context "both 2 loses, but area1 has a dealbreaker" do
+      let(:scores1) { [:win, :irrelevant, :lose, :dealbreaker] }
+      let(:scores2) { [:win, :irrelevant, :lose, :lose] }
+      it 'both scores are between 0 and 100' do
+        expect(subject.score_area area1).to be_between(0,100)
+        expect(subject.score_area area2).to be_between(0,100)
+      end
+      it 'area2 scores higher than area1' do
+        expect(subject.score_area area2).to be > subject.score_area(area1)
+      end
+    end
+    
+    context 'all loses' do
+      let(:scores1) { [:lose, :lose, :lose, :dealbreaker] }
+      it 'scores 0' do
+        expect(subject.score_area area1).to eq(0)
+      end
+    end
+    
+    context 'more wins than loses' do
+      let(:scores1) { [:win, :win, :lose] }
+      it 'scores between 50 and 100' do
+        expect(subject.score_area area1).to be_between(50,100)
+      end
+    end
+    
+    context 'more loses than wins' do
+      let(:scores1) { [:win, :lose, :lose] }
+      it 'scores between 0 and 99.9' do
+        expect(subject.score_area area1).to be_between(0,99.9)
       end
     end
   end

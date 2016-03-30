@@ -61,7 +61,6 @@ RSpec.describe Answer, type: :model do
     end    
   end
   
-  # A score of 50 is "OK", lower than 50 is "bad"
   # This also implicitly tests the #area_contains_feature? method by stubbing the already-specced
   # Area#contains? instead of that method.
   describe '#score_area' do
@@ -75,26 +74,26 @@ RSpec.describe Answer, type: :model do
       end
       context ImportanceAnswer do
         context :essential do
-          it { is_expected.to eq(100) }
+          it { is_expected.to eq(:win) }
         end
         context :important do
-          it { is_expected.to eq(75) }
+          it { is_expected.to eq(:win) }
         end
         context :irrelevant do
-          it { is_expected.to eq(50) }
+          it { is_expected.to eq(:irrelevant) }
         end
         context :bad do
-          it { is_expected.to eq(25) }
+          it { is_expected.to eq(:lose) }
         end
       end
       context BooleanAnswer do
         let(:question) { create :boolean_question }
         let(:type)     { :boolean_answer }
         context :yes do
-          it { is_expected.to eq(100) }
+          it { is_expected.to eq(:win) }
         end
         context :no do
-          it { is_expected.to eq(50) }
+          it { is_expected.to eq(:irrelevant) }
         end
       end
     end
@@ -104,26 +103,26 @@ RSpec.describe Answer, type: :model do
       end
       context ImportanceAnswer do
         context :essential do
-          it { is_expected.to eq(0) }
+          it { is_expected.to eq(:dealbreaker) }
         end
         context :important do
-          it { is_expected.to eq(25) }
+          it { is_expected.to eq(:lose) }
         end
         context :irrelevant do
-          it { is_expected.to eq(50) }
+          it { is_expected.to eq(:irrelevant) }
         end
         context :bad do
-          it { is_expected.to eq(75) }
+          it { is_expected.to eq(:win) }
         end
       end
       context BooleanAnswer do
         let(:question) { create :boolean_question }
         let(:type)     { :boolean_answer }
         context :yes do
-          it { is_expected.to eq(0) }
+          it { is_expected.to eq(:lose) }
         end
         context :no do
-          it { is_expected.to eq(50) }
+          it { is_expected.to eq(:irrelevant) }
         end
       end
     end
