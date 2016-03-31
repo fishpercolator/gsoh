@@ -44,7 +44,7 @@ Then(/^each section should contain appropriate features$/) do
     expect(page.find('.good-answers')).to have_text(ftype)
     expect(page.find('.bad-answers')).not_to have_text(ftype)
   end
-  %w{Restaurant Doctors}.each do |ftype|
+  ['Restaurant', "Doctor's surgery"].each do |ftype|
     expect(page.find('.good-answers')).not_to have_text(ftype)
     expect(page.find('.bad-answers')).to have_text(ftype)
   end
