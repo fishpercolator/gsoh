@@ -20,7 +20,11 @@ class Match < ActiveRecord::Base
   end
   
   def bad_answers
-    user.answers.select {|a| a.score_area(area).in? [:lose, :dealbreaker] }
+    user.answers.select {|a| a.score_area(area) == :lose }
+  end
+  
+  def dealbreakers
+    user.answers.select {|a| a.score_area(area) == :dealbreaker }
   end
   
 end

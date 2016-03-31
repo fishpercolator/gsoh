@@ -13,6 +13,13 @@
     :javascript
       initialize_matchmap(#{matches_map_json [@match]}, true)
   .col-md-6.col-xs-12
+    - if match.dealbreakers.any?
+      .dealbreakers
+        %h2
+          %span.dealbreaker.icon
+          Dealbreakers for you
+        %table.table.table-striped.match-details
+          = render partial: 'match_row', collection: match.dealbreakers.sort_by {|a| a.question.ftype}, locals: {area: match.area}
     - if match.good_answers.any?
       .good-answers
         %h2

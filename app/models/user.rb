@@ -27,18 +27,16 @@ class User < ActiveRecord::Base
   def score_area(area)
     scores = area_scores(area)
     return 100 if scores.empty? # perfect match if we know nothing!
+    return 0 if scores.any? {|s| s == :dealbreaker} # always 0 if area contains a dealbreaker
     
     # The "loss weight" is the fraction of loses + 2*dealbreakers
-    loss_weight = (scores.count(:lose) + 2*scores.count(:dealbreaker)).to_f / scores.count
+    loss_weight = scores.count(:lose).to_f / scores.count
     
     # The "win weight" is the fraction of non-wins (i.e. more wins lowers the weight)
     win_weight = (scores.count - scores.count(:win)).to_f / scores.count
     
     # Multiplying the two weights and subtracting them from 1 should give us our percentage
-    score = (1 - loss_weight * win_weight) * 100
-    
-    # If it's less than zero (because of so many dealbreakers), return zero
-    score < 0 ? 0 : score
+    (1 - loss_weight * win_weight) * 100
   end
   
   # Regenerate all the user's matches based on the areas' current scores

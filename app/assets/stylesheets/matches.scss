@@ -25,6 +25,13 @@ span.info, span.info:before {
     @extend .glyphicon-info-sign;
   }
 }
+span.dealbreaker, span.dealbreaker:before {
+  color: red !important; // Marked as important black in print css, so override
+  &.icon {
+    @extend .glyphicon;
+    @extend .glyphicon-ban-circle;
+  }
+}
 
 .print-button {
   @extend .btn;

@@ -10,7 +10,7 @@ Given(/^there is a neighbourhood that matches part of my profile$/) do
     create :importance_answer,
       user: user,
       question: create(:importance_question, ftype: ftype),
-      answer: :essential
+      answer: :important
   end
   
   # Create an area with lots of just the matching features

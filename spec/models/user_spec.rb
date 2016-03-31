@@ -103,20 +103,36 @@ RSpec.describe User, type: :model do
       end
     end
     
-    context "both 2 loses, but area1 has a dealbreaker" do
-      let(:scores1) { [:win, :irrelevant, :lose, :dealbreaker] }
-      let(:scores2) { [:win, :irrelevant, :lose, :lose] }
-      it 'both scores are between 0 and 100' do
-        expect(subject.score_area area1).to be_between(0,100)
-        expect(subject.score_area area2).to be_between(0,100)
+    context 'equal wins and loses' do
+      let(:scores1) { [:win, :win, :lose, :lose] }
+      it 'scores 75' do
+        expect(subject.score_area area1).to eq(75)
       end
-      it 'area2 scores higher than area1' do
-        expect(subject.score_area area2).to be > subject.score_area(area1)
+    end
+    
+    context 'equal loses and irrelevants' do
+      let(:scores1) { [:irrelevant, :irrelevant, :lose, :lose] }
+      it 'scores 50' do
+        expect(subject.score_area area1).to eq(50)
+      end
+    end
+    
+    context 'more loses than irrelevant' do
+      let(:scores1) { [:lose, :irrelevant, :lose, :lose, :irrelevant] }
+      it 'scores less than 50' do
+        expect(subject.score_area area1).to be < 50
+      end
+    end
+    
+    context 'contains one dealbreaker' do
+      let(:scores1) { [:irrelevant, :win, :win, :lose, :dealbreaker] }
+      it 'scores 0' do
+        expect(subject.score_area area1).to eq(0)
       end
     end
     
     context 'all loses' do
-      let(:scores1) { [:lose, :lose, :lose, :dealbreaker] }
+      let(:scores1) { [:lose, :lose, :lose] }
       it 'scores 0' do
         expect(subject.score_area area1).to eq(0)
       end

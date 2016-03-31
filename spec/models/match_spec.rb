@@ -30,14 +30,26 @@ RSpec.describe Match, type: :model do
   end
   
   describe '#bad_answers' do
-    it 'includes the :lose and :dealbreaker' do
-      expect(subject.bad_answers).to include(@answers[:dealbreaker], @answers[:lose])
+    it 'includes the :lose' do
+      expect(subject.bad_answers).to include(@answers[:lose])
     end
     it 'does not include the :irrelevant' do
       expect(subject.bad_answers).not_to include(@answers[:irrelevant])
     end
     it 'does not include the :win' do
       expect(subject.bad_answers).not_to include(@answers[:win])
+    end
+    it 'does not include the :dealbreaker' do
+      expect(subject.bad_answers).not_to include(@answers[:dealbreaker])
+    end
+  end
+  
+  describe '#dealbreakers' do
+    it 'includes the :dealbreaker' do
+      expect(subject.dealbreakers).to include(@answers[:dealbreaker])
+    end
+    it 'does not include the others' do
+      expect(subject.dealbreakers).not_to include(@answers[:win], @answers[:lose], @answers[:irrelevant])
     end
   end
   
