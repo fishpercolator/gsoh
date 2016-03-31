@@ -1,5 +1,32 @@
 # The t() method defaults to capitalizing every word of the name which is normally
 # fine but in some cases we want to override them and we do that here.
 en:
+  
+  # Answers
+  essential: 'Essential'
+  important: 'Important'
+  irrelevant: 'Irrelevant'
   bad: 'Keep me away'
+  yes: 'Yes'
+  no: 'No'
+  
+  # Ftypes
+  bank: 'Bank'
+  bus_stop: 'Bus stop'
+  cafe: 'Café'
+  changing_place: 'Changing place'
+  doctors: "Doctor's surgery"
+  library: 'Library'
+  nns: 'Neighbourhood Network'
+  pharmacy: 'Pharmacy'
   place_of_worship: 'Place of worship'
+  pub: 'Pub'
+  restaurant: 'Restaurant'
+  shop: 'Shop'
+  sports_centre: 'Leisure centre'
+  
+  # Subtypes (not conclusive)
+  with_shelter: 'with shelter'
+  av: 'AV'
+  diy: 'DIY'
+  tv_repair: 'TV Repair'
