@@ -40,6 +40,9 @@ span.dealbreaker, span.dealbreaker:before {
   @media print {
     display: none;
   }
+  @media (max-width: $screen-md-min) {
+    display: none;
+  }
 }
 
 table.match-details {

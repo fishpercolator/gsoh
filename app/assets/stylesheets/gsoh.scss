@@ -34,6 +34,12 @@ footer {
 h1.with-small {
   small {
     margin-left: 0.5em;
+    @media (max-width: $screen-md-min) {
+      margin-top: 0.2em;
+      margin-bottom: 0.5em;
+      margin-left: 0;
+      display: block;
+    }
   }
 }
 
