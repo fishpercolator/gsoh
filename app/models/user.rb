@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.name  = auth.info.name
-      user.password = Devise.friendly_token[0,20]
     end
   end
   
@@ -64,6 +63,11 @@ class User < ActiveRecord::Base
     end
   end
   
+  # Returns true if the user has a password set in the database
+  def has_password?
+    encrypted_password_was.present?
+  end
+    
   private
   
   def area_scores(area)
@@ -74,4 +78,11 @@ class User < ActiveRecord::Base
     provider != 'twitter'
   end
   
+  # Don't require a password if the user is a new user from Oauth but require
+  # it when they change their account
+  def password_required?
+    return false if !persisted? and provider.present?
+    super
+  end
+    
 end
