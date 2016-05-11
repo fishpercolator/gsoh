@@ -54,6 +54,9 @@ GEM
       rails (~> 4.2)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
+    administrate-field-image (0.0.2)
+      administrate (>= 0.2.0.rc1, < 0.3.0)
+      rails (~> 4.2)
     administrate-field-password (0.0.2)
       administrate (>= 0.2.0.rc1, < 0.3.0)
       rails (~> 4.2)
@@ -431,6 +434,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate (~> 0.2.0)
+  administrate-field-image (~> 0.0)
   administrate-field-password (~> 0.0.2)
   administrate-field-type (~> 1.0)
   better_errors

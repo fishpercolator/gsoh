@@ -5,14 +5,21 @@
 #via-oauth {
   @extend .col-xs-6;
   
-  display: flex;
-  align-items: center;
+  text-align: center;
+
+  .btn-facebook, .btn-twitter {
+    @extend .btn-lg;
+    margin: 1em;
+  }
 
   .btn-facebook {
-    @extend .btn-lg;
     background-color: #3b5998;
     color: white;
-    margin: 0 auto;
+  }
+  
+  .btn-twitter {
+    background-color: #55acee;
+    color: white;
   }
 
 }

@@ -49,6 +49,8 @@ gem 'high_voltage', '~> 2.4'
 gem 'pundit', '~> 1.1'
 gem 'administrate-field-password', '~> 0.0.2'
 gem 'administrate-field-type', '~> 1.0'
+# just until https://github.com/thoughtbot/administrate/issues/561 is resolved
+gem 'administrate-field-image', '~> 0.0'
 gem 'kaminari', '~> 0.16.3'
 gem 'postmark-rails', '~> 0.12.0'
 
