@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
 # Use postgresql as the database for Active Record
@@ -40,6 +42,8 @@ gem 'bootswatch-rails', '~> 3.3'
 gem 'bootstrap-select-rails', '~> 1.6'
 gem 'devise', '~> 4.1'
 gem 'devise-bootstrap-views', '~> 0.0.8'
+gem 'omniauth-facebook', '~> 3.0'
+gem 'omniauth-twitter', '~> 1.2'
 gem 'haml-rails', '~> 0.9.0'
 gem 'high_voltage', '~> 2.4'
 gem 'pundit', '~> 1.1'

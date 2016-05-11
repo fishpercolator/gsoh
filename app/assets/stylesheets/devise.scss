@@ -1,0 +1,22 @@
+.panel-body {
+  @extend .row;
+}
+
+#via-oauth {
+  @extend .col-xs-6;
+  
+  display: flex;
+  align-items: center;
+
+  .btn-facebook {
+    @extend .btn-lg;
+    background-color: #3b5998;
+    color: white;
+    margin: 0 auto;
+  }
+
+}
+
+#via-email {
+  @extend .col-xs-6;
+}
