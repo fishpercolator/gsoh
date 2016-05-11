@@ -4,7 +4,9 @@ module MatchesHelper
   def matches_map_json(matches)
     matches.map do |m|
       {
-        polygon: m.area.polygon,
+        lat: m.area.lat,
+        lng: m.area.lng,
+        radius: Area::RADIUS,
         name: m.area.name,
         score: m.score.to_i,
         path: match_path(area: m.area.name),
@@ -16,7 +18,9 @@ module MatchesHelper
   # Get JSON for a highlight
   def map_highlight(match)
     {
-      polygon: match.area.polygon,
+      lat: match.area.lat,
+      lng: match.area.lng,
+      radius: Area::RADIUS,
       color: '#000000'
     }.to_json
   end

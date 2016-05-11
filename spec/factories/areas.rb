@@ -1,10 +1,12 @@
 FactoryGirl.define do
   factory :area do
     name { Faker::Address.city }
-    geography do
-      lats = Array.new(2) { Faker::Address.latitude.to_f }.sort
-      lngs = Array.new(2) { Faker::Address.longitude.to_f }.sort
-      {n: lats[1], s: lats[0], e: lngs[1], w: lngs[0]}
+    lat  { Faker::Address.latitude.to_f }
+    lng  { Faker::Address.longitude.to_f }
+    
+    trait :central_leeds do
+      lat 53.7990
+      lng -1.5457
     end
     
     # Create an area with n_features random features of the given types
@@ -15,14 +17,12 @@ FactoryGirl.define do
         n_features 2
       end
       after(:create) do |area, evaluator|
-        avg_lat = (area.geography[:n] + area.geography[:s]) / 2
-        avg_lng = (area.geography[:e] + area.geography[:w]) / 2
         guaranteed = evaluator.ftypes.clone # guarantee at least one of each type
         evaluator.n_features.times do
-          create :feature, lat: avg_lat, lng: avg_lng, ftype: guaranteed.shift || evaluator.ftypes.sample
+          create :feature, lat: area.lat, lng: area.lng, ftype: guaranteed.shift || evaluator.ftypes.sample
         end
         # Create a neighbourhood network inside the neighbourhood
-        create :feature, lat: avg_lat, lng: avg_lng, ftype: 'nns'
+        create :feature, lat: area.lat, lng: area.lng, ftype: 'nns'
       end
     end
   end

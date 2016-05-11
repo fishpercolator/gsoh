@@ -2,30 +2,26 @@ require 'rails_helper'
 
 RSpec.describe Area, type: :model do
   
-  subject do
-    create :area, geography: {n: 53.8177, w: -1.5252, s: 53.8057, e: -1.5051}
-  end
+  subject { create :area, :central_leeds }
   
   describe '#features' do
-    let!(:feature_inside_area) { create :feature, lat: 53.8090, lng: -1.5103 }
-    let!(:feature_outside_lat) { create :feature, lat: 53.9922, lng: -1.5103 }
-    let!(:feature_outside_lng) { create :feature, lat: 53.8090, lng: -1.5010 }
+    let!(:inside)  { create :feature, :in_city_centre }
+    let!(:outside) { create :feature, :outside_city_centre }
     
     it 'finds features inside the area' do
-      expect(subject.features).to include(feature_inside_area)
+      expect(subject.features).to include(inside)
     end
     
     it 'does not find features outside the area' do
-      expect(subject.features).not_to include(feature_outside_lat)
-      expect(subject.features).not_to include(feature_outside_lng)
+      expect(subject.features).not_to include(outside)
     end
   end
   
   describe '#contains?' do
-    let!(:pharmacy_inside) { create :feature, ftype: 'pharmacy', lat: 53.8090, lng: -1.5103 }
-    let!(:church_inside)   { create :feature, ftype: 'place_of_worship', subtype: 'christian', lat: 53.8122, lng: -1.5111 }
-    let!(:mosque_outside)  { create :feature, ftype: 'place_of_worship', subtype: 'muslim', lat: 53.9922, lng: -1.5103 }
-    let!(:school_outside)  { create :feature, ftype: 'school', lat: 53.8090, lng: -1.5010 }
+    let!(:pharmacy_inside) { create :feature, :in_city_centre, ftype: 'pharmacy' }
+    let!(:church_inside)   { create :feature, :also_in_city_centre, ftype: 'place_of_worship', subtype: 'christian' }
+    let!(:mosque_outside)  { create :feature, :outside_city_centre, ftype: 'place_of_worship', subtype: 'muslim' }
+    let!(:school_outside)  { create :feature, :outside_city_centre, ftype: 'school' }
     
     it 'contains pharmacy' do
       expect(subject.contains?('pharmacy')).to be_truthy
@@ -42,10 +38,10 @@ RSpec.describe Area, type: :model do
   end
   
   describe '#specific_feature' do
-    let!(:pharmacy_inside1) { create :feature, ftype: 'pharmacy', lat: 53.8090, lng: -1.5103 }
-    let!(:pharmacy_inside2) { create :feature, ftype: 'pharmacy', lat: 53.8066, lng: -1.5092 }
-    let!(:pharmacy_outside) { create :feature, ftype: 'pharmacy', lat: 53.8090, lng: -1.5010 }
-    let!(:school_inside)    { create :feature, ftype: 'school',   lat: 53.8123, lng: -1.5123 }
+    let!(:pharmacy_inside1) { create :feature, :in_city_centre, ftype: 'pharmacy' }
+    let!(:pharmacy_inside2) { create :feature, :also_in_city_centre, ftype: 'pharmacy' }
+    let!(:pharmacy_outside) { create :feature, :outside_city_centre, ftype: 'pharmacy' }
+    let!(:school_inside)    { create :feature, :in_city_centre, ftype: 'school' }
     
     it 'returns both pharmacies inside' do
       expect(subject.specific_feature('pharmacy')).to include(pharmacy_inside1)
@@ -59,21 +55,9 @@ RSpec.describe Area, type: :model do
     end
   end
   
-  describe '#polygon' do
-    it 'returns the four corners NW, NE, SE, SW' do
-      expect(subject.polygon).to eq([[53.8177, -1.5252], [53.8177, -1.5051], [53.8057, -1.5051], [53.8057, -1.5252]])
-    end
-  end
-  
-  describe '#centre' do
-    it 'returns the centre of the area' do
-      expect(subject.centre).to eq([53.8117, -1.51515])
-    end
-  end
-  
   describe '#closest' do
-    let!(:nns) { create :feature, ftype: 'nns', lat: 53.3000, lng: -1.5092 }
-    let!(:further_nns) { create :feature, ftype: 'nns', lat: 52.8000, lng: -1.5092 }
+    let!(:nns) { create :feature, :outside_city_centre, ftype: 'nns' }
+    let!(:further_nns) { create :feature, :further_outside_city_centre, ftype: 'nns' }
     
     it 'returns the nearest nns even though it is not inside the area' do
       expect(subject.closest('nns')).to eq(nns)

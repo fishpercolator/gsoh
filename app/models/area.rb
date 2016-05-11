@@ -1,13 +1,10 @@
 class Area < ActiveRecord::Base
-  serialize :geography
-  has_many :matches, dependent: :delete_all
+  acts_as_mappable
   
-  before_save do
-    # If the geography was given as a string, run it in a sandbox
-    if geography.is_a? String
-      self.geography = Shikashi::Sandbox.run(geography)
-    end
-  end
+  # Hardcode this for now
+  RADIUS = 750
+  
+  has_many :matches, dependent: :delete_all
   
   # Whenever an area is saved, regenerate all user matches
   after_save do
@@ -15,7 +12,7 @@ class Area < ActiveRecord::Base
   end
   
   def features
-    Feature.in_area(self)
+    Feature.within(RADIUS.to_f/1000, units: :kms, origin: self)
   end
   
   def specific_feature(ftype, subtype: nil)
@@ -26,30 +23,10 @@ class Area < ActiveRecord::Base
     specific_feature(ftype, subtype: subtype).any?
   end
   
-  # Returns the centre of the area as a lat/lng array
-  def centre
-    lat = geography.values_at(:n,:s).sum / 2
-    lng = geography.values_at(:w,:e).sum / 2
-    [lat, lng]
-  end
-  
   # Returns the closest feature of the given type to the centre of the area,
   # whether it's in the area or not
   def closest(ftype)
-    Feature.where(ftype: ftype).closest(origin: self.centre).first
-  end
-  
-  # Returns the points of the polygon (currently always a rectangle)
-  def polygon
-    g = geography
-    [[g[:n],g[:w]], [g[:n], g[:e]], [g[:s], g[:e]], [g[:s], g[:w]]]
-  end
-  
-  # Returns the bounds in Geokit format
-  def bounds
-    sw = Geokit::LatLng.new *geography.values_at(:s,:w)
-    ne = Geokit::LatLng.new *geography.values_at(:n,:e)
-    Geokit::Bounds.new(sw, ne)
+    Feature.where(ftype: ftype).closest(origin: self).first
   end
   
 end

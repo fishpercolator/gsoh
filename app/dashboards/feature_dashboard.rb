@@ -12,8 +12,8 @@ class FeatureDashboard < Administrate::BaseDashboard
     name: Field::String,
     ftype: Field::String,
     subtype: Field::String,
-    lat: Field::Number.with_options(decimals: 2),
-    lng: Field::Number.with_options(decimals: 2),
+    lat: Field::Number.with_options(decimals: 4),
+    lng: Field::Number.with_options(decimals: 4),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }

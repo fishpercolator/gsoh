@@ -10,7 +10,8 @@ class AreaDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
-    geography: Field::String,
+    lat: Field::Number.with_options(decimals: 4),
+    lng: Field::Number.with_options(decimals: 4),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -23,7 +24,8 @@ class AreaDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :geography,
+    :lat,
+    :lng,
     :created_at,
   ]
 
@@ -32,7 +34,8 @@ class AreaDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
-    :geography,
+    :lat,
+    :lng,
     :created_at,
     :updated_at,
   ]
@@ -42,7 +45,8 @@ class AreaDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :geography,
+    :lat,
+    :lng
   ]
 
   # Overwrite this method to customize how areas are displayed

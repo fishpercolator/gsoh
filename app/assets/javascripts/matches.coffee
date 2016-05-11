@@ -4,12 +4,12 @@
 
 render_area = (area, single) ->
   opacity = if single then 0 else 0.2
-  p = L.polygon(area["polygon"], color: area["color"], fillOpacity: opacity).addTo(@matchmap)
+  c = L.circle([area["lat"], area["lng"]], area["radius"], color: area["color"], fillOpacity: opacity).addTo(@matchmap)
   if single
-    # center the map on this polygon
-    @matchmap.setView(p.getBounds().getCenter(), 14)
+    # center the map on this area
+    @matchmap.setView([area["lat"], area["lng"]], 15)
   else
-    p.bindPopup("<a href=\"#{area["path"]}\">#{area["name"]}</a> (#{area["score"]}% match)")
+    c.bindPopup("<a href=\"#{area["path"]}\">#{area["name"]}</a> (#{area["score"]}% match)")
 
 @initialize_matchmap = (map_data, single = false) ->
   @matchmap = L.map('matchmap')
@@ -25,7 +25,7 @@ render_area = (area, single) ->
   $('tr.match').hover(
     ->
       area = $(this).data('map-highlight')
-      @hovered = L.polygon(area['polygon'], color: area['color'], fillOpacity: 0).addTo(matchmap)
+      @hovered = L.circle([area["lat"], area["lng"]], area["radius"], color: area['color'], fillOpacity: 0).addTo(matchmap)
     ->
       matchmap.removeLayer(@hovered)
   )

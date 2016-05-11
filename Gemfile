@@ -57,9 +57,6 @@ gem 'postmark-rails', '~> 0.12.0'
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1.3'
 
-# Sandbox for codey things in the dashbaord
-gem 'shikashi', '~> 0.6.0'
-
 # For drawing maps in the UI
 gem 'leaflet-rails', '~> 0.7.7'
 gem 'color-generator', '~> 0.0.4'
