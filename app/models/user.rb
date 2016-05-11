@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
   has_many :questions, through: :answers
   has_many :matches, -> { order(score: :desc) }, dependent: :delete_all
   
-  validates :email, presence: true, unless: ->(u) { u.provider == 'twitter' }
-  validates :name,  presence: true, if: ->(u) { u.provider == 'twitter' }
-  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -71,6 +68,10 @@ class User < ActiveRecord::Base
   
   def area_scores(area)
     answers.map {|ans| ans.score_area(area) }
+  end
+  
+  def email_required?
+    provider != 'twitter'
   end
   
 end
