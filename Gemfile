@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
@@ -34,33 +34,33 @@ gem 'puma', '~> 3.2'
 # gem 'capistrano-rails', group: :development
 
 # Frameworky stuff
-gem 'administrate', '~> 0.1'
+gem 'administrate', '~> 0.2.0'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'bootswatch-rails', '~> 3.3'
 gem 'bootstrap-select-rails', '~> 1.6'
-gem 'devise', '~> 3.5'
-gem 'devise-bootstrap-views', '~> 0.0'
-gem 'haml-rails', '~> 0.9'
+gem 'devise', '~> 4.1'
+gem 'devise-bootstrap-views', '~> 0.0.8'
+gem 'haml-rails', '~> 0.9.0'
 gem 'high_voltage', '~> 2.4'
 gem 'pundit', '~> 1.1'
-gem 'administrate-field-password', '~> 0.0'
+gem 'administrate-field-password', '~> 0.0.2'
 gem 'administrate-field-type', '~> 1.0'
-gem 'kaminari', '~> 0.16'
-gem 'postmark-rails', '~> 0.12'
+gem 'kaminari', '~> 0.16.3'
+gem 'postmark-rails', '~> 0.12.0'
 
 # Needed for the seeding of data from OpenStreetMap
-gem 'overpass-api-ruby', '~> 0.1'
+gem 'overpass-api-ruby', '~> 0.1.3'
 
 # Sandbox for codey things in the dashbaord
-gem 'shikashi', '~> 0.6'
+gem 'shikashi', '~> 0.6.0'
 
 # For drawing maps in the UI
-gem 'leaflet-rails', '~> 0.7'
-gem 'color-generator', '~> 0.0'
+gem 'leaflet-rails', '~> 0.7.7'
+gem 'color-generator', '~> 0.0.4'
 
 # For querying government data
-gem 'ckan', '~> 0.0', github: 'fishpercolator/CKAN'
-gem 'breasal', '~> 0.0'
+gem 'ckan', '~> 0.0.3', github: 'fishpercolator/CKAN'
+gem 'breasal', '~> 0.0.1'
 
 # So the objects can be mappable
 gem 'geokit-rails', '~> 2.1'
@@ -106,5 +106,5 @@ group :test do
 end
 
 group :production do
-  gem 'rails_12factor', '~> 0.0'
+  gem 'rails_12factor', '~> 0.0.3'
 end
