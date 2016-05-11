@@ -58,8 +58,7 @@ class User < ActiveRecord::Base
   # Regenerate all the user's matches based on the areas' current scores
   def regenerate_matches!
     Area.all.each do |area|
-      m = Match.find_or_create_by(user: self, area: area)
-      m.update!(score: score_area(area))
+      area.regenerate_matches_for!(self)
     end
   end
   

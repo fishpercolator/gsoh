@@ -8,7 +8,7 @@ class Area < ActiveRecord::Base
   
   # Whenever an area is saved, regenerate all user matches
   after_save do
-    User.all.each(&:regenerate_matches!)
+    User.all.each { |u| regenerate_matches_for! u }
   end
   
   def features
@@ -29,4 +29,9 @@ class Area < ActiveRecord::Base
     Feature.where(ftype: ftype).closest(origin: self).first
   end
   
+  def regenerate_matches_for!(user)
+    m = Match.find_or_create_by(user: user, area: self)
+    m.update!(score: user.score_area(self))
+  end
+
 end
