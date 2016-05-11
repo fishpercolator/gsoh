@@ -2,7 +2,7 @@ class Area < ActiveRecord::Base
   acts_as_mappable
   
   # Hardcode this for now
-  RADIUS = 750
+  RADIUS = 500
   
   has_many :matches, dependent: :delete_all
   
