@@ -1,7 +1,7 @@
 %li.dropdown
   %a.dropdown-toggle{data: {toggle: 'dropdown'}, role: 'button', aria: {expanded: false}}
     - if user_signed_in?
-      = current_user.email
+      = current_user.display_name
     - else
       Not signed in
     %b.caret
