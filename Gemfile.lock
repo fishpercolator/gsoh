@@ -5,13 +5,6 @@ GIT
     ckan (0.0.3)
 
 GIT
-  remote: git://github.com/fishpercolator/administrate-field-lat_lng.git
-  revision: 281a550756c20bb3afd0b6fe7eace6d867feebb9
-  specs:
-    administrate-field-lat_lng (1.0.0)
-      administrate (~> 0.2.0)
-
-GIT
   remote: git://github.com/thoughtbot/administrate.git
   revision: 674dcf04f139eb36447bd9d4e1fc86c0b719bf0f
   specs:
@@ -69,6 +62,8 @@ GEM
     administrate-field-image (0.0.2)
       administrate (>= 0.2.0.rc1, < 0.3.0)
       rails (~> 4.2)
+    administrate-field-lat_lng (1.0.0)
+      administrate (~> 0.2.0)
     administrate-field-password (0.0.2)
       administrate (>= 0.2.0.rc1, < 0.3.0)
       rails (~> 4.2)
@@ -414,7 +409,7 @@ GEM
       ref
     thor (0.19.1)
     thread_safe (0.3.5)
-    tilt (2.0.2)
+    tilt (2.0.3)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -437,7 +432,7 @@ PLATFORMS
 DEPENDENCIES
   administrate (~> 0.2.0)!
   administrate-field-image (~> 0.0)
-  administrate-field-lat_lng (~> 1.0)!
+  administrate-field-lat_lng (~> 1.0)
   administrate-field-password (~> 0.0.2)
   administrate-field-type (~> 1.0)
   better_errors
