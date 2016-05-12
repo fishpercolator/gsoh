@@ -14,5 +14,3 @@ Scenario: Edit an existing answer
   Then my new answer should be recorded
   And I should redirected to the answers page
   And I should be told my new answer was saved
-  
-Scenario: Edit a subtype answer

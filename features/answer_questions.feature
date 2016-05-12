@@ -18,7 +18,8 @@ Scenario: Presented with a question
   Then I should see a question with options
   And I should see a button for the next question
   And I should see a button to skip this question
-  And I should see I have answered 0% of the questions
+  And I should see a progress bar at 0%
+  And I should see I have 4 questions remaining
 
 Scenario: Answering a question
   Given I am signed in
@@ -27,7 +28,8 @@ Scenario: Answering a question
   When I go to answer questions
   And I answer the displayed question
   Then I should see a question with options
-  And I should see I have answered 25% of the questions
+  And I should see a progress bar at 25%
+  And I should see I have 3 questions remaining
   
 Scenario: Answering the final question
   Given I am signed in

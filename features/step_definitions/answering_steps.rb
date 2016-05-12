@@ -66,13 +66,16 @@ Then(/^I should see a button to skip this question$/) do
   expect(page).to have_css('button', text: 'Skip')
 end
 
-Then(/^I should see I have answered (\d+)% of the questions$/) do |arg1|
+Then(/^I should see a progress bar at (\d+)%$/) do |arg1|
   expect(page).to have_css('.progress')
   within '.progress' do
     bar = find('.progress-bar')
     expect(bar[:style]).to match(/width: #{arg1}%;/)
-    expect(bar).to have_content("#{arg1}% answered")
   end
+end
+
+Then(/^I should see I have (\d+) questions remaining$/) do |arg1|
+  expect(page.find('.progress .progress-bar')).to have_text("#{arg1} remaining")
 end
 
 Then(/^I should be told there are no more questions$/) do
