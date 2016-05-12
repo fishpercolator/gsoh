@@ -10,8 +10,8 @@ class AreaDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
-    lat: Field::Number.with_options(decimals: 4),
-    lng: Field::Number.with_options(decimals: 4),
+    lat: LatLngField.with_options(lat: true),
+    lng: LatLngField.with_options(lng: true),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }

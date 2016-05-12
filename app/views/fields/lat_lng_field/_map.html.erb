@@ -1,0 +1,38 @@
+<div class="map-container">
+  <div id="latlngmap"></div>
+</div>
+<%= content_for :javascript do %>
+  <script type="text/javascript">
+    var map = L.map('latlngmap');
+    var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      minZoom: 10,
+      maxZoom: 18,
+      attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    });
+    map.addLayer(osm);
+    var latlng = [];
+    if (lng === undefined) {
+      latlng = <%= field.initial.to_json %>;
+    } else {
+      latlng = [lat, lng];
+    }
+    map.setView(latlng, <%= field.zoom %>);
+    var marker;
+    if (lng !== undefined) {
+      marker = L.marker(latlng);
+      marker.addTo(map);
+    }
+    <% if edit %>
+    map.on('click', function (e) {
+      if (marker === undefined) {
+        marker = L.marker(e.latlng);
+        marker.addTo(map);
+      } else {
+        marker.setLatLng(e.latlng);
+      }
+      $('.latlng-lat').val(e.latlng.lat);
+      $('.latlng-lng').val(e.latlng.lng);
+    });
+    <% end %>
+  </script>
+<% end %>

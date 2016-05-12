@@ -36,7 +36,7 @@ gem 'puma', '~> 3.2'
 # gem 'capistrano-rails', group: :development
 
 # Frameworky stuff
-gem 'administrate', '~> 0.2.0'
+gem 'administrate', '~> 0.2.0', github: 'thoughtbot/administrate'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'bootswatch-rails', '~> 3.3'
 gem 'bootstrap-select-rails', '~> 1.6'
