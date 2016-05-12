@@ -62,7 +62,7 @@ GEM
     administrate-field-image (0.0.2)
       administrate (>= 0.2.0.rc1, < 0.3.0)
       rails (~> 4.2)
-    administrate-field-lat_lng (1.0.0)
+    administrate-field-lat_lng (1.0.1)
       administrate (~> 0.2.0)
     administrate-field-password (0.0.2)
       administrate (>= 0.2.0.rc1, < 0.3.0)
