@@ -58,6 +58,7 @@ gem 'google-analytics-rails', '~> 1.1'
 
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1.3'
+gem 'retriable', '~> 2.1'
 
 # For drawing maps in the UI
 gem 'leaflet-rails', '~> 0.7.7'

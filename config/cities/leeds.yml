@@ -1,0 +1,21 @@
+# A bounding box containing the entire city
+bounds:
+  n: 53.9458558
+  e: -1.2903452
+  s: 53.6983747
+  w: -1.8003617
+# Features that can be found in CKAN sources
+ckan:
+  'http://leedsdatamill.org/api/1/':
+    nns:
+      package: 'neighbourhood-network-schemes'
+      columns:
+        name: nameofneighbourhoodnetworkscheme
+        easting: easting
+        northing: northing
+    changing_place:
+      package: 'changing-places-toilets-in-leeds'
+      columns:
+        name: location
+        easting: easting
+        northing: northing

@@ -1,0 +1,28 @@
+# Add OSM features of type "node" or "way" to this list.
+osm:
+  bank:             
+    tag: amenity
+  cafe:
+    tag: amenity
+  doctors:
+    tag: amenity
+  library:
+    tag: amenity
+  pharmacy:
+    tag: amenity
+  place_of_worship:
+    tag: amenity
+    subtype: religion
+  pub:
+    tag: amenity
+  restaurant:
+    tag: amenity
+  shop:
+    tag: shop
+    subtype: shop
+  sports_centre:
+    tag: leisure
+  bus_stop:
+    tag: highway
+    subtype_on_match:
+      with_shelter: shelter=yes
