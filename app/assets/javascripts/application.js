@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require bootstrap-select
 //= require leaflet
+//= require google-analytics-turbolinks
 //= require_tree .

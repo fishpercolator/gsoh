@@ -54,6 +54,7 @@ gem 'administrate-field-lat_lng', '~> 1.0'
 gem 'administrate-field-image', '~> 0.0'
 gem 'kaminari', '~> 0.16.3'
 gem 'postmark-rails', '~> 0.12.0'
+gem 'google-analytics-rails', '~> 1.1'
 
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1.3'
