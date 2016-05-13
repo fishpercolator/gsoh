@@ -168,6 +168,9 @@ GEM
       geokit (~> 1.5)
       rails (>= 3.0)
     gherkin (3.2.0)
+    gibbon (2.2.3)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     guard (2.13.0)
@@ -456,6 +459,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geokit-rails (~> 2.1)
+  gibbon (~> 2.2)
   guard-cucumber
   guard-rspec
   haml-rails (~> 0.9.0)

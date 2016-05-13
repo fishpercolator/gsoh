@@ -5,6 +5,10 @@ ENV REFRESHED_AT 2016-03-08
 # This line is needed for JavaScript testing with headless+capybara-webkit
 RUN apt-get update -y && apt-get install less xvfb qt5-default libqt5webkit5-dev -y && apt-get clean
 
+# Mailchimp's certificate isn't trusted on Debian 8 - make it so
+ADD vendor/mailchimp-cert.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
 RUN adduser --uid 1001 --disabled-password --gecos "" rails
 
 RUN gem install bundler
