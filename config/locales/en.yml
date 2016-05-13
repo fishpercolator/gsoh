@@ -3,8 +3,8 @@
 en:
   
   # Answers
-  essential: 'Essential'
   important: 'Important'
+  nice: 'Nice to have'
   irrelevant: 'Irrelevant'
   bad: 'Keep me away'
   yes: 'Yes'

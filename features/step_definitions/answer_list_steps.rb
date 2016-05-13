@@ -13,7 +13,7 @@ Then(/^I should see a list of (\d+) answers$/) do |arg1|
 end
 
 Then(/^they should be the answers I have given$/) do
-  expect(page.first('.answer')).to have_content('A. Essential')
+  expect(page.first('.answer')).to have_content('A. Important')
 end
 
 Then(/^I should see an edit button on each answer$/) do

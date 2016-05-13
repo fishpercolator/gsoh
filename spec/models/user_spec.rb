@@ -29,33 +29,33 @@ RSpec.describe User, type: :model do
         # Create a new :importance_question so now there are 21
         let!(:question) { create :importance_question }
         it 'creates an ImportanceAnswer' do
-          expect{subject.answer_question(question, :essential)}.to change{Answer.count}.from(0).to(1)
+          expect{subject.answer_question(question, :important)}.to change{Answer.count}.from(0).to(1)
         end        
         it 'moves a question from unanswered_questions to questions' do
           expect(subject.questions).not_to include(question)
           expect(subject.unanswered_questions).to include(question)
-          subject.answer_question(question, :essential)
+          subject.answer_question(question, :important)
           expect(subject.questions).to include(question)
           expect(subject.unanswered_questions).not_to include(question)
         end
         it 'has the right answer' do
-          subject.answer_question(question, :essential)
+          subject.answer_question(question, :important)
           expect(subject.answers).to have(1).item
           a = subject.answers.first
           expect(a).to be_an(ImportanceAnswer)
-          expect(a.essential?).to be true
+          expect(a.important?).to be true
           expect(a.bad?).to be false
           expect(a.question).to eq question
         end
         it 'allows subtype answer but deletes it' do
-          expect{subject.answer_question(question, :essential, subtype: 'christian')}.not_to raise_error
+          expect{subject.answer_question(question, :important, subtype: 'christian')}.not_to raise_error
           expect(subject.answers.first.subtype).to be nil
         end
         it 'refuses a bad enum answer' do
           expect{subject.answer_question(question, :yes)}.to raise_error(/'yes' is not a valid answer/)
         end
         it 'returns the answer' do
-          expect(subject.answer_question(question, :essential)).to be_an(ImportanceAnswer)
+          expect(subject.answer_question(question, :important)).to be_an(ImportanceAnswer)
         end
         context 'with subtype question' do
           let!(:question) { create :boolean_question, ask_subtype: true }
@@ -85,7 +85,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'all wins or irrelevant' do
-      let(:scores1) { [:win, :irrelevant, :win, :irrelevant, :irrelevant] }
+      let(:scores1) { [:win, :irrelevant, :big_win, :irrelevant, :irrelevant] }
       it 'scores 100' do
         expect(subject.score_area area1).to eq(100)
       end
@@ -105,29 +105,15 @@ RSpec.describe User, type: :model do
     
     context 'equal wins and loses' do
       let(:scores1) { [:win, :win, :lose, :lose] }
-      it 'scores 75' do
-        expect(subject.score_area area1).to eq(75)
-      end
-    end
-    
-    context 'equal loses and irrelevants' do
-      let(:scores1) { [:irrelevant, :irrelevant, :lose, :lose] }
       it 'scores 50' do
         expect(subject.score_area area1).to eq(50)
       end
     end
     
-    context 'more loses than irrelevant' do
-      let(:scores1) { [:lose, :irrelevant, :lose, :lose, :irrelevant] }
+    context 'only loses and irrelevants' do
+      let(:scores1) { [:irrelevant, :irrelevant, :lose, :big_lose] }
       it 'scores less than 50' do
         expect(subject.score_area area1).to be < 50
-      end
-    end
-    
-    context 'contains one dealbreaker' do
-      let(:scores1) { [:irrelevant, :win, :win, :lose, :dealbreaker] }
-      it 'scores 0' do
-        expect(subject.score_area area1).to eq(0)
       end
     end
     
@@ -140,15 +126,41 @@ RSpec.describe User, type: :model do
     
     context 'more wins than loses' do
       let(:scores1) { [:win, :win, :lose] }
-      it 'scores between 50 and 100' do
-        expect(subject.score_area area1).to be_between(50,100)
+      it 'scores between 50 and 99.9' do
+        expect(subject.score_area area1).to be_between(50,99.9)
       end
     end
     
     context 'more loses than wins' do
       let(:scores1) { [:win, :lose, :lose] }
-      it 'scores between 0 and 99.9' do
-        expect(subject.score_area area1).to be_between(0,99.9)
+      it 'scores less than 50' do
+        expect(subject.score_area area1).to be < 50
+      end
+    end
+    
+    context 'equal wins and loses but more big wins' do
+      let(:scores1) { [:win, :big_win, :lose, :lose] }
+      it 'scores between 50 and 99.9' do
+        expect(subject.score_area area1).to be_between(50,99.9)
+      end
+    end
+    
+    context 'equal wins and loses but more big loses' do
+      let(:scores1) { [:win, :win, :lose, :big_lose] }
+      it 'scores less than 50' do
+        expect(subject.score_area area1).to be < 50
+      end
+    end
+    
+    context 'both same number of wins, area1 has more big wins' do
+      let(:scores1) { [:win, :win, :big_win, :lose] }
+      let(:scores2) { [:win, :win, :win, :lose] }
+      it 'both scores are between 0 and 100' do
+        expect(subject.score_area area1).to be_between(0,100)
+        expect(subject.score_area area2).to be_between(0,100)
+      end
+      it 'area1 scores higher than area2' do
+        expect(subject.score_area area1).to be > subject.score_area(area2)
       end
     end
   end

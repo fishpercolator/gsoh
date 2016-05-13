@@ -16,15 +16,11 @@ class Match < ActiveRecord::Base
   end
   
   def good_answers
-    user.answers.select {|a| a.score_area(area) == :win }
+    user.answers.select {|a| a.score_area(area).in? [:win, :big_win] }
   end
   
   def bad_answers
-    user.answers.select {|a| a.score_area(area) == :lose }
-  end
-  
-  def dealbreakers
-    user.answers.select {|a| a.score_area(area) == :dealbreaker }
+    user.answers.select {|a| a.score_area(area).in? [:lose, :big_lose] }
   end
   
 end

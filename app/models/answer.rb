@@ -62,7 +62,7 @@ class Answer < ActiveRecord::Base
 end
 
 class ImportanceAnswer < Answer
-  enum answer: [:essential, :important, :irrelevant, :bad]
+  enum answer: [:important, :nice, :irrelevant, :bad]
   
   # If the answer was :irrelevant or :bad then the subtype isn't used - remove it
   before_save do
@@ -81,9 +81,9 @@ class ImportanceAnswer < Answer
   
   def score_area(area)
     contains = area_contains_feature?(area)
-    if essential?
-      contains ? :win : :dealbreaker
-    elsif important?
+    if important?
+      contains ? :big_win : :big_lose
+    elsif nice?
       contains ? :win : :lose
     elsif bad?
       contains ? :lose : :win

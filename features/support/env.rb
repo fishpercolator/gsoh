@@ -66,4 +66,7 @@ Headless.new.start # make sure there's an X server for the browser to run in
 Capybara::Webkit.configure do |config|
   config.block_unknown_urls
 end
+Kernel.silence_warnings do
+  Capybara.save_and_open_page_path = Rails.root + "tmp/capybara"
+end
 

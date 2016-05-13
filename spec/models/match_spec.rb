@@ -10,7 +10,7 @@ RSpec.describe Match, type: :model do
   # We need answers!
   before(:each) do
     @answers = {}
-    [:dealbreaker, :lose, :irrelevant, :win].each do |n|
+    [:big_lose, :lose, :irrelevant, :win, :big_win].each do |n|
       @answers[n] = create(:importance_answer, user: user, question: create(:importance_question))
       allow(@answers[n]).to receive(:score_area).with(area).and_return(n)
     end
@@ -18,39 +18,26 @@ RSpec.describe Match, type: :model do
   end
     
   describe '#good_answers' do
-    it 'includes the :win' do
-      expect(subject.good_answers).to include(@answers[:win])
+    it 'includes the :win and :big_win' do
+      expect(subject.good_answers).to include(@answers[:win], @answers[:big_win])
     end
     it 'does not include the :irrelevant' do
       expect(subject.good_answers).not_to include(@answers[:irrelevant])
     end
-    it 'does not include the :lose and :dealbreaker' do
-      expect(subject.good_answers).not_to include(@answers[:dealbreaker], @answers[:lose])
+    it 'does not include the :lose and :big_lose' do
+      expect(subject.good_answers).not_to include(@answers[:big_lose], @answers[:lose])
     end
   end
   
   describe '#bad_answers' do
-    it 'includes the :lose' do
-      expect(subject.bad_answers).to include(@answers[:lose])
+    it 'includes the :lose and :big_lose' do
+      expect(subject.bad_answers).to include(@answers[:lose], @answers[:big_lose])
     end
     it 'does not include the :irrelevant' do
       expect(subject.bad_answers).not_to include(@answers[:irrelevant])
     end
-    it 'does not include the :win' do
-      expect(subject.bad_answers).not_to include(@answers[:win])
-    end
-    it 'does not include the :dealbreaker' do
-      expect(subject.bad_answers).not_to include(@answers[:dealbreaker])
+    it 'does not include the :win or :big_win' do
+      expect(subject.bad_answers).not_to include(@answers[:win], @answers[:big_win])
     end
   end
-  
-  describe '#dealbreakers' do
-    it 'includes the :dealbreaker' do
-      expect(subject.dealbreakers).to include(@answers[:dealbreaker])
-    end
-    it 'does not include the others' do
-      expect(subject.dealbreakers).not_to include(@answers[:win], @answers[:lose], @answers[:irrelevant])
-    end
-  end
-  
 end

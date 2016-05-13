@@ -16,7 +16,7 @@ Given(/^I have answered (\d+) questions?$/) do |arg1|
   user = User.find_by_email('test@example.com')
   arg1.to_i.times do
     q = user.unanswered_questions.first
-    user.answer_question(q, :essential)
+    user.answer_question(q, :important)
   end
 end
 
@@ -25,12 +25,12 @@ When(/^I go to answer questions$/) do
 end
 
 When(/^I answer the displayed question(?: with '(\w+)')?$/) do |answer|
-  choose answer || 'Essential'
+  choose answer || 'Important'
   step 'I click to go to the next question'
 end
 
 When(/^I answer the displayed question selecting a subtype$/) do
-  choose 'Essential'
+  choose 'Important'
   select 'Harry'
   step 'I click to go to the next question'
 end
@@ -99,7 +99,7 @@ Then(/^I should see the second question$/) do
 end
 
 Then(/^I should see my existing answer selected$/) do
-  expect(page.find('input[type=radio][value=essential]')).to be_checked
+  expect(page.find('input[type=radio][value=important]')).to be_checked
 end
 
 Then(/^my new answer should be recorded$/) do

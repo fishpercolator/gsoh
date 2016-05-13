@@ -35,14 +35,14 @@ RSpec.describe Answer, type: :model do
           a = create :importance_answer, question: question, user: user, answer: :irrelevant, subtype: 'foo'
           expect(a.subtype).to be nil
         end
-        it 'does not delete subtype for answer=essential' do
-          a = create :importance_answer, question: question, user: user, answer: :essential, subtype: 'foo'
+        it 'does not delete subtype for answer=important' do
+          a = create :importance_answer, question: question, user: user, answer: :important, subtype: 'foo'
           expect(a.subtype).to eq('foo')
         end
         context 'question with ask_subtype=false' do
           let(:question) { create :importance_question, ask_subtype: false }
-          it 'deletes subtype even if answer=essential' do
-            a = create :importance_answer, question: question, user: user, answer: :essential, subtype: 'foo'
+          it 'deletes subtype even if answer=important' do
+            a = create :importance_answer, question: question, user: user, answer: :important, subtype: 'foo'
             expect(a.subtype).to be nil
           end
         end
@@ -73,10 +73,10 @@ RSpec.describe Answer, type: :model do
         allow(area).to receive(:contains?).with(question.ftype, subtype: nil).and_return(true)
       end
       context ImportanceAnswer do
-        context :essential do
-          it { is_expected.to eq(:win) }
-        end
         context :important do
+          it { is_expected.to eq(:big_win) }
+        end
+        context :nice do
           it { is_expected.to eq(:win) }
         end
         context :irrelevant do
@@ -102,10 +102,10 @@ RSpec.describe Answer, type: :model do
         allow(area).to receive(:contains?).with(question.ftype, subtype: nil).and_return(false)
       end
       context ImportanceAnswer do
-        context :essential do
-          it { is_expected.to eq(:dealbreaker) }
-        end
         context :important do
+          it { is_expected.to eq(:big_lose) }
+        end
+        context :nice do
           it { is_expected.to eq(:lose) }
         end
         context :irrelevant do

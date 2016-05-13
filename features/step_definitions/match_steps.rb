@@ -4,7 +4,7 @@ end
 
 Given(/^I have answered some questions$/) do
   user = User.find_by_email('test@example.com')
-  4.times { create :importance_answer, question: create(:importance_question), user: user, answer: :essential }
+  4.times { create :importance_answer, question: create(:importance_question), user: user, answer: :important }
 end
 
 When(/^I list my matches$/) do
