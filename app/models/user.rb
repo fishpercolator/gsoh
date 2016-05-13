@@ -48,10 +48,8 @@ class User < ActiveRecord::Base
   # Get the score for an area across all the provided answers.
   def score_area(area)
     scores = area_scores(area)
-    return 100 if scores.empty? # perfect match if we know nothing!
+    return 100 if scores.all? {|s| s == :irrelevant} # perfect match if we know nothing!
     
-    # Irrelevants have no impact on the weight
-    total = scores.count {|s| s != :irrelevant }
     # Calculate a "score" based on the ratio of wins to loses
     win_score =  2*scores.count(:big_win)  + scores.count(:win)
     lose_score = 2*scores.count(:big_lose) + scores.count(:lose)
