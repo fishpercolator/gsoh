@@ -84,7 +84,11 @@ class City
     cols = config['columns']
     # Currently only supports the first resource in each package (easily
     # changed when needed)
-    data = package.resources.first.content_csv({headers: true})
+    csv_options = {headers: true}
+    if config['encoding']
+      csv_options[:encoding] = config['encoding']
+    end
+    data = package.resources.first.content_csv(csv_options)
     data.each do |row|
       ckan_row_to_feature(ftype, row, cols).save!
     end

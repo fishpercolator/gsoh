@@ -25,3 +25,22 @@ ckan:
         name: 'Site name'
         lat: Latitude
         lng: Longitude
+    school:
+      package: 'leeds-schools'
+      columns:
+        name: School
+        easting: X_REF
+        northing: Y_REF
+    dementia_cafe:
+      package: 'dementia-cafes-in-leeds'
+      encoding: iso-8859-1
+      columns:
+        name: Name
+        easting: Easting
+        northing: Northing
+    public_toilet:
+      package: 'public-toilets'
+      columns:
+        name: LocationText
+        easting: GeoX
+        northing: GeoY

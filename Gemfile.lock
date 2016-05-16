@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/fishpercolator/CKAN.git
-  revision: ec8a8caadee9d53fdbc8595202a0dd6227fee4c5
+  revision: e963fd97cee5b56e353bddb5f84189694433edeb
   specs:
     ckan (0.0.3)
 
