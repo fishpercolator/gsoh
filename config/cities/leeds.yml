@@ -19,3 +19,9 @@ ckan:
         name: Location
         easting: EASTING
         northing: NORTHING
+    public_wifi:
+      package: 'public-access-free-wifi'
+      columns:
+        name: 'Site name'
+        lat: Latitude
+        lng: Longitude

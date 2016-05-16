@@ -94,6 +94,24 @@ RSpec.describe City, type: :model do
         expect(generated.lng).to be_within(0.001).of(-1.493)
       end
     end
+    
+    context 'public_wifi' do
+      let(:ftype) { 'public_wifi' }
+      let(:row) { {'Site name' => '2 Great George Street', 'Latitude' => '53.80116', 'Longitude' => '-1.54549'} }
+      it 'generates a Feature' do
+        expect(generated).to be_a(Feature)
+      end
+      it 'sets the name' do
+        expect(generated.name).to eq('2 Great George Street')
+      end
+      it 'sets the ftype' do
+        expect(generated.ftype).to eq('public_wifi')
+      end
+      it 'sets the lat/lng' do
+        expect(generated.lat).to be_within(0.001).of(53.801)
+        expect(generated.lng).to be_within(0.001).of(-1.545)
+      end
+    end
   end
   
 end
