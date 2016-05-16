@@ -73,4 +73,27 @@ RSpec.describe City, type: :model do
     end
   end
   
+  describe '#ckan_row_to_feature' do
+    let(:cols) { subject.send(:metadata)['ckan'].values.first[ftype]['columns'] }
+    let(:generated) { subject.send(:ckan_row_to_feature, ftype, row, cols) }
+    
+    context 'nns' do
+      let(:ftype) { 'nns' }
+      let(:row) { {'nameOfNeighbourhoodNetworkScheme' => 'AGE', 'Easting' => '433437', 'Northing' => '435529'} }
+      it 'generates a Feature' do
+        expect(generated).to be_a(Feature)
+      end
+      it 'sets the name' do
+        expect(generated.name).to eq('AGE')
+      end
+      it 'sets the ftype' do
+        expect(generated.ftype).to eq('nns')
+      end
+      it 'sets the lat/lng' do
+        expect(generated.lat).to be_within(0.001).of(53.815)
+        expect(generated.lng).to be_within(0.001).of(-1.493)
+      end
+    end
+  end
+  
 end

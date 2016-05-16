@@ -10,12 +10,12 @@ ckan:
     nns:
       package: 'neighbourhood-network-schemes'
       columns:
-        name: nameofneighbourhoodnetworkscheme
-        easting: easting
-        northing: northing
+        name: nameOfNeighbourhoodNetworkScheme
+        easting: Easting
+        northing: Northing
     changing_place:
       package: 'changing-places-toilets-in-leeds'
       columns:
-        name: location
-        easting: easting
-        northing: northing
+        name: Location
+        easting: EASTING
+        northing: NORTHING
