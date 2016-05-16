@@ -31,6 +31,17 @@ footer {
   width: 100%;
 }
 
+// Use the "level down" from paper theme for each of h1,h2,h3
+h1 {
+  @extend .h2;
+}
+h2 {
+  @extend .h3;
+}
+h3 {
+  @extend .h4;
+}
+
 h1.with-small {
   small {
     margin-left: 0.5em;
