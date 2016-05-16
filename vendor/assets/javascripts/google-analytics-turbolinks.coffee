@@ -38,7 +38,7 @@ class @GoogleAnalytics
     document.domain.indexOf(str) isnt -1
 
   @analyticsId: ->
-    "<%= GA.tracker %>"
+    gon.ga_tracker
 
 if GoogleAnalytics.analyticsId() != ""
   GoogleAnalytics.load()

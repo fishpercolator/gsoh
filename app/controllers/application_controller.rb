@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_ga
 
   private
   
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:subscribe_to_mailing_list])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+  
+  def set_ga
+    gon.ga_tracker = GA.tracker
   end
   
 end
