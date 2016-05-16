@@ -6,23 +6,19 @@ require 'ckan'
 
 namespace :gsoh do
   
-  BORDER = {n: 53.9458558, e: -1.2903452, s: 53.6983747, w: -1.8003617}
-  
+  CITY_NAME = ENV['CITY'] || 'leeds'
+    
   desc 'Regenerate all the features in the DB'
-  task :seed_features => [:destroy_all_features, :seed_nnses, :seed_changing_places, :seed_osm, :regenerate_matches]
+  task :seed_features => [:seed_nnses, :seed_changing_places, :seed_osm, :regenerate_matches]
 
-  task :destroy_all_features => :environment do
-    # Obliterate all the existing features (FIXME)
-    puts "Destroying existing features (FIXME)..."
-    Feature.destroy_all
+  task :logger => :environment do
+    logger           = Logger.new(STDOUT)
+    logger.level     = Logger::INFO
+    Rails.logger     = logger
   end
-  
-  task :seed_osm => :environment do
-    leeds = OSMQuery.new(BORDER)
-    leeds.all_types.each do |ftype|
-      puts "Finding #{ftype}:"
-      leeds.query_type(ftype).each {|osm| Feature.from_osm(osm).save }
-    end
+    
+  task :seed_osm => :logger do
+    City.new(name: CITY_NAME).regenerate_osm!
   end
   
   task :seed_nnses => :environment do

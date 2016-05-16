@@ -3,26 +3,12 @@ require 'nokogiri'
 require 'retriable'
 
 class OSMQuery
-  OSM_TYPES = {
-    'pharmacy'         => 'amenity',
-    'doctors'          => 'amenity',
-    'place_of_worship' => 'amenity',
-    'restaurant'       => 'amenity',
-    'pub'              => 'amenity',
-    'cafe'             => 'amenity',
-    'bank'             => 'amenity',
-    'library'          => 'amenity',
-    'shop'             => true,
-    'sports_centre'    => 'leisure',
-    'bus_stop'         => 'highway',
-  }
   
-  def initialize(border)
+  attr_reader :overpass, :types
+  
+  def initialize(border, types)
     @overpass = OverpassAPI.new(bbox: border, json: true)
-  end
-  
-  def all_types
-    OSM_TYPES.keys.sort
+    @types = types
   end
   
   # Given a type from all_types, run a query for all named nodes and ways
@@ -34,25 +20,30 @@ class OSMQuery
   
   private
   
-  # Get the query hash for the given type (if a tagname is listed it's
-  # tagname=type, otherwise it's type=true)
+  # Get the query hash for the given type (if the type and tagname are the same,
+  # retrieve all items with that tagname)
   def query_hash(type)
-    tagname = OSM_TYPES[type]
-    if tagname.is_a? String
-      {tagname => type}
-    else
+    tagname = types[type]['tag']
+    if tagname == type
       {type => true}
+    else
+      {tagname => type}
     end
   end
   
   # Runs the given query on Overpass
   def query(hash)
     # Array -> Hash so we can look up
-    result = @overpass.query(query_xml hash).inject({}) {|h,v| h.update(v[:id] => v)}
+    result = overpass.query(query_xml hash).inject({}) {|h,v| h.update(v[:id] => v)}
     # Pull out all the child nodes into this hash
     result.each do |id, v|
       if v[:type] == 'way'
         v[:nodes] = v[:nodes].map {|id| result[id]}
+        # Find something roughly in the middle and make that the lat/lon
+        lats = v[:nodes].map {|n| n[:lat]}.compact
+        lons = v[:nodes].map {|n| n[:lon]}.compact
+        v[:lat] = (lats.max + lats.min)/2
+        v[:lon] = (lons.max + lons.min)/2
       end
     end
     # Items without a name are probably just constituent nodes and we don't need them
