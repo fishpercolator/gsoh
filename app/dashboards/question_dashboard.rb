@@ -11,6 +11,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     id: Field::Number,
     type: Field::Type.with_options(class_name: 'Question'),
     text: Field::String,
+    image_url: Field::Image,
     ftype: Field::String,
     ask_subtype: Field::Boolean,
     created_at: Field::DateTime,
@@ -35,6 +36,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     :id,
     :type,
     :text,
+    :image_url,
     :ftype,
     :ask_subtype,
     :created_at,
@@ -47,6 +49,7 @@ class QuestionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :type,
     :text,
+    :image_url,
     :ftype,
     :ask_subtype,
   ]

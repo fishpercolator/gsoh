@@ -16,6 +16,12 @@
   }
 }
 
+.image-zone {
+  img {
+    width: 100%;
+  }
+}
+
 .answer-well {
   @extend .well;
   &:after {

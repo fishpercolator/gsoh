@@ -1,5 +1,7 @@
 = form_for answer do |f|
   = f.hidden_field :question_id
+  .image-zone
+    = image_tag answer.question.image_url
   .answer-well
     = errors_for answer
     %p= answer.question.text
