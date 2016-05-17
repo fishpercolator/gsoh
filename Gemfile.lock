@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/fishpercolator/devise_campaignable.git
-  revision: 2749ed2002e80df81fdd21d33997c1abe5282925
+  revision: e0197e2d1574616d5da2d19e299614d5d882bab9
   specs:
     devise_campaignable (0.2.0)
       devise (>= 3.2.0)
