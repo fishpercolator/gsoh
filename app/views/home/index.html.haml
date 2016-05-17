@@ -1,0 +1,26 @@
+- content_for :outside_container do
+  #banner
+    #title
+      %h1 GSOH
+      %h2 Great Sense of Home
+      %h3 Helping you find that perfect place
+#blurb
+  .entry
+    %h2 Answer
+    %p Tell us about your interests
+  .entry
+    %h2 Magic
+    %p Let the algorithm work its magic
+  .entry
+    %h2 Match
+    %p Find your perfect neighbourhood
+- if current_user
+  #action
+    - if current_user.unanswered_questions.any?
+      = link_to raw('Answer more questions &raquo;'), new_answer_path, class: 'btn btn-primary btn-lg'
+    - else
+      = link_to raw('See your matches &raquo;'), matches_path, class: 'btn btn-primary btn-lg'
+- else
+  #first-q
+    %h3 Get started
+    = render 'answers/form', answer: @answer, no_skip: true

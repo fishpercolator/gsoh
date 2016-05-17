@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   namespace :admin do
     resources :questions, :answers, :areas, :features, :users
 
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
   
   resources :answers
   resources :matches, only: [:index, :show], param: :area
+  resources :pages
   
-  root to: 'pages#show', id: 'index'
+  root to: 'home#index'
 end

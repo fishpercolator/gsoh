@@ -11,13 +11,14 @@
     = csrf_meta_tags
     = analytics_init(skip_pageview: true) if GoogleAnalytics.valid_tracker?
   %body
-    %header
-      = render 'layouts/navigation'
-    %main{:role => "main"}
-      .container
+    %header{class: controller_name}
+      = render 'layouts/user'
+    %main{:role => "main", class: controller_name}
+      = yield :outside_container
+      #content
         = render 'layouts/messages'
         = yield
-      .push
+        .push
     %footer
       .pull-right
         &copy; 2016 

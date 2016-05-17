@@ -13,9 +13,10 @@
         = f.select :subtype, answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
   .answer-button-group{role: 'group'}
     - if answer.new_record?
-      = f.button class: 'btn btn-default', name: 'skip' do
-        Skip
-        %span.glyphicon.glyphicon-forward        
+      - unless local_assigns[:no_skip]
+        = f.button class: 'btn btn-default', name: 'skip' do
+          Skip
+          %span.glyphicon.glyphicon-forward        
       = f.button class: 'btn btn-primary' do
         Next
         %span.glyphicon.glyphicon-chevron-right

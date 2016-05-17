@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :sign_up_creation, only: [:create]
   before_action :authenticate_user!
   
   def index
@@ -64,6 +65,13 @@ class AnswersController < ApplicationController
   
   def answer_params
     params.require(:answer).permit(:question_id, :answer, :subtype)
+  end
+  
+  def sign_up_creation
+    if !current_user and params[:answer]
+      flash[:notice] = "Please create an account to continue"
+      redirect_to new_user_registration_path(answer: params[:answer])
+    end
   end
   
 end

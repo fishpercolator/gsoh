@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   has_many :users, through: :answers
   
   # Construct an answer for this question
-  def answer(params)
+  def answer(params={})
     matching_answer_class.new(params.merge(question: self))
   end
   
@@ -24,6 +24,10 @@ class Question < ActiveRecord::Base
   
   def available_answers
     matching_answer_class.answers
+  end
+  
+  def self.random
+    order('RANDOM()').first
   end
 end
 
