@@ -1,6 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    create_answer
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
@@ -13,6 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   def twitter
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    create_answer
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
@@ -25,5 +27,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     redirect_to root_path
+  end
+  
+  protected 
+  
+  def create_answer
+    if answer_params = request.env["omniauth.params"]["answer"]
+      @user.answers << Answer.new_with_type(answer_params.symbolize_keys.slice(:question_id, :answer, :subtype))
+    end
   end
 end

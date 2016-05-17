@@ -5,6 +5,14 @@ GIT
     ckan (0.0.3)
 
 GIT
+  remote: git://github.com/fishpercolator/devise_campaignable.git
+  revision: 2749ed2002e80df81fdd21d33997c1abe5282925
+  specs:
+    devise_campaignable (0.2.0)
+      devise (>= 3.2.0)
+      gibbon (~> 2.0)
+
+GIT
   remote: git://github.com/thoughtbot/administrate.git
   revision: 674dcf04f139eb36447bd9d4e1fc86c0b719bf0f
   specs:
@@ -19,13 +27,6 @@ GIT
       rails (~> 4.2)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
-
-PATH
-  remote: vendor/devise_campaignable
-  specs:
-    devise_campaignable (0.2.0)
-      devise (>= 3.2.0)
-      gibbon (~> 2.0)
 
 GEM
   remote: https://rubygems.org/

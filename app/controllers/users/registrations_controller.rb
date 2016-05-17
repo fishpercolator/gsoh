@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
   
   def answer_params
-    params.permit(:answer => [:question_id, :user_id, :answer])
+    params.permit(:answer => [:question_id, :user_id, :answer, :subtype])
   end
   
 end
