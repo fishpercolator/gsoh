@@ -264,4 +264,10 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  
+  # Setup Mailchimp campaign
+  config.campaignable_vendor = :mailchimp
+  config.campaignable_api_key = ENV["MAILCHIMP_API_KEY"]
+  config.campaignable_list_id = ENV["MAILCHIMP_LIST_ID"]
+  config.campaignable_additional_fields = [:name]
 end

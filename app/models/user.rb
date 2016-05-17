@@ -3,17 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
-         :omniauthable, :omniauth_providers => [:facebook, :twitter]
+         :omniauthable, :campaignable, :omniauth_providers => [:facebook, :twitter]
        
-  has_many :answers
+  has_many :answers, dependent: :delete_all
   has_many :questions, through: :answers
   has_many :matches, -> { order(score: :desc) }, dependent: :delete_all
-  
-  attr_accessor :subscribe_to_mailing_list
-  
-  before_save do
-    subscribe_to_mailing_list! if subscribe_to_mailing_list?
-  end
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -69,14 +63,7 @@ class User < ActiveRecord::Base
   def has_password?
     encrypted_password_was.present?
   end
-  
-  # Returns true if subscribe_to_mailing_list is present and not 0/'0'
-  # (checkbox off values)
-  def subscribe_to_mailing_list?
-    subscribe_to_mailing_list.present? &&
-    subscribe_to_mailing_list.to_s != '0'
-  end
-      
+    
   private
   
   def area_scores(area)
@@ -93,27 +80,5 @@ class User < ActiveRecord::Base
     return false if !persisted? and provider.present?
     super
   end
-  
-  # Subscribes the user to the mailing list. Sets the status to pending (i.e.
-  # they need to click the link in the email) for politeness.
-  def subscribe_to_mailing_list!
-    mailing_list.members(email_md5).upsert(body: {
-      email_address: email,
-      status: 'pending'
-    })
-    self.subscribe_to_mailing_list = nil
-  end
-  
-  # Get the default mailing list as a Gibbon list or nil if no list_id has been set
-  def mailing_list
-    list_id = Rails.application.secrets.mailchimp_list_id
-    return nil unless list_id.present?
-    Gibbon::Request.new.lists(list_id)
-  end
-  
-  # Get the email as an MD5 hash for Mailchimp
-  def email_md5
-    Digest::MD5.hexdigest email
-  end
-    
+
 end

@@ -5,6 +5,14 @@ GIT
     ckan (0.0.3)
 
 GIT
+  remote: git://github.com/fishpercolator/devise_campaignable.git
+  revision: 2749ed2002e80df81fdd21d33997c1abe5282925
+  specs:
+    devise_campaignable (0.2.0)
+      devise (>= 3.2.0)
+      gibbon (~> 2.0)
+
+GIT
   remote: git://github.com/thoughtbot/administrate.git
   revision: 674dcf04f139eb36447bd9d4e1fc86c0b719bf0f
   specs:
@@ -463,11 +471,11 @@ DEPENDENCIES
   database_cleaner
   devise (~> 4.1)
   devise-bootstrap-views (~> 0.0.8)
+  devise_campaignable (~> 0.2)!
   dotenv-rails
   factory_girl_rails
   faker
   geokit-rails (~> 2.1)
-  gibbon (~> 2.2)
   gon (~> 6.0)
   google-analytics-rails (~> 1.1)
   guard-cucumber
