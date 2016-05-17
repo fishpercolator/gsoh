@@ -20,6 +20,13 @@ GIT
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
 
+PATH
+  remote: vendor/devise_campaignable
+  specs:
+    devise_campaignable (0.2.0)
+      devise (>= 3.2.0)
+      gibbon (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -463,11 +470,11 @@ DEPENDENCIES
   database_cleaner
   devise (~> 4.1)
   devise-bootstrap-views (~> 0.0.8)
+  devise_campaignable (~> 0.2)!
   dotenv-rails
   factory_girl_rails
   faker
   geokit-rails (~> 2.1)
-  gibbon (~> 2.2)
   gon (~> 6.0)
   google-analytics-rails (~> 1.1)
   guard-cucumber

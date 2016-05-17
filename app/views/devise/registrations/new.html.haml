@@ -21,9 +21,5 @@
         .form-group
           = f.label :password_confirmation
           = f.password_field :password_confirmation, class: "form-control"
-        .checkbox
-          = f.label :subscribe_to_mailing_list do
-            = f.check_box :subscribe_to_mailing_list, checked: true
-            Subscribe to mailing list
         = f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary"
 = render "devise/shared/links"
