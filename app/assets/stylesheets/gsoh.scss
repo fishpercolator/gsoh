@@ -70,6 +70,10 @@ ul#user {
   a.dropdown-toggle {
     color: #444;
   }
+  .dropdown-menu {
+    right: 0;
+    left: inherit;
+  }
 }
 
 header.home ul#user {
