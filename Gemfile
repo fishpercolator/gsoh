@@ -76,7 +76,7 @@ gem 'geokit-rails', '~> 2.1'
 gem 'seed_dump', '~> 3.2'
 
 # For signing users up to Mailchimp
-gem 'devise_campaignable', '~> 0.2', github: 'fishpercolator/devise_campaignable'
+gem 'devise_campaignable', '~> 0.2', github: 'sorry-app/devise_campaignable'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

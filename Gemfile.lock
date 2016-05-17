@@ -5,8 +5,8 @@ GIT
     ckan (0.0.3)
 
 GIT
-  remote: git://github.com/fishpercolator/devise_campaignable.git
-  revision: e0197e2d1574616d5da2d19e299614d5d882bab9
+  remote: git://github.com/sorry-app/devise_campaignable.git
+  revision: a845be3922a6c3199e4ea3e5c4bf98f645c4ef08
   specs:
     devise_campaignable (0.2.0)
       devise (>= 3.2.0)
