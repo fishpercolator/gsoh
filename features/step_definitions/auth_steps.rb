@@ -9,3 +9,14 @@ Given(/^I am signed in$/) do
   fill_in 'user_password', with: user.password
   click_button 'Sign in'
 end
+
+When(/^I sign up for an account$/) do
+  fill_in 'user_email', with: 'newuser@example.com'
+  fill_in 'user_password', with: 'password'
+  fill_in 'user_password_confirmation', with: 'password'
+  click_button 'Sign up'
+end
+
+When(/^I click to advance without answering the question$/) do
+  click_button 'Next'
+end
