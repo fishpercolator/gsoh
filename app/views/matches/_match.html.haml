@@ -47,3 +47,10 @@
               = @closest_nns.name
             %td.map-button
               = show_features_on_map_button([@closest_nns])
+        - if @closest_station
+          %tr
+            %th Nearest train station
+            %td
+              = @closest_station.name
+            %td.map-button
+              = show_features_on_map_button([@closest_station])

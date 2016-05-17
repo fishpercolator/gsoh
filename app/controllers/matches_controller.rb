@@ -8,6 +8,7 @@ class MatchesController < ApplicationController
   
   def show
     @closest_nns = @match.area.closest('nns')
+    @closest_station = @match.area.closest('station')
   end
   
   private

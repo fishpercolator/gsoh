@@ -26,5 +26,7 @@ osm:
     tag: highway
     subtype_on_match:
       with_shelter: shelter=yes
+  station:
+    tag: railway
 # Add CKAN data resources here
 ckan: {}
