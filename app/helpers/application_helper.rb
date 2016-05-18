@@ -3,8 +3,15 @@ module ApplicationHelper
   # Tags for OpenGraph
   def og_tags
     {
+      title: 'GSOH: Great Sense of Home',
+      description: 'Helping you find that perfect place to live in Leeds',
       image: image_url('opo-square.jpg')
-    }
+    }.tap do |tags|
+      if params[:result]
+        tags[:title] = "My perfect #Leeds home is in #{params[:result]}: #{params[:score].with_indefinite_article}% match! Where's yours?"
+        tags[:site_name] = 'GSOH: Great Sense of Home'
+      end
+    end    
   end
   
   # Tags for Twitter
