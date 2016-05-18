@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
        
   has_many :answers, dependent: :delete_all
   has_many :questions, through: :answers
-  has_many :matches, -> { order(score: :desc) }, dependent: :delete_all
+  has_many :matches, -> { order(score: :desc, id: :asc) }, dependent: :delete_all
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
