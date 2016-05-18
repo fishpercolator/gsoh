@@ -2,7 +2,7 @@
   #match-headline.match{data: {map_highlight: map_highlight(@matches.first)}}
     %h2 Your perfect match is
     %h1= @matches.first.area.name
-    %h2 a #{@matches.first.score}% match!
+    %h2= "#{@matches.first.score}% match!".with_indefinite_article
     %p= link_to raw("Find out more &raquo;"), match_path(@matches.first.area.name), class: 'btn btn-lg btn-success'
   #other-matches
     #table-column
