@@ -17,4 +17,5 @@
 //= require bootstrap-select
 //= require leaflet
 //= require google-analytics-turbolinks
+//= require social-share-button
 //= require_tree .

@@ -4,11 +4,12 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : 'GSOH: Great Sense of Home'
     = Gon::Base.render_data
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Gsoh'}"}
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Helping you find that perfect place to live in Leeds'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = favicon_link_tag
     = csrf_meta_tags
+    = metamagic og: og_tags, twitter: twitter_tags
     = analytics_init(skip_pageview: true) if GoogleAnalytics.valid_tracker?
   %body
     %header{class: controller_name}

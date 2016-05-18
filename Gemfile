@@ -50,12 +50,12 @@ gem 'pundit', '~> 1.1'
 gem 'administrate-field-password', '~> 0.0.2'
 gem 'administrate-field-type', '~> 1.0'
 gem 'administrate-field-lat_lng', '~> 1.0'
-# just until https://github.com/thoughtbot/administrate/issues/561 is resolved
 gem 'administrate-field-image', '~> 0.0'
 gem 'kaminari', '~> 0.16.3'
 gem 'postmark-rails', '~> 0.12.0'
 gem 'google-analytics-rails', '~> 1.1'
 gem 'gon', '~> 6.0'
+gem 'metamagic', '~> 3.1'
 
 # Needed for the seeding of data from OpenStreetMap
 gem 'overpass-api-ruby', '~> 0.1.3'
@@ -80,6 +80,9 @@ gem 'devise_campaignable', '~> 0.2', github: 'sorry-app/devise_campaignable'
 
 # For inflecting in results
 gem 'indefinite_article', '~> 0.2.4'
+
+# Social sharing
+gem 'social-share-button', '~> 0.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

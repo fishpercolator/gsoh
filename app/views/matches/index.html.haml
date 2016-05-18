@@ -4,6 +4,9 @@
     %h1= @matches.first.area.name
     %h2= "#{@matches.first.score}% match!".with_indefinite_article
     %p= link_to raw("Find out more &raquo;"), match_path(@matches.first.area.name), class: 'btn btn-lg btn-success'
+    .share
+      Share this result:
+      = social_share_button_tag("My perfect #Leeds home is in #{@matches.first.area.name}: #{@matches.first.score.to_s.with_indefinite_article}% match! Where's yours?", url: root_url, via: 'fishpercolator')
   #other-matches
     #table-column
       %h2 Other matches
