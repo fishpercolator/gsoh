@@ -1,28 +1,30 @@
-%ol.breadcrumb
-  %li= link_to 'Home', root_path
-  %li.active Matches
-.row
-  .col-md-12
-    %h1.with-small
-      Your matches
-      %small [#{link_to 'see your answers', answers_path}]
-.row
-  #matchlist-container
-    %table.table.table-striped.table-bordered#matchlist
-      %thead
-        %tr
-          %th Neighbourhood
-          %th Match
-      %tbody
-        - @matches.each do |match|
-          %tr.match{data: {map_highlight: map_highlight(match)}}
-            %td
-              = link_to match.area.name, match_path(match.area.name)
-            %td
-              #{match.score.to_i}% match
-    .paginator
-      = paginate @matches
-  .col-md-6.col-xs-12
-    #matchmap
-    :javascript
-      initialize_matchmap(#{matches_map_json @matches})
+- if @matches.any?
+  #match-headline.match{data: {map_highlight: map_highlight(@matches.first)}}
+    %h2 Your perfect match is
+    %h1= @matches.first.area.name
+    %h2 a #{@matches.first.score}% match!
+    %p= link_to raw("Find out more &raquo;"), match_path(@matches.first.area.name), class: 'btn btn-lg btn-success'
+  #other-matches
+    #table-column
+      %h2 Other matches
+      %table.table.table-striped.table-bordered#matchlist
+        %thead
+          %tr
+            %th Neighbourhood
+            %th Match
+        %tbody
+          - @matches[1..-1].each do |match|
+            %tr.match{data: {map_highlight: map_highlight(match)}}
+              %td
+                = link_to match.area.name, match_path(match.area.name)
+              %td
+                #{match.score.to_i}% match
+      %p
+        Don't like these matches?
+        = link_to 'Change your answers', answers_path, class: 'btn btn-default'
+    #map-column
+      #matchmap
+      :javascript
+        initialize_matchmap(#{matches_map_json @matches})
+- else
+  %h1 No matches! Weird.

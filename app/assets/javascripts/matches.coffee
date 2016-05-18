@@ -22,7 +22,7 @@ render_area = (area, single) ->
   render_area(area, single) for area in map_data
   @matchmap.setView([53.794,-1.551], 11) unless single
   
-  $('tr.match').hover(
+  $('.match').hover(
     ->
       area = $(this).data('map-highlight')
       @hovered = L.circle([area["lat"], area["lng"]], area["radius"], color: area['color'], fillOpacity: 0).addTo(matchmap)

@@ -17,11 +17,16 @@ When(/^I click on a match$/) do
   link.click
 end
 
+When(/^I click on my top match$/) do
+  @area = page.first('#match-headline h1').text
+  click_on 'Find out more'
+end
+
 When(/^I visit that neighbourhood's match page$/) do
   visit match_path(area: 'Wibbleton')
 end
 
-Then(/^I should see (\d+) areas with match percentage$/) do |arg1|
+Then(/^I should see (\d+) other areas with match percentage$/) do |arg1|
   expect(page).to have_css('#matchlist tr', count: arg1.to_i, text: /\d+%/)
 end
 
@@ -89,13 +94,8 @@ Then(/^it should show the nearest neighbourhood network$/) do
   expect(page).to have_content(nns.name)
 end
 
-Then(/^I should see a paginator with (\d+) pages$/) do |arg1|
-  expect(page).to have_css('ul.pagination')
-  # +2 for the prev/next links
-  expect(page).to have_css('ul.pagination li', count: arg1.to_i + 2)
-end
-
-
-When(/^I click for page (\d+)$/) do |arg1|
-  click_link(arg1)
+Then(/^I should see my top match in big letters with a match percentage$/) do
+  user = User.find_by(email: 'test@example.com')
+  top_match = user.matches.first
+  expect(page).to have_content("Your perfect match is #{top_match.area.name} a #{top_match.score}% match!")
 end
