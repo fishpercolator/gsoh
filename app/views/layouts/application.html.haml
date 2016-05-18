@@ -12,7 +12,7 @@
     = analytics_init(skip_pageview: true) if GoogleAnalytics.valid_tracker?
   %body
     %header{class: controller_name}
-      = render 'layouts/user'
+      = render 'layouts/nav'
     %main{:role => "main", class: controller_name}
       = yield :outside_container
       #content

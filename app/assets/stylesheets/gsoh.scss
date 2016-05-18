@@ -59,26 +59,35 @@ h1.with-small {
   }
 }
 
-ul#user {
+ul#user, ul#nav {
   position: absolute;
   top: 1em;
-  right: 1em;
-  li.dropdown {
+  padding-left: 0;
+  li {
     list-style-type: none;
     text-decoration: none;
   }
   a.dropdown-toggle {
     color: #444;
   }
+}
+
+ul#user {
+  right: 1em;
   .dropdown-menu {
     right: 0;
     left: inherit;
   }
 }
+ul#nav {
+  left: 1em;
+}
 
-header.home ul#user {
-  a.dropdown-toggle {
-    color: white;
+header.home {
+  ul#nav, ul#user {
+    a.dropdown-toggle {
+      color: white;
+    }
   }
 }
 
