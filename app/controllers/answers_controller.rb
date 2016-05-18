@@ -17,7 +17,6 @@ class AnswersController < ApplicationController
       authorize @answer
       redirect_to edit_answer_path(question.id)
     else
-      flash[:notice] = 'All questions answered: here are your matches!'
       authorize Match, :index?
       redirect_to matches_path
     end

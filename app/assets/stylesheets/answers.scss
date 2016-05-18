@@ -24,6 +24,7 @@
 
 .answer-well {
   @extend .well;
+  font-size: 1.2em;
   &:after {
     content: " ";
     display: block;
@@ -55,10 +56,8 @@
   @extend .pull-right;
 }
 
-.answer-more-btn {
-  @extend .btn;
-  @extend .btn-success;
-  @extend .btn-lg;
-  @extend .pull-right;
-  margin-bottom: 1em;
+#title-and-controls {
+  @extend .row;
+  text-align: center;
+  margin-bottom: 3em;
 }

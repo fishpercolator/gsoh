@@ -1,6 +1,12 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#blurb {
+  padding-bottom: 3em;
+  margin-bottom: 3em;
+  border-bottom: 1px solid #666;
+}
+
 #first-q {
   @extend .col-md-8;
   @extend .col-md-offset-2;
