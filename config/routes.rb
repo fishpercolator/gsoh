@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
   
   resources :answers
-  resources :matches, only: [:index, :show], param: :area
+  resources :matches, only: [:index, :show], param: :area do
+    get :all_areas, on: :collection
+  end
   resources :pages
   
   root to: 'home#index'

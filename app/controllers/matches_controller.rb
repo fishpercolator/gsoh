@@ -1,9 +1,14 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_match, only: [:show]
+  skip_after_action :verify_authorized, only: [:all_areas]
   
   def index
     @matches = policy_scope(Match).page(params[:page]).per(10)
+  end
+  
+  def all_areas
+    @matches = policy_scope(Match)
   end
   
   def show
