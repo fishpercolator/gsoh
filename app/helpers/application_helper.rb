@@ -9,7 +9,7 @@ module ApplicationHelper
     }.tap do |tags|
       if params[:result]
         tags[:title] = "My perfect #Leeds home is in #{params[:result]}: #{params[:score].with_indefinite_article}% match! Where's yours?"
-        tags[:site_name] = 'GSOH: Great Sense of Home'
+        tags[:description] = "GSOH: #{tags[:description]}"
       end
     end    
   end
