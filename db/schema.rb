@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517145637) do
+ActiveRecord::Schema.define(version: 20160519094245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20160517145637) do
     t.float    "lat"
     t.float    "lng"
   end
+
+  create_table "areas_features", force: :cascade do |t|
+    t.integer "area_id"
+    t.integer "feature_id"
+  end
+
+  add_index "areas_features", ["area_id"], name: "index_areas_features_on_area_id", using: :btree
+  add_index "areas_features", ["feature_id"], name: "index_areas_features_on_feature_id", using: :btree
 
   create_table "features", force: :cascade do |t|
     t.string   "name"
@@ -95,6 +103,8 @@ ActiveRecord::Schema.define(version: 20160517145637) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "areas_features", "areas"
+  add_foreign_key "areas_features", "features"
   add_foreign_key "matches", "areas"
   add_foreign_key "matches", "users"
 end

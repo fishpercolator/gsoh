@@ -9,7 +9,7 @@ namespace :gsoh do
   CITY_NAME = ENV['CITY'] || 'leeds'
     
   desc 'Regenerate all the features in the DB'
-  task :seed_features => [:seed_ckan, :seed_osm, :regenerate_matches]
+  task :seed_features => [:seed_ckan, :seed_osm, :save_all_areas, :regenerate_matches]
 
   task :logger => :environment do
     logger           = Logger.new(STDOUT)
@@ -23,5 +23,10 @@ namespace :gsoh do
   
   task :seed_ckan => :logger do
     City.new(name: CITY_NAME).regenerate_ckan!
+  end
+  
+  task :save_all_areas => :logger do
+    # After features have changed, save all areas to update the features in each
+    Area.all.each(&:save!)
   end
 end

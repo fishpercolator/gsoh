@@ -5,14 +5,14 @@ class Area < ActiveRecord::Base
   RADIUS = 500
   
   has_many :matches, dependent: :delete_all
+  has_and_belongs_to_many :features
   
-  # Whenever an area is saved, regenerate all user matches
+  # Whenever an area is saved, regenerate all features and user matches
+  before_save do
+    self.features = Feature.within(RADIUS.to_f/1000, units: :kms, origin: self)
+  end
   after_save do
     User.all.each { |u| regenerate_matches_for! u }
-  end
-  
-  def features
-    Feature.within(RADIUS.to_f/1000, units: :kms, origin: self)
   end
   
   def specific_feature(ftype, subtype: nil)
@@ -33,5 +33,4 @@ class Area < ActiveRecord::Base
     m = Match.find_or_create_by(user: user, area: self)
     m.update!(score: user.score_area(self))
   end
-
 end

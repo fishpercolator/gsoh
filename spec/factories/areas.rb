@@ -23,6 +23,9 @@ FactoryGirl.define do
         end
         # Create a neighbourhood network inside the neighbourhood
         create :feature, lat: area.lat, lng: area.lng, ftype: 'nns'
+        
+        # And update the features in the area
+        area.save!
       end
     end
   end
