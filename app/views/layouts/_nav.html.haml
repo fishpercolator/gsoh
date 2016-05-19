@@ -5,6 +5,7 @@
       %b.caret
     %ul.dropdown-menu
       %li= link_to 'Home', root_path
+      %li= link_to 'About', page_path('about')
       - if current_user
         - if current_user.answers.count > 0
           %li= link_to 'Change answers', answers_path
