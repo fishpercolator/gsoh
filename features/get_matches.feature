@@ -12,11 +12,11 @@ Scenario: No account
   
 Scenario: Listing matches
   Given I am signed in
-  And there exist 4 areas
+  And there exist 15 areas
   And I have answered some questions
   When I list my matches
   Then I should see my top match in big letters with a match percentage
-  And I should see 3 other areas with match percentage
+  And I should see 10 areas with match percentage
   And match percentages should be in descending order
 
 Scenario: Proceeding to top match details

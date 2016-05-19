@@ -12,14 +12,14 @@
         = social_share_button_tag("My perfect #Leeds home is in #{@matches.first.area.name}: #{@matches.first.score.to_s.with_indefinite_article}% match! Where's yours?", popup: true, url: url, allow_sites: [site], via: 'fishpercolator')
   #other-matches
     #table-column
-      %h2 Other matches
+      %h2 Your top matches
       %table.table.table-striped.table-bordered#matchlist
         %thead
           %tr
             %th Neighbourhood
             %th Match
         %tbody
-          - @matches[1..-1].each do |match|
+          - @matches.each do |match|
             %tr.match{data: {map_highlight: map_highlight(match)}}
               %td
                 = link_to match.area.name, match_path(match.area.name)

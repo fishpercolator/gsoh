@@ -26,7 +26,7 @@ When(/^I visit that neighbourhood's match page$/) do
   visit match_path(area: 'Wibbleton')
 end
 
-Then(/^I should see (\d+) other areas with match percentage$/) do |arg1|
+Then(/^I should see (\d+) areas with match percentage$/) do |arg1|
   expect(page).to have_css('#matchlist tr', count: arg1.to_i, text: /\d+%/)
 end
 

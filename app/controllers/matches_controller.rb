@@ -4,7 +4,7 @@ class MatchesController < ApplicationController
   skip_after_action :verify_authorized, only: [:all_areas]
   
   def index
-    @matches = policy_scope(Match).limit(9)
+    @matches = policy_scope(Match).limit(10)
   end
   
   def all_areas
