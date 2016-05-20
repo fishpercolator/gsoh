@@ -87,16 +87,25 @@ div#matchmap {
 
 #match-headline {
   @extend .row;
-  text-align: center;
-  h1, h2 {
-    margin-top: 11.5px;
-    margin-bottom: 11.5px;
-  }
-  h1 {
-    font-size: 7em;
-    color: green;
-    @media (max-width: $screen-md-min) {
-      font-size: 3em;
+  padding: 4em;
+  .match {
+    @extend .col-md-8;
+    @extend .col-md-offset-2;
+    padding: 2em;
+    background-color: #FAEBD6;
+    border: 1px solid black;
+    text-align: center;
+    h1, h2 {
+      margin-top: 11.5px;
+      margin-bottom: 11.5px;
+    }
+    h1 {
+      font-size: 7em;
+      color: green;
+      font-weight: bold;
+      @media (max-width: $screen-md-min) {
+        font-size: 3em;
+      }
     }
   }
 }

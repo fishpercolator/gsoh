@@ -5,3 +5,8 @@
       .progress-bar{role: 'progressbar', style: "width: #{progress}%;"}
         = "#{answered}/#{Question.count}"
   = render partial: 'form', locals: {answer: @answer}
+  - if @answer.new_record? and current_user.answers.count >= 5
+    #jumpahead
+      = link_to matches_path, class: 'btn btn-default' do
+        Go straight to matches
+        %span.glyphicon.glyphicon-fast-forward

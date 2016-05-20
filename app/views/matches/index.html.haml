@@ -1,15 +1,19 @@
 - if @matches.any?
-  #match-headline.match{data: {map_highlight: map_highlight(@matches.first)}}
-    %h2 Your perfect match is
-    %h1= @matches.first.area.name
-    %h2= "#{@matches.first.score}% match!".with_indefinite_article
-    %p= link_to raw("Find out more &raquo;"), match_path(@matches.first.area.name), class: 'btn btn-lg btn-success'
-    .share
-      Share this result:
-      - %w{twitter facebook google_plus email}.each do |site|
-        -# Do these all separately because there's a shorter URL for Twitter
-        - url = (site != 'twitter' ? root_url(result: @matches.first.area.name, score: @matches.first.score) : root_url)
-        = social_share_button_tag("My perfect #Leeds home is in #{@matches.first.area.name}: #{@matches.first.score.to_s.with_indefinite_article}% match! Where's yours?", popup: true, url: url, allow_sites: [site], via: 'fishpercolator')
+  #match-headline
+    .match{data: {map_highlight: map_highlight(@matches.first)}}
+      %h2 Your perfect match is
+      %h1= @matches.first.area.name
+      %h2= "#{@matches.first.score}% match!".with_indefinite_article
+      %p
+        = link_to match_path(@matches.first.area.name), class: 'btn btn-lg btn-success' do
+          Find out more
+          %span.glyphicon.glyphicon-chevron-right
+      .share
+        Share this result:
+        - %w{twitter facebook google_plus email}.each do |site|
+          -# Do these all separately because there's a shorter URL for Twitter
+          - url = (site != 'twitter' ? root_url(result: @matches.first.area.name, score: @matches.first.score) : root_url)
+          = social_share_button_tag("My perfect #Leeds home is in #{@matches.first.area.name}: #{@matches.first.score.to_s.with_indefinite_article}% match! Where's yours?", popup: true, url: url, allow_sites: [site], via: 'fishpercolator')
   #other-matches
     #table-column
       %h2 Your top matches
@@ -27,6 +31,8 @@
                 #{match.score.to_i}% match
       %p
         Don't like these matches?
+        - if current_user.unanswered_questions.count > 0
+          = link_to 'Answer more', new_answer_path, class: 'btn btn-primary'
         = link_to 'Change your answers', answers_path, class: 'btn btn-default'
     #map-column
       #matchmap

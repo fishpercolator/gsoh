@@ -63,3 +63,9 @@
   text-align: center;
   margin-bottom: 3em;
 }
+
+#jumpahead {
+  @extend .pull-right;
+  clear: both;
+  margin-top: 1em;
+}

@@ -17,9 +17,13 @@
 - if current_user
   #action
     - if current_user.unanswered_questions.any?
-      = link_to raw('Answer more questions &raquo;'), new_answer_path, class: 'btn btn-primary btn-lg'
+      = link_to new_answer_path, class: 'btn btn-primary btn-lg' do
+        Answer more questions
+        %span.glyphicon.glyphicon-chevron-right
     - else
-      = link_to raw('See your matches &raquo;'), matches_path, class: 'btn btn-primary btn-lg'
+      = link_to matches_path, class: 'btn btn-primary btn-lg' do
+        See your matches
+        %span.glyphicon.glyphicon-chevron-right
 - else
   #first-q
     %h2 Start by answering your first question:

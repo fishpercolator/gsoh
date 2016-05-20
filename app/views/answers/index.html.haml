@@ -3,7 +3,11 @@
     %h1 Your answers
     %p#controls
     - if current_user.unanswered_questions.any?
-      = link_to raw("Answer more &raquo;"), new_answer_path, class: 'btn btn-success btn-lg'
+      = link_to new_answer_path, class: 'btn btn-success btn-lg' do
+        Answer more
+        %span.glyphicon.glyphicon-chevron-right
     - else
-      = link_to raw("Back to matches &raquo;"), matches_path, class: 'btn btn-success btn-lg'
+      = link_to matches_path, class: 'btn btn-success btn-lg' do
+        Back to matches
+        %span.glyphicon.glyphicon-chevron-right
   = render partial: 'answer', collection: @answers
