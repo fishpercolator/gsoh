@@ -28,6 +28,10 @@ footer {
   @extend .container;
   background-color: $well-bg;
   line-height: 3em;
+  @media (max-width: $screen-sm-min) {
+    line-height: 1.5em;
+    text-align: right;
+  }
   width: 100%;
 }
 

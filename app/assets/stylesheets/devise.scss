@@ -2,14 +2,22 @@
   @extend .row;
 }
 
+#info {
+  @extend .col-xs-12;
+}
+
 #via-oauth {
-  @extend .col-xs-6;
+  @extend .col-sm-6;
+  @extend .col-xs-12;
   
   text-align: center;
 
   .btn-facebook, .btn-twitter {
     @extend .btn-lg;
     margin: 1em;
+    @media (max-width: $screen-sm-min) {
+      margin: 0.5em;
+    }
   }
 
   .btn-facebook {
@@ -25,5 +33,6 @@
 }
 
 #via-email {
-  @extend .col-xs-6;
+  @extend .col-sm-6;
+  @extend .col-xs-12;
 }

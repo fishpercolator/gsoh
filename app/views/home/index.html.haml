@@ -2,9 +2,9 @@
   #banner
     #title
       %h1 GSOH
-      %h2 Great Sense of Home
-      %h3 Helping you find that perfect place
+      %h2 Great Sense of Home!
 #blurb
+  %h3 Helping you find that perfect place to live
   .entry
     %h2 Answer
     %p Tell us about your interests
@@ -22,6 +22,6 @@
       = link_to raw('See your matches &raquo;'), matches_path, class: 'btn btn-primary btn-lg'
 - else
   #first-q
-    %h2 Tell us about your perfect neighbourhood
+    %h2 Start by answering your first question:
     = render 'answers/form', answer: @answer, no_skip: true
   .clearfix

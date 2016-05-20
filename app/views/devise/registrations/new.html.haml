@@ -1,8 +1,13 @@
 = bootstrap_devise_error_messages!
 .panel.panel-default.devise-bs
   .panel-heading
-    %h4= t('.sign_up', :default => "Sign up")
+    - if params[:answer] && params[:answer][:answer].present?
+      %h4 Now your first question is out of the way, sign up for an account
+    - else
+      %h4 Sign up for an account
   .panel-body
+    #info
+      %p We ask you to create an account so we can build a unique profile for you: you can sign in any time in the future to see your matches.
     #via-oauth
       = link_to 'Sign up with Facebook', user_facebook_omniauth_authorize_path(answer: params[:answer]), class: 'btn btn-facebook'
       = link_to 'Sign up with Twitter', user_twitter_omniauth_authorize_path(answer: params[:answer]), class: 'btn btn-twitter'
