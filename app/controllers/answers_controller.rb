@@ -68,7 +68,6 @@ class AnswersController < ApplicationController
   
   def sign_up_creation
     if !current_user and params[:answer]
-      flash[:notice] = "Please create an account to continue"
       redirect_to new_user_registration_path(answer: params[:answer])
     end
   end

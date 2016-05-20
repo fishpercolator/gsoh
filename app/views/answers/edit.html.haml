@@ -3,5 +3,5 @@
   - if @answer.new_record?
     .progress
       .progress-bar{role: 'progressbar', style: "width: #{progress}%;"}
-        = "#{remaining_questions} remaining"
+        = "#{answered}/#{Question.count}"
   = render partial: 'form', locals: {answer: @answer}

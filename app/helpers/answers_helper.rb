@@ -1,6 +1,6 @@
 module AnswersHelper
-  def remaining_questions
-    current_user.unanswered_questions.count
+  def answered
+    current_user.answers.count
   end
   # Percentage of the way through answering the questions
   def progress
