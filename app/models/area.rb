@@ -23,11 +23,13 @@ class Area < ActiveRecord::Base
     features.with_type(ftype, subtype)
   end
   
+  # Should be called on an area that's preloaded its area_contained_ftypes to
+  # prevent a heavy SQL query
   def contains?(ftype, subtype: nil)
     if subtype
-      area_contained_ftypes.exists?(ftype: ftype, subtype: subtype)
+      area_contained_ftypes.any? {|f| f.ftype == ftype && f.subtype == subtype }
     else
-      area_contained_ftypes.exists?(ftype: ftype)
+      area_contained_ftypes.any? {|f| f.ftype == ftype }
     end
   end
   

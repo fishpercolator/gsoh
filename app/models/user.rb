@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   
   # Regenerate all the user's matches based on the areas' current scores
   def regenerate_matches!
-    Area.all.each do |area|
+    Area.eager_load(:area_contained_ftypes).all.each do |area|
       area.regenerate_matches_for!(self)
     end
   end
