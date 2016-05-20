@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   private
   
   def area_scores(area)
-    answers.map {|ans| ans.score_area(area) }
+    answers.eager_load(:question).map {|ans| ans.score_area(area) }
   end
   
   def email_required?
