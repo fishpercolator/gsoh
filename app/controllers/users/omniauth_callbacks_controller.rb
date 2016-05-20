@@ -24,6 +24,19 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_session_url
     end
   end
+  
+  def google_oauth2
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+    create_answer
+
+    if @user.persisted?
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => "Google") if is_navigational_format?
+    else
+      flash[:error] = "Error signing in with Google: #{@user.errors.full_messages}"
+      redirect_to new_user_session_url
+    end
+  end
 
   def failure
     redirect_to root_path

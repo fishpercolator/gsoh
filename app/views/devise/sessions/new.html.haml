@@ -6,6 +6,7 @@
       #via-oauth
         = link_to 'Sign in with Facebook', user_facebook_omniauth_authorize_path, class: 'btn btn-facebook'
         = link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path, class: 'btn btn-twitter'
+        = link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, class: 'btn btn-google'
       #via-email
         .form-group
           = f.label :email

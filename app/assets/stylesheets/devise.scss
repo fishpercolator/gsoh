@@ -12,7 +12,7 @@
   
   text-align: center;
 
-  .btn-facebook, .btn-twitter {
+  .btn-facebook, .btn-twitter, .btn-google {
     @extend .btn-lg;
     margin: 1em;
     @media (max-width: $screen-sm-min) {
@@ -27,6 +27,11 @@
   
   .btn-twitter {
     background-color: #55acee;
+    color: white;
+  }
+  
+  .btn-google {
+    background-color: #f44336;
     color: white;
   }
 
