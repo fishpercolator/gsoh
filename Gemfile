@@ -42,7 +42,7 @@ gem 'bootswatch-rails', '~> 3.3'
 gem 'bootstrap-select-rails', '~> 1.6'
 gem 'devise', '~> 4.1'
 gem 'devise-bootstrap-views', '~> 0.0.8'
-gem 'oauth2', github: 'intridea/oauth2'
+gem 'oauth2', github: 'intridea/oauth2' # until oauth2 1.2.0 is released
 gem 'omniauth-facebook', '~> 3.0'
 gem 'omniauth-twitter', '~> 1.2'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
