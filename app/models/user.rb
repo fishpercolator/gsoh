@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :delete_all
   has_many :questions, through: :answers
   has_many :matches, -> { order(score: :desc, id: :asc) }, dependent: :delete_all
+  def matches
+    if self.needs_regeneration?
+      self.regenerate_matches!
+      self.update_attributes(needs_regeneration: false)
+    end
+    super
+  end
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

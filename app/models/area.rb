@@ -16,7 +16,7 @@ class Area < ActiveRecord::Base
     self.regenerate_area_contained_ftypes!
   end
   after_save do
-    User.all.each { |u| regenerate_matches_for! u }
+    User.update_all(needs_regeneration: true)
   end
   
   def specific_feature(ftype, subtype: nil)

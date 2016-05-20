@@ -16,7 +16,7 @@ class Answer < ActiveRecord::Base
   
   # Make sure a user's matches are regenerated whenever an answer is saved
   after_save do
-    user.regenerate_matches!
+    user.update_attributes(needs_regeneration: true)
   end
   
   def self.new_with_type(params)
