@@ -50,7 +50,7 @@
   @extend .pull-right;
   margin-top: 0.2em;
   @media (max-width: $screen-md-min) {
-    float: left !important;
+    margin-top: 1em;
   }
 }
 

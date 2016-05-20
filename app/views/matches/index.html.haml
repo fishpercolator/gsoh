@@ -29,8 +29,8 @@
                 = link_to match.area.name, match_path(match.area.name)
               %td
                 #{match.score.to_i}% match
-      %p
-        Don't like these matches?
+      %p.actions
+        %span Don't like these matches?
         - if current_user.unanswered_questions.count > 0
           = link_to 'Answer more', new_answer_path, class: 'btn btn-primary'
         = link_to 'Change your answers', answers_path, class: 'btn btn-default'

@@ -5,15 +5,9 @@
       %h2 Great Sense of Home!
 #blurb
   %h3 Helping you find that perfect place to live
-  .entry
-    %h2 Answer
-    %p Tell us about your interests
-  .entry
-    %h2 Magic
-    %p Let the algorithm work its magic
-  .entry
-    %h2 Match
-    %p Find your perfect neighbourhood
+  %h3
+    %b Answer
+    some simple questions to find your perfect neighbourhood
 - if current_user
   #action
     - if current_user.unanswered_questions.any?

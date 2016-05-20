@@ -1,5 +1,8 @@
 .col-md-8.col-md-offset-2
-  %p= link_to raw('&laquo; Home'), root_path
+  %p
+    = link_to root_path do
+      %span.glyphicon.glyphicon-chevron-left
+      Home
   %h1 About GSOH
 
   %p

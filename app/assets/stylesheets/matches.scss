@@ -122,6 +122,16 @@ div#matchmap {
       margin-top: 21px; // matches h2
     }
   }
+  .actions {
+    span {
+      margin-right: 1em;
+    }
+    @media (max-width: $screen-md-min) {
+      span {
+        display: block;
+      }
+    }
+  }
 }
 
 .share {
