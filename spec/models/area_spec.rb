@@ -22,6 +22,10 @@ RSpec.describe Area, type: :model do
     let!(:church_inside)   { create :feature, :also_in_city_centre, ftype: 'place_of_worship', subtype: 'christian' }
     let!(:mosque_outside)  { create :feature, :outside_city_centre, ftype: 'place_of_worship', subtype: 'muslim' }
     let!(:school_outside)  { create :feature, :outside_city_centre, ftype: 'school' }
+    before(:each) do
+      # To update the cache of features in the given area
+      subject.save
+    end
     
     it 'contains pharmacy' do
       expect(subject.contains?('pharmacy')).to be_truthy

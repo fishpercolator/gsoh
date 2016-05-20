@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519094245) do
+ActiveRecord::Schema.define(version: 20160520153015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160519094245) do
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
+
+  create_table "area_contained_ftypes", force: :cascade do |t|
+    t.integer  "area_id"
+    t.string   "ftype"
+    t.string   "subtype"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "area_contained_ftypes", ["area_id"], name: "index_area_contained_ftypes_on_area_id", using: :btree
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -103,6 +113,7 @@ ActiveRecord::Schema.define(version: 20160519094245) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "area_contained_ftypes", "areas"
   add_foreign_key "areas_features", "areas"
   add_foreign_key "areas_features", "features"
   add_foreign_key "matches", "areas"

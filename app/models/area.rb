@@ -7,9 +7,13 @@ class Area < ActiveRecord::Base
   has_many :matches, dependent: :delete_all
   has_and_belongs_to_many :features
   
+  # A table that quickly looks up whether an area contains a given ftype
+  has_many :area_contained_ftypes, dependent: :delete_all
+  
   # Whenever an area is saved, regenerate all features and user matches
   before_save do
     self.features = Feature.within(RADIUS.to_f/1000, units: :kms, origin: self)
+    self.regenerate_area_contained_ftypes!
   end
   after_save do
     User.all.each { |u| regenerate_matches_for! u }
@@ -20,7 +24,11 @@ class Area < ActiveRecord::Base
   end
   
   def contains?(ftype, subtype: nil)
-    specific_feature(ftype, subtype: subtype).any?
+    if subtype
+      area_contained_ftypes.exists?(ftype: ftype, subtype: subtype)
+    else
+      area_contained_ftypes.exists?(ftype: ftype)
+    end
   end
   
   # Returns the closest feature of the given type to the centre of the area,
@@ -32,5 +40,11 @@ class Area < ActiveRecord::Base
   def regenerate_matches_for!(user)
     m = Match.find_or_create_by(user: user, area: self)
     m.update!(score: user.score_area(self))
+  end
+  
+  def regenerate_area_contained_ftypes!
+    self.area_contained_ftypes = self.features.select(:ftype, :subtype).distinct.map do |f|
+      AreaContainedFtype.new(ftype: f.ftype, subtype: f.subtype)
+    end
   end
 end
