@@ -25,7 +25,7 @@ Scenario: Sign up with question answered
   And I sign up for an account
   Then I should see a question with options
   And I should see a progress bar at 25%
-  And I should see I have 3 questions remaining
+  And I should see I have answered "1/4"
 
 Scenario: Sign up without answering question
   Given I am signed out
@@ -35,4 +35,4 @@ Scenario: Sign up without answering question
   And I sign up for an account
   Then I should see a question with options
   And I should see a progress bar at 0%
-  And I should see I have 4 questions remaining
+  And I should see I have answered "0/4"

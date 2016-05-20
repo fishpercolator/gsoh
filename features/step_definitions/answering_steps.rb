@@ -12,6 +12,12 @@ Given(/^there (?:is|are) (\d+) subtype questions? to answer$/) do |arg1|
   arg1.to_i.times {create :importance_question, ftype: 'person', ask_subtype: true}
 end
 
+Given(/^there (?:is|are) (\d+) single-subtype questions? to answer$/) do |arg1|
+  # Make sure there are subtypes to choose from
+  %w{old}.each {|st| create :feature, ftype: 'person', subtype: st}
+  arg1.to_i.times {create :importance_question, ftype: 'person', ask_subtype: true}
+end
+
 Given(/^I have answered (\d+) questions?$/) do |arg1|
   user = User.find_by_email('test@example.com')
   arg1.to_i.times do
@@ -74,8 +80,8 @@ Then(/^I should see a progress bar at (\d+)%$/) do |arg1|
   end
 end
 
-Then(/^I should see I have (\d+) questions remaining$/) do |arg1|
-  expect(page.find('.progress .progress-bar')).to have_text("#{arg1} remaining")
+Then(/^I should see I have answered "(.*)"$/) do |arg1|
+  expect(page.find('.progress .progress-bar')).to have_text(arg1)
 end
 
 Then(/^I should be told there are no more questions$/) do
@@ -90,7 +96,7 @@ Then(/^I should be asked for a subtype$/) do
   expect(page).to have_select('answer_subtype', options: %w{Any Tom Dick Harry Sally})
 end
 
-Then(/^an answer should be recording containing the chosen subtype$/) do
+Then(/^an answer should be recorded containing the chosen subtype$/) do
   expect(Answer.where(subtype: 'harry').any?).to be true
 end
 
@@ -109,4 +115,23 @@ end
 
 Then(/^I should be told my new answer was saved$/) do
   expect(page).to have_content('Answer saved')
+end
+
+Then(/^I should see a checkbox with the single subtype$/) do
+  expect(page).to have_css('.checkbox')
+  expect(page.first('.checkbox')).to have_content('Old')
+end
+
+When(/^I answer the displayed question ticking the box$/) do
+  choose 'Important'
+  check 'Old'
+  step 'I click to go to the next question'
+end
+
+Then(/^an answer should be recorded containing the single subtype$/) do
+  expect(Answer.first.subtype).to eq('old')
+end
+
+Then(/^an answer should be recorded without a subtype$/) do
+  expect(Answer.first.subtype).to be nil
 end

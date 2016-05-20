@@ -19,7 +19,7 @@ Scenario: Presented with a question
   And I should see a button for the next question
   And I should see a button to skip this question
   And I should see a progress bar at 0%
-  And I should see I have 4 questions remaining
+  And I should see I have answered "0/4"
 
 Scenario: Answering a question
   Given I am signed in
@@ -29,7 +29,7 @@ Scenario: Answering a question
   And I answer the displayed question
   Then I should see a question with options
   And I should see a progress bar at 25%
-  And I should see I have 3 questions remaining
+  And I should see I have answered "1/4"
   
 Scenario: Answering the final question
   Given I am signed in
@@ -76,7 +76,32 @@ Scenario: Answering subtype question
   When I go to answer questions
   And I answer the displayed question selecting a subtype
   Then I should be redirected to my matches
-  And an answer should be recording containing the chosen subtype
+  And an answer should be recorded containing the chosen subtype
+  
+Scenario: Single-subtype question
+  Given I am signed in
+  And there is 1 single-subtype question to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  Then I should see a checkbox with the single subtype
+
+Scenario: Answering single-subtype question
+  Given I am signed in
+  And there is 1 single-subtype question to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  And I answer the displayed question ticking the box
+  Then I should be redirected to my matches
+  And an answer should be recorded containing the single subtype
+  
+Scenario: Answering single-subtype question without the subtype
+  Given I am signed in
+  And there is 1 single-subtype question to answer
+  And I have answered 0 questions
+  When I go to answer questions
+  And I answer the displayed question
+  Then I should be redirected to my matches
+  And an answer should be recorded without a subtype
 
 Scenario: Skip question
   Given I am signed in

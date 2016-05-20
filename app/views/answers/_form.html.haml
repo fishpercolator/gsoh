@@ -12,7 +12,13 @@
           = t a[0]
     - if answer.question.ask_subtype?
       .subtype-selector
-        = f.select :subtype, answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
+        - if answer.available_subtypes.count == 1
+          .checkbox
+            = f.label :subtype do
+              = f.check_box :subtype, {}, answer.available_subtypes.first, nil
+              = t(answer.available_subtypes.first)
+        - else
+          = f.select :subtype, answer.available_subtypes.sort_by {|st| st.downcase}.map {|st| [t(st), st]}, {include_blank: 'Any'}, class: 'selectpicker'
   .answer-button-group{role: 'group'}
     - if answer.new_record?
       - unless local_assigns[:no_skip]
