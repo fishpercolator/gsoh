@@ -4,10 +4,12 @@
   .panel-body
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f|
       #via-oauth
+        %h4 Sign in with social media
         = link_to 'Sign in with Facebook', user_facebook_omniauth_authorize_path, class: 'btn btn-facebook'
         = link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path, class: 'btn btn-twitter'
         = link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, class: 'btn btn-google'
       #via-email
+        %h4 Or with your GSOH account
         .form-group
           = f.label :email
           = f.email_field :email, autofocus: true, class: "form-control"

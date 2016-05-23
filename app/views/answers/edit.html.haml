@@ -3,7 +3,7 @@
   - if @answer.new_record?
     .progress
       .progress-bar{role: 'progressbar', style: "width: #{progress}%;"}
-        = "#{answered}/#{Question.count}"
+        = "#{remaining} questions left"
   = render partial: 'form', locals: {answer: @answer}
   - if @answer.new_record? and current_user.answers.count >= 5
     #jumpahead

@@ -80,8 +80,8 @@ Then(/^I should see a progress bar at (\d+)%$/) do |arg1|
   end
 end
 
-Then(/^I should see I have answered "(.*)"$/) do |arg1|
-  expect(page.find('.progress .progress-bar')).to have_text(arg1)
+Then(/^I should see I have (\d+) questions left$/) do |n|
+  expect(page.find('.progress .progress-bar')).to have_text("#{n} questions left")
 end
 
 Then(/^I should be told there are no more questions$/) do

@@ -19,7 +19,7 @@ Scenario: Presented with a question
   And I should see a button for the next question
   And I should see a button to skip this question
   And I should see a progress bar at 0%
-  And I should see I have answered "0/4"
+  And I should see I have 4 questions left
 
 Scenario: Answering a question
   Given I am signed in
@@ -29,7 +29,7 @@ Scenario: Answering a question
   And I answer the displayed question
   Then I should see a question with options
   And I should see a progress bar at 25%
-  And I should see I have answered "1/4"
+  And I should see I have 3 questions left
   
 Scenario: Answering the final question
   Given I am signed in
