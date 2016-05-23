@@ -44,3 +44,11 @@ ckan:
         name: LocationText
         easting: GeoX
         northing: GeoY
+    community_centre:
+      package: 'community-centres'
+      resource: 'Community centres'
+      columns:
+        name: Centre
+        lat: Latitude
+        lng: Longitude
+

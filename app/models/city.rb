@@ -9,7 +9,7 @@ class City
       Rails.logger.info("Regenerating #{ftype}:")
       ActiveRecord::Base.transaction do
         # FIXME: This will keep destroying and recreating, whereas really we want to update
-        Feature.where(ftype: ftype).delete_all
+        Feature.where(ftype: ftype).destroy_all
         osm_query.query_type(ftype).each {|osm| osm_to_feature(ftype, osm).save! }
       end
     end
@@ -22,7 +22,7 @@ class City
       features.each do |ftype, config|
         Rails.logger.info("Regenerating #{ftype}:")
         ActiveRecord::Base.transaction do
-          Feature.where(ftype: ftype).delete_all
+          Feature.where(ftype: ftype).destroy_all
           ckan_ftype(ftype, config)
         end
       end
@@ -81,6 +81,11 @@ class City
   # Create features for the given CKAN ftype
   def ckan_ftype(ftype, config)
     package = CKAN::Package.find(name: config['package']).first
+    resource = if config['resource']
+      package.resources.select {|r| r.description == config['resource']}.first
+    else
+      package.resources.first
+    end
     cols = config['columns']
     # Currently only supports the first resource in each package (easily
     # changed when needed)
@@ -88,7 +93,7 @@ class City
     if config['encoding']
       csv_options[:encoding] = config['encoding']
     end
-    data = package.resources.first.content_csv(csv_options)
+    data = resource.content_csv(csv_options)
     data.each do |row|
       ckan_row_to_feature(ftype, row, cols).save!
     end

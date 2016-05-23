@@ -5,7 +5,7 @@ class Area < ActiveRecord::Base
   RADIUS = 500
   
   has_many :matches, dependent: :delete_all
-  has_and_belongs_to_many :features
+  has_and_belongs_to_many :features, dependent: :delete_all
   
   # A table that quickly looks up whether an area contains a given ftype
   has_many :area_contained_ftypes, dependent: :delete_all
