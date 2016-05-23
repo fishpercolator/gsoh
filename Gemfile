@@ -36,7 +36,7 @@ gem 'puma', '~> 3.2'
 # gem 'capistrano-rails', group: :development
 
 # Frameworky stuff
-gem 'administrate', '~> 0.2.0', github: 'thoughtbot/administrate'
+gem 'administrate', '~> 0.2.1'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'bootswatch-rails', '~> 3.3'
 gem 'bootstrap-select-rails', '~> 1.6'
@@ -78,7 +78,7 @@ gem 'geokit-rails', '~> 2.1'
 gem 'seed_dump', '~> 3.2'
 
 # For signing users up to Mailchimp
-gem 'devise_campaignable', '~> 0.2', github: 'fishpercolator/devise_campaignable'
+gem 'devise_campaignable', '~> 0.2', '>= 0.2.1'
 
 # For inflecting in results
 gem 'indefinite_article', '~> 0.2.4'
