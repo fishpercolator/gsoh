@@ -3,12 +3,16 @@
     = link_to root_path do
       %span.glyphicon.glyphicon-chevron-left
       Home
+      
+  .img-header
+    = image_tag 'trinity.jpg', alt: 'Trinity shopping centre and church'
+  
   %h1 About GSOH
-
+  
   %p
     %b GSOH: Great Sense of Home
     was commissioned by Leeds City Council Adult Social Care as part of the
-    innovation pathway, run by #{link_to 'Dhyaan Design', 'http://dhyaandesign.com/'}
+    innovation pathway, run by #{link_to 'Urban Sustainable Development Lab', 'http://dhyaandesign.com/sustainabledevelopmentlab/'}
     and #{link_to 'Leeds Data Mill', 'http://leedsdatamill.org/'}.
     
   %p
@@ -29,6 +33,11 @@
     editable map of the world - kind of like the Wikipedia of maps.
     If you spot that something is missing or in the wrong location, you're
     invited to fix it yourself!
+    
+  %p
+    Most of the photos are sourced from #{link_to 'FreeImages.com', 'http://www.freeimages.com/'}
+    and are subject to the licence agreement on that site. Photos of Leeds are
+    copyright their respective owners and used with permission.
 
   %h2 About the code
 
