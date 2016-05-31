@@ -1,8 +1,8 @@
 = bootstrap_devise_error_messages!
 .panel.panel-default.devise-bs
-  .panel-heading
+  .panel-heading.loud
     - if params[:answer] && params[:answer][:answer].present?
-      %h4 Now your first question is out of the way, sign up for an account
+      %h4 Great! Now your first question is out of the way, sign up for an account
     - else
       %h4 Sign up for an account
   .panel-body

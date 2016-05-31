@@ -1,3 +1,10 @@
+.panel-heading.loud {
+  background-color: $brand-primary;
+  h4 {
+    color: white;
+  }
+}
+
 .panel-body {
   @extend .row;
 }

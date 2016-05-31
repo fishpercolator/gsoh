@@ -49,6 +49,12 @@
 #first-q {
   @extend .col-md-8;
   @extend .col-md-offset-2;
+  h2 {
+    background-color: $brand-primary;
+    color: white;
+    padding: 11.5px;
+    margin-bottom: 0;
+  }
 }
 
 #action {
