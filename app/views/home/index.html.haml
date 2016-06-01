@@ -3,23 +3,25 @@
     #title
       %h1 GSOH
       %h2 Great Sense of Home!
-#blurb
-  %h3 Helping you find that perfect place to live
-  %h3
-    %b Answer
-    some simple questions to find your perfect neighbourhood
-- if current_user
-  #action
-    - if current_user.unanswered_questions.any?
-      = link_to new_answer_path, class: 'btn btn-primary btn-lg' do
-        Answer more questions
-        %span.glyphicon.glyphicon-chevron-right
-    - else
-      = link_to matches_path, class: 'btn btn-primary btn-lg' do
-        See your matches
-        %span.glyphicon.glyphicon-chevron-right
-- else
-  #first-q
-    %h2 Start by answering your first question!
-    = render 'answers/form', answer: @answer, no_skip: true
-  .clearfix
+.row
+  #blurb
+    %h3 Helping you find that perfect place to live
+    %h3
+      %b Answer
+      some simple questions to find your perfect neighbourhood
+.row
+  - if current_user
+    #action
+      - if current_user.unanswered_questions.any?
+        = link_to new_answer_path, class: 'btn btn-primary btn-lg' do
+          Answer more questions
+          %span.glyphicon.glyphicon-chevron-right
+      - else
+        = link_to matches_path, class: 'btn btn-primary btn-lg' do
+          See your matches
+          %span.glyphicon.glyphicon-chevron-right
+  - else
+    #first-q
+      %h2 Start by answering your first question!
+      = render 'answers/form', answer: @answer, no_skip: true
+    .clearfix
