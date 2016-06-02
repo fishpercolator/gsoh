@@ -78,14 +78,6 @@ ul#nav {
   left: 1em;
 }
 
-header.home {
-  ul#nav, ul#user {
-    a.dropdown-toggle {
-      color: white;
-    }
-  }
-}
-
 @media print {
   body {
     padding: 0;

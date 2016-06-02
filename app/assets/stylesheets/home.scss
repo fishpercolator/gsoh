@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #banner {
   display: table;
-  background-image: image-url('opo.jpg');
+  background-image: image-url('leeds-skyline.jpg');
   background-size: 100% auto;
   background-attachment: fixed;
   background-position: 0 0;
@@ -17,7 +17,10 @@
     text-align: center;
     h1, h2, h3 {
       margin: 0;
-      color: white;
+      color: black;
+      -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
       font-weight: bold;
     }
     h1 {
