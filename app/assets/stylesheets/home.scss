@@ -17,10 +17,8 @@
     text-align: center;
     h1, h2, h3 {
       margin: 0;
-      color: black;
-      -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
+      color: white;
+      text-shadow: 2px 2px black;
       font-weight: bold;
     }
     h1 {
