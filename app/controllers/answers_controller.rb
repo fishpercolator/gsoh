@@ -29,8 +29,9 @@ class AnswersController < ApplicationController
   end
   
   def create
-    @answer = Answer.new_with_type(answer_params)
-    @answer.user = current_user
+    question = Question.find(answer_params[:question_id]) || not_found
+    @answer = question.answer_from(current_user)
+    @answer.update_attributes answer_params
     authorize @answer
     return skip_answer if params[:skip]
     if @answer.save
