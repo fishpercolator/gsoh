@@ -8,6 +8,7 @@
   .panel-body
     #info
       %p We ask you to create an account so we can build a unique profile for you: you can sign in any time in the future to see your matches.
+      %p Signing up will add you to a mailing list for very occasional emails about GSOH. You can unsubscribe from this list any time by clicking the link in any email.
     #via-oauth
       %h4 Sign up with social media
       = link_to 'Sign up with Facebook', user_facebook_omniauth_authorize_path(answer: params[:answer]), class: 'btn btn-facebook'
