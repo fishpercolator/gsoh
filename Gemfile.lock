@@ -249,6 +249,10 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    lograge (0.3.6)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.10)
@@ -498,6 +502,7 @@ DEPENDENCIES
   kaminari (~> 0.16.3)
   launchy
   leaflet-rails (~> 0.7.7)
+  lograge (~> 0.3.6)
   metamagic (~> 3.1)
   oauth2!
   omniauth-facebook (~> 3.0)
