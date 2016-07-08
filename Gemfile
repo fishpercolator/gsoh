@@ -13,14 +13,14 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.0.0.beta2'
+gem 'turbolinks', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -37,23 +37,24 @@ gem 'puma', '~> 3.2'
 
 # Frameworky stuff
 gem 'administrate', '~> 0.2.1'
+gem 'bourbon', '~> 4.2' # https://github.com/thoughtbot/administrate/issues/615
 gem 'bootstrap-sass', '~> 3.3'
 gem 'bootswatch-rails', '~> 3.3'
 gem 'bootstrap-select-rails', '~> 1.6'
 gem 'devise', '~> 4.1'
 gem 'devise-bootstrap-views', '~> 0.0.8'
-gem 'oauth2', github: 'intridea/oauth2' # until oauth2 1.2.0 is released
+gem 'oauth2', '~> 1.2'
 gem 'omniauth-facebook', '~> 3.0'
 gem 'omniauth-twitter', '~> 1.2'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'haml-rails', '~> 0.9.0'
-gem 'high_voltage', '~> 2.4'
+gem 'high_voltage', '~> 3.0'
 gem 'pundit', '~> 1.1'
 gem 'administrate-field-password', '~> 0.0.2'
 gem 'administrate-field-type', '~> 1.0'
 gem 'administrate-field-lat_lng', '~> 1.0'
 gem 'administrate-field-image', '~> 0.0'
-gem 'kaminari', '~> 0.16.3'
+gem 'kaminari', '~> 0.17.0'
 gem 'postmark-rails', '~> 0.12.0'
 gem 'google-analytics-rails', '~> 1.1'
 gem 'gon', '~> 6.0'
@@ -84,10 +85,10 @@ gem 'devise_campaignable', '~> 0.2', '>= 0.2.1'
 gem 'indefinite_article', '~> 0.2.4'
 
 # Social sharing
-gem 'social-share-button', '~> 0.2.1'
+gem 'social-share-button', '~> 0.3.1'
 
 # Shorter log entries
-gem 'lograge', '~> 0.3.6'
+gem 'lograge', '~> 0.4.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
