@@ -22,6 +22,11 @@ class Area < ActiveRecord::Base
   def specific_feature(ftype, subtype: nil)
     features.with_type(ftype, subtype)
   end
+
+  # https://twitter.com/pedantic_git/status/770183269333733376
+  def getSausage
+    specific_feature 'shop', subtype: 'butcher'
+  end
   
   # Should be called on an area that's preloaded its area_contained_ftypes to
   # prevent a heavy SQL query
